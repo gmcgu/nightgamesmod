@@ -78,16 +78,6 @@ public class Player extends Character {
         self.getWillpower().setMax(self.willpower.max());
         self.availableAttributePoints = 0;
         self.setTrophy(Item.PlayerTrophy);
-        if (initialGender.considersItselfFeminine()) {
-            outfitPlan.add(Clothing.getByID("bra"));
-            outfitPlan.add(Clothing.getByID("panties"));
-        } else {
-            outfitPlan.add(Clothing.getByID("boxers"));
-        }
-        outfitPlan.add(Clothing.getByID("Tshirt"));
-        outfitPlan.add(Clothing.getByID("jeans"));
-        outfitPlan.add(Clothing.getByID("socks"));
-        outfitPlan.add(Clothing.getByID("sneakers"));
     }
 
     private void applyConfigStats(PlayerConfiguration config) {
@@ -102,11 +92,11 @@ public class Player extends Character {
     }
 
     public void setGrowth() {
-        getGrowth().stamina = 2;
-        getGrowth().arousal = 6;
-        getGrowth().willpower = .4f;
-        getGrowth().bonusStamina = 1;
-        getGrowth().bonusArousal = 2;
+        getGrowth().stamina = 20;
+        getGrowth().arousal = 20;
+        getGrowth().willpower = 10.4f;
+        getGrowth().bonusStamina = 10;
+        getGrowth().bonusArousal = 20;
         getGrowth().attributes = new int[]{2, 3, 3, 3};
     }
 
@@ -710,18 +700,6 @@ public class Player extends Character {
     @Override
     public void eot(Combat c, Character opponent) {
         super.eot(c, opponent);
-        if (opponent.has(Trait.pheromones) && opponent.getArousal()
-                                                      .percent() >= 20
-                        && opponent.rollPheromones(c)) {
-            c.write(opponent, "<br/>Whenever you're near " + opponent.getName()
-                            + ", you feel your body heat up. Something in her scent is making you extremely horny.");
-            add(c, Pheromones.getWith(opponent, this, opponent.getPheromonePower(), 10));
-        }
-        if (opponent.has(Trait.sadist) && !is(Stsflag.masochism)) {
-            c.write("<br/>"+Global.capitalizeFirstLetter(
-                            String.format("%s seem to shudder in arousal at the thought of pain.", subject())));
-            add(c, new Masochistic(this));
-        }
         if (has(Trait.RawSexuality)) {
             c.write(this, Global.format("{self:NAME-POSSESSIVE} raw sexuality turns both of you on.", this, opponent));
             temptNoSkillNoSource(c, opponent, arousal.max() / 25);
@@ -827,7 +805,7 @@ public class Player extends Character {
     protected void resolveOrgasm(Combat c, Character opponent, BodyPart selfPart, BodyPart opponentPart, int times,
                     int totalTimes) {
         super.resolveOrgasm(c, opponent, selfPart, opponentPart, times, totalTimes);
-        if (has(Trait.slimification) && times == totalTimes && getWillpower().percent() < 60 && !has(Trait.slime)) {
+        //if (has(Trait.slimification) && times == totalTimes && getWillpower().percent() < 60 && !has(Trait.slime)) {
             c.write(this, Global.format("A powerful shiver runs through your entire body. Oh boy, you know where this"
                             + " is headed... Sure enough, you look down to see your skin seemingly <i>melt</i>,"
                             + " turning a translucent blue. You legs fuse together and collapse into a puddle."
@@ -839,48 +817,28 @@ public class Player extends Character {
             addTemporaryTrait(Trait.slime, 999);
             add(c, new PlayerSlimeDummy(this));
             if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(this, GooeyMod.INSTANCE)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
+                //body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
                 body.temporaryAddOrReplacePartWithType(new TentaclePart("slime filaments", "pussy", "slime", 0.0, 1.0, 1.0), 999);
             }
-            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(this, CockMod.slimy)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy), 999);
-            }
+            //if (hasDick() && !body.getRandomCock().moddedPartCountsAs(this, CockMod.slimy)) {
+                //body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy), 999);
+            //}
             BreastsPart part = body.getBreastsBelow(BreastsPart.h.getSize());
             if (part != null && body.getRandomBreasts() != BreastsPart.flat) {
-                body.temporaryAddOrReplacePartWithType(part.upgrade(), 10);
+                body.temporaryAddOrReplacePartWithType(part.upgrade(), 999);
             }
             body.temporaryAddOrReplacePartWithType(new GenericBodyPart("gooey skin", .6, 1.5, .8, "skin", ""), 999);
             body.temporaryAddOrReplacePartWithType(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
-            if (level >= 21) {
                 addTemporaryTrait(Trait.Sneaky, 999);
-            }
-            if (level >= 24) {
                 addTemporaryTrait(Trait.shameless, 999);
-            }
-            if (level >= 27) {
                 addTemporaryTrait(Trait.lactating, 999);
-            }
-            if (level >= 30) {
                 addTemporaryTrait(Trait.addictivefluids, 999);
-            }
-            if (level >= 33) {
                 addTemporaryTrait(Trait.autonomousPussy, 999);
-            }
-            if (level >= 36) {
                 addTemporaryTrait(Trait.enthrallingjuices, 999);
-            }
-            if (level >= 39) {
                 addTemporaryTrait(Trait.energydrain, 999);
-            }
-            if (level >= 42) {
                 addTemporaryTrait(Trait.desensitized, 999);
-            }
-            if (level >= 45) {
                 addTemporaryTrait(Trait.steady, 999);
-            }
-            if (level >= 50) {
                 addTemporaryTrait(Trait.strongwilled, 999);
-            }
         }
     }
 
