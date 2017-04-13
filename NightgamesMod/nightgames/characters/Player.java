@@ -840,7 +840,6 @@ public class Player extends Character {
                 addTemporaryTrait(Trait.steady, 999);
                 addTemporaryTrait(Trait.strongwilled, 999);
         }
-    }
 
     public int getLevelsToGain() {
         return levelsToGain;
