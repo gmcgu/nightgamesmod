@@ -35,7 +35,7 @@ public class OrgasmSeal extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         writeOutput(c, Result.normal, target);
-        target.add(c, new nightgames.status.OrgasmSeal(target, 15));
+        target.add(c, new nightgames.status.OrgasmSeal(target, 25));
         return true;
     }
 

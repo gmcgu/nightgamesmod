@@ -87,9 +87,9 @@ public class Paizuri extends Skill {
             c.write(getSelf(), deal(c, 0, Result.normal, target));
         }
         target.body.pleasure(getSelf(), getSelf().body.getRandom("breasts"), target.body.getRandom("cock"), m, c, this);
-        if (Global.random(100) < fetishChance) {
-            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.a.getType(), .05 + (0.01 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .01));
-        }
+        //if (Global.random(100) < fetishChance) {
+            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.a.getType(), 1.5 + (0.1 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .1));
+        //}
         if (getSelf().has(Trait.temptingtits)) {
             target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("breasts"), m/5, this);
         }

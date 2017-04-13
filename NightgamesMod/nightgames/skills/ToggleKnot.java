@@ -27,7 +27,7 @@ public class ToggleKnot extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return user.body.get("cock").stream().anyMatch(cock -> cock.moddedPartCountsAs(user, CockMod.primal));
+        return user.human() || user.body.get("cock").stream().anyMatch(cock -> cock.moddedPartCountsAs(user, CockMod.primal));
     }
 
     @Override

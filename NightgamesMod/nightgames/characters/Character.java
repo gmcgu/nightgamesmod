@@ -3519,7 +3519,7 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public boolean checkLoss(Combat c) {
-        return (orgasmed || c.getTimer() > 150) && willpower.isEmpty();
+        return (orgasmed || c.getTimer() > 150) && willpower.isEmpty() && !this.human();
     }
 
     public boolean isCustomNPC() {

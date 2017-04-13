@@ -38,7 +38,7 @@ public class DenyOrgasm extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         writeOutput(c, Result.normal, target);
-        target.add(c, new CockChoked(target, getSelf(), 4));
+        target.add(c, new CockChoked(target, getSelf(), 10));
         return true;
     }
 

@@ -59,15 +59,14 @@ public class BreastGrowth extends Skill {
         } else {
             res = Result.miss;
         }
-        boolean permanent = Global.random(20) == 0 && (getSelf().human() || c.shouldPrintReceive(target, c))
-                        && !target.has(Trait.stableform);
+        boolean permanent = true;
         writeOutput(c, permanent ? 1 : 0, res, target);
         if (res != Result.miss) {
             target.add(c, new Hypersensitive(target, 10));
             BreastsPart part = target.body.getBreastsBelow(BreastsPart.f.getSize());
             if (permanent) {
                 if (part != null) {
-                    target.body.addReplace(part.upgrade(), 1);
+                    target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
                     target.body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade(), 10);
                 }
             } else {

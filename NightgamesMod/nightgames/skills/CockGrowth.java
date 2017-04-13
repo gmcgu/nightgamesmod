@@ -52,21 +52,20 @@ public class CockGrowth extends Skill {
             res = Result.special;
         }
 
-        boolean permanent = Global.random(20) == 0 && (getSelf().human() || c.shouldPrintReceive(target, c))
-                        && !target.has(Trait.stableform);
+        boolean permanent = true;
 
         if (res != Result.miss) {
             target.add(c, new Hypersensitive(target, 10));
             CockPart part = target.body.getCockBelow(SizeMod.getMaximumSize("cock"));
             if (permanent) {
                 if (part != null) {
-                    target.body.addReplace(part.upgrade(), 1);
+                    target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
                 } else {
                     target.body.addReplace(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_SMALL)), 1);
                 }
             } else {
                 if (part != null) {
-                    target.body.temporaryAddOrReplacePartWithType(part.upgrade(), 10);
+                    target.body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 10);
                 } else {
                     target.body.temporaryAddPart(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_SMALL)), 10);
                 }

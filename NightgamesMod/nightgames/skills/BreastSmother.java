@@ -84,7 +84,7 @@ public class BreastSmother extends Skill {
             getSelf().emote(Emotion.dominant, 10);
         }
         if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "breasts", .25));
+            target.add(c, new BodyFetish(target, getSelf(), "breasts", 2.5));
         }
         return true;
     }

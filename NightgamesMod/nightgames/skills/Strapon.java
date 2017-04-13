@@ -27,7 +27,7 @@ public class Strapon extends Skill {
     public boolean usable(Combat c, Character target) {
         return getSelf().canAct() && !getSelf().has(Trait.strapped) && c.getStance().mobile(getSelf())
                         && !c.getStance().prone(getSelf())
-                        && (getSelf().has(Item.Strapon) || getSelf().has(Item.Strapon2)) && !getSelf().hasDick()
+                        && (getSelf().has(Item.Strapon) || getSelf().has(Item.Strapon2))
                         && !c.getStance().connected(c) && !c.getStance().isFaceSitting(getSelf());
     }
 

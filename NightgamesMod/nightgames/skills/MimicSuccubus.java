@@ -30,7 +30,7 @@ public class MimicSuccubus extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().canRespond() && !getSelf().is(Stsflag.mimicry) && Global.characterTypeInGame(Reyka.class.getSimpleName());
+        return getSelf().human() || getSelf().canRespond() && !getSelf().is(Stsflag.mimicry) && Global.characterTypeInGame(Reyka.class.getSimpleName());
     }
 
     @Override
@@ -49,51 +49,38 @@ public class MimicSuccubus extends Skill {
                 printBlinded(c);
         }
 
-        if (getSelf().has(Trait.ImitatedStrength)) {
-            getSelf().addTemporaryTrait(Trait.succubus, 10);
-            getSelf().addTemporaryTrait(Trait.energydrain, 10);
-            if (getSelf().getLevel() >= 20) {
-                getSelf().addTemporaryTrait(Trait.spiritphage, 10);
-            }
-            if (getSelf().getLevel() >= 28) {
-                getSelf().addTemporaryTrait(Trait.lacedjuices, 10);
-            }
-            if (getSelf().getLevel() >= 36) {
-                getSelf().addTemporaryTrait(Trait.RawSexuality, 10);
-            }
-            if (getSelf().getLevel() >= 44) {
-                getSelf().addTemporaryTrait(Trait.soulsucker, 10);
-            }
-            if (getSelf().getLevel() >= 52) {
-                getSelf().addTemporaryTrait(Trait.gluttony, 10);
-            }
-            if (getSelf().getLevel() >= 60) {
-                getSelf().body.temporaryAddPartMod("ass", DemonicMod.INSTANCE, 10);
-                getSelf().body.temporaryAddPartMod("hands", DemonicMod.INSTANCE, 10);
-                getSelf().body.temporaryAddPartMod("feet", DemonicMod.INSTANCE, 10);
-                getSelf().body.temporaryAddPartMod("mouth", DemonicMod.INSTANCE, 10);
-            }
-        }
-        getSelf().addTemporaryTrait(Trait.succubus, 10);
-        getSelf().addTemporaryTrait(Trait.soulsucker, 10);
-        getSelf().addTemporaryTrait(Trait.energydrain, 10);
-        getSelf().addTemporaryTrait(Trait.spiritphage, 10);
-        getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonicslime, 10);
-        getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonicslime, 10);
-        getSelf().body.temporaryAddOrReplacePartWithType(EarPart.pointed, 10);
+        getSelf().addTemporaryTrait(Trait.ImitatedStrength, 999);
+            getSelf().addTemporaryTrait(Trait.succubus, 999);
+            getSelf().addTemporaryTrait(Trait.energydrain, 999);
+                getSelf().addTemporaryTrait(Trait.spiritphage, 999);
+                getSelf().addTemporaryTrait(Trait.lacedjuices, 999);
+                getSelf().addTemporaryTrait(Trait.RawSexuality, 999);
+                getSelf().addTemporaryTrait(Trait.soulsucker, 999);
+                getSelf().addTemporaryTrait(Trait.gluttony, 999);
+                getSelf().body.temporaryAddPartMod("ass", DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod("hands", DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod("feet", DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod("mouth", DemonicMod.INSTANCE, 999);
+        getSelf().addTemporaryTrait(Trait.succubus, 999);
+        getSelf().addTemporaryTrait(Trait.soulsucker, 999);
+        getSelf().addTemporaryTrait(Trait.energydrain, 999);
+        getSelf().addTemporaryTrait(Trait.spiritphage, 999);
+        getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonicslime, 999);
+        getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonicslime, 999);
+        getSelf().body.temporaryAddOrReplacePartWithType(EarPart.pointed, 999);
         BreastsPart part = getSelf().body.getBreastsBelow(BreastsPart.h.getSize());
         if (part != null) {
-            getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade(), 10);
+            getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade().upgrade(), 999);
         }
 
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;
         if (getSelf().has(Trait.Masquerade)) {
             strength = strength * 3 / 2;
         }
-        getSelf().add(c, new Abuff(getSelf(), Attribute.Dark, strength, 10));
-        getSelf().add(c, new SlimeMimicry("succubus", getSelf(), 10));
-        getSelf().body.temporaryAddPartMod("pussy", DemonicMod.INSTANCE, 10);
-        getSelf().body.temporaryAddPartMod("cock", CockMod.incubus, 10);
+        getSelf().add(c, new Abuff(getSelf(), Attribute.Dark, strength, 999));
+        getSelf().add(c, new SlimeMimicry("succubus", getSelf(), 999));
+        getSelf().body.temporaryAddPartMod("pussy", DemonicMod.INSTANCE, 999);
+        getSelf().body.temporaryAddPartMod("cock", CockMod.incubus, 999);
 
         return true;
     }
