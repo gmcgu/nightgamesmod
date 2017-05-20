@@ -15,6 +15,7 @@ import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;
 import nightgames.requirements.NotRequirement;
 import nightgames.requirements.RequirementShortcuts;
+import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
 
@@ -206,8 +207,12 @@ public class MaraTime extends BaseNPCTime {
                 Global.gui().message("Mara has some fun making you do embarassing things in public, and then takes"
                                 + " you home so you can put on a good show of jacking off for her. At the end, "
                                 + "she reinforces her control over you. This is a placeholder.");
+<<<<<<< HEAD
             // The buttslut scene isn't fully written yet
             } else /* if (!player.hasStatus(Stsflag.buttsluttraining)) */ {
+=======
+            } else if (!player.hasStatus(Stsflag.buttsluttraining)) {
+>>>>>>> pr/2
                 Global.gui()
                       .message("<i>\"Haha, yes! Great isn't it? Hands up!\"</i> You try to resist, "
                                       + "but this close and this direct it's no use. You let her know you're not happy about all this. <i>\"He, "
@@ -267,7 +272,11 @@ public class MaraTime extends BaseNPCTime {
                                       + "around you, and you continue hugging and making out for a while before you finally leave. Your "
                                       + "muscles feel a little sluggish, and it's only going to get worse with time and distance, but maybe"
                                       + " it's worth it?");
+<<<<<<< HEAD
             } /*else {
+=======
+            } else {
+>>>>>>> pr/2
                 //another option to leave- it might not be the best idea to give carte blance to do "SCIENCE!!!" to you to a mad scientist with mind control tech, but you trust that 
                 //whatever Mara will do will be, if not in your best interest, then certainly not too much a bad thing
                 
@@ -292,11 +301,16 @@ public class MaraTime extends BaseNPCTime {
                 //Jewel: ???
                 Global.gui().message("\"Hey, "+player.getName()+", would you mind helping me with some <b>science</b>? I think I've figured out some new applications of the mind control technology that "
                                 + "will not only be able to make you feel amazing, they'll have impressive therapeutic applications too.\"");
+<<<<<<< HEAD
             }*/
+=======
+            }
+>>>>>>> pr/2
             Global.gui().choose(this, "Leave");
             Global.getPlayer().addict(null, AddictionType.MIND_CONTROL, npc, Addiction.MED_INCREASE);
             Global.getPlayer().getAddiction(AddictionType.MIND_CONTROL).ifPresent(Addiction::flagDaytime);
         }
+        
         if (choice.equals("Sex")) {
             if (npc.getAffection(player) >= 8 && (!player.has(Trait.ticklemonster) || Global.random(2) == 1)) {
                 Global.gui()

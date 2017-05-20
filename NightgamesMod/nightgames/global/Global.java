@@ -170,7 +170,11 @@ public class Global {
     public static double xpRate = 1.0;
     public static ContextFactory factory;
     public static Context cx;
+<<<<<<< HEAD
     public static MatchType currentMatchType = MatchType.NORMAL;
+=======
+    private static MatchType currentMatchType = MatchType.NORMAL;
+>>>>>>> pr/2
     private static Character noneCharacter = new NPC("none", 1, null);
     private static HashMap<String, MatchAction> matchActions;
     private static final int LINEUP_SIZE = 5;
@@ -265,6 +269,7 @@ public class Global {
         Collection<DebugFlags> cfgDebugFlags = config.map
                         (StartConfiguration::getDebugFlags).orElse(new ArrayList<>());
         Collection<String> cfgFlags = config.map(StartConfiguration::getFlags).orElse(new ArrayList<>());
+        Collection<DebugFlags> cfgDebugFlags = config.map(StartConfiguration::getDebugFlags).orElse(new ArrayList<>());
         human = new Player(playerName, pickedGender, playerConfig, pickedTraits, selectedAttributes);
         if(human.has(Trait.largereserves)) {
             human.getWillpower().gain(20);
@@ -281,9 +286,14 @@ public class Global {
         players.addAll(characterPool.values().stream().filter(npc -> npc.isStartCharacter).collect(Collectors.toList()));
         if (!cfgFlags.isEmpty()) {
             flags = cfgFlags.stream().collect(Collectors.toSet());
-        }
+            System.out.println("flags: "+flags.toString());
+        }      
         Map<String, Boolean> configurationFlags = JsonUtils.mapFromJson(JsonUtils.rootJson(new InputStreamReader(ResourceLoader.getFileResourceAsStream("data/globalflags.json"))).getAsJsonObject(), String.class, Boolean.class);
         configurationFlags.forEach((flag, val) -> Global.setFlag(flag, val));
+<<<<<<< HEAD
+=======
+        
+>>>>>>> pr/2
         if (!cfgDebugFlags.isEmpty()) {
             for (DebugFlags db:cfgDebugFlags.stream().collect(Collectors.toSet())) {
                 debug[db.ordinal()]=true;
@@ -439,6 +449,7 @@ public class Global {
         getSkillPool().add(new SpawnFaerie(ch, Ptype.fairyfem));
         getSkillPool().add(new SpawnFaerie(ch, Ptype.fairyherm));
         getSkillPool().add(new SpawnImp(ch, Ptype.impfem));
+        getSkillPool().add(new SpawnFaerie(ch, Ptype.fairyherm));
         getSkillPool().add(new SpawnFaerie(ch, Ptype.fairymale));
         getSkillPool().add(new SpawnImp(ch, Ptype.impmale));
         getSkillPool().add(new SpawnFGoblin(ch, Ptype.fgoblin));
@@ -477,6 +488,7 @@ public class Global {
         getSkillPool().add(new Charm(ch));
         getSkillPool().add(new Tempt(ch));
         getSkillPool().add(new EyesOfTemptation(ch));
+        getSkillPool().add(new ManipulateFetish(ch));
         getSkillPool().add(new TailJob(ch));
         getSkillPool().add(new FaceSit(ch));
         getSkillPool().add(new Smother(ch));
@@ -519,6 +531,7 @@ public class Global {
         getSkillPool().add(new Invitation(ch));
         getSkillPool().add(new SubmissiveHold(ch));
         getSkillPool().add(new BreastGrowth(ch));
+        //getSkillPool().add(new BreastGrowthSuper(ch));
         getSkillPool().add(new CockGrowth(ch));
         getSkillPool().add(new BreastRay(ch));
         getSkillPool().add(new FootSmother(ch));
@@ -536,8 +549,10 @@ public class Global {
         getSkillPool().add(new LeechSeed(ch));
         getSkillPool().add(new Beg(ch));
         getSkillPool().add(new Cowardice(ch));
+        getSkillPool().add(new Kneel(ch));
         getSkillPool().add(new Dive(ch));
         getSkillPool().add(new Offer(ch));
+        getSkillPool().add(new OfferAss(ch));
         getSkillPool().add(new ShamefulDisplay(ch));
         getSkillPool().add(new Stumble(ch));
         getSkillPool().add(new TortoiseWrap(ch));
@@ -611,11 +626,15 @@ public class Global {
         getSkillPool().add(new Focus.OnForeplay(ch));
         getSkillPool().add(new Focus.OnSex(ch));
         getSkillPool().add(new Focus.OnRecovery(ch));
+<<<<<<< HEAD
         getSkillPool().add(new ManipulateFetish(ch));
         //getSkillPool().add(new BreastGrowthSuper(ch));
         getSkillPool().add(new Kneel(ch));
         getSkillPool().add(new OfferAss(ch));
         
+=======
+
+>>>>>>> pr/2
         if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
             getSkillPool().add(new SelfStun(ch));
         }
@@ -1869,11 +1888,18 @@ public class Global {
 		}
 	}
 
+<<<<<<< HEAD
 	public static Optional<String> getFlagStartingWith(Collection<String> collection,
 	                String start) {
         return collection.stream().filter(s -> s.startsWith(start)).findFirst();
     }
 	
+=======
+	public static Optional<String> getFlagStartingWith(Collection<String> collection, String start) {
+	    return collection.stream().filter(s -> s.startsWith(start)).findFirst();
+	}
+
+>>>>>>> pr/2
 	/**
 	 * TODO Huge hack to freeze status descriptions.
 	 */
@@ -1890,6 +1916,7 @@ public class Global {
         rng = FROZEN_RNG;
     }
     
+<<<<<<< HEAD
     public static boolean randomBool() {
         return rng.nextBoolean();
     }
@@ -1898,4 +1925,12 @@ public class Global {
         return quests.stream().filter(q -> q instanceof ButtslutQuest)
                         .map(q -> (ButtslutQuest)q).findFirst();
     }
+=======
+    public static Optional<ButtslutQuest> getButtslutQuest() {
+        return quests.stream().filter(q -> q instanceof ButtslutQuest).map(q -> (ButtslutQuest)q).findFirst();
+    }
+    public static boolean randomBool() {
+        return rng.nextBoolean();
+    }
+>>>>>>> pr/2
 }

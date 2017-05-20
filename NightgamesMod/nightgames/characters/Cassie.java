@@ -38,6 +38,9 @@ public class Cassie extends BasePersonality {
     private static final String CASSIE_MOUTH_FOCUS = "CassieMouthFocus";
     private static final String CASSIE_SUBMISSIVE_FOCUS = "CassieSubmissiveFocus";
     private static final String CASSIE_ENCHANTRESS_FOCUS = "CassieEnchantressFocus";
+    
+    private int dominance=0;
+    private int minDominance=0;
 
     public Cassie() {
         this(Optional.empty(), Optional.empty());
@@ -416,6 +419,7 @@ public class Cassie extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
+<<<<<<< HEAD
         if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart 
                         || c.getStance().vaginallyPenetrated(c,c.getOpponent(character))) 
             dominance +=1;
@@ -429,7 +433,18 @@ public class Cassie extends BasePersonality {
         } else */if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
             character.arousal.empty();
             dominance+=1;
+=======
+        if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
+
+        if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart || c.getStance().vaginallyPenetrated(c,c.getOpponent(character))) dominance +=1;
+        if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart && c.getOpponent(character).body.getLargestBreasts().getSensitivity(c.getOpponent(character), character.body.getRandom("hands"))>5) {
             character.arousal.empty();
+            return "incomplete, should be a series of scenes including one where Cassie makes the player lactate magicmilk that only affects themself and prevents breast size reduction"
+                            + "and one where Cassie gives the player a bra that reduces breast sensitivity to reasonable levels while worn, but also makes them moo on orgasm, and vibrates while fighting Cassie";
+        } else if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
+>>>>>>> pr/2
+            character.arousal.empty();
+            dominance+=1;
             return "Cassie bucks her hips against your ass wildly causing the strapon to rub hard against your prostate. Your arms and legs feel like jelly as she thrusts in again and again. "
                             + "You're almost shocked as you feel yourself on the edge of orgasm and you're certain you wouldn't be able to stop yourself if Cassie keeps this pace up. Above you Cassie moans "
                             + "loudly clearly in a world of her own. You don't think she even notices as the pleasure from your prostate overcomes you and you shoot your white flag of surrender on the "
@@ -438,7 +453,7 @@ public class Cassie extends BasePersonality {
                             + "you actually came while she was pegging you. <i>\"You came?\"</i> she gasps. <i>\"I mean the shopkeeper said it would work but....\"</i> she trails off.  She smiles, and stands. <i>\"I never knew "
                             + "I'd enjoy that so much.\"</i> Her grin widens in a way that makes you nervous. <i>\"I might need to try that again in the future.\"</i> Your decide to bid a hasty retreat leaving your "
                             + "clothes behind to the victor.";
-        } else if (character.has(Trait.witch) && character.has(Trait.silvertongue) && Global.random(3) == 0) {
+        } else if (character.has(Trait.witch) && character.has(Trait.silvertongue) && Global.random(3) == 0 && c.getOpponent(character).hasDick() && !c.getOpponent(character).hasPussy()) {
             character.arousal.empty();
             return "Cassie's efforts to pleasure you finally break your resistance and you find yourself completely unable to stop her. She slips between your legs and takes your straining "
                             + "dick into her mouth. She eagerly sucks on your cock, while glancing up to meet your eyes. Her talented oral technique blows away your endurance and you spill your seed "
@@ -601,9 +616,13 @@ public class Cassie extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
+<<<<<<< HEAD
         if (c.getStance().vaginallyPenetrated(c, c.getOpponent(character))) {
             dominance=Math.max(dominance-1,minDominance);
         }
+=======
+        if (c.getStance().vaginallyPenetrated(c, c.getOpponent(character))) dominance=Math.min(dominance-1,minDominance);
+>>>>>>> pr/2
         Character opponent = c.getOpponent(character);
         if (character.has(Trait.witch) && Global.random(3) == 0) {
             opponent.add(c, new Energized(opponent, 10));
@@ -811,7 +830,7 @@ public class Cassie extends BasePersonality {
         character.outfitPlan.add(Clothing.getByID("shoes"));
 
         character.modAttributeDontSaveData(Attribute.Arcane, 1);
-        character.getGrowth().addOrRemoveTraits(character);
+        character.getGrowth().addOrRemoveTraits(character, true);
     }
 
     @Override

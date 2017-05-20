@@ -391,7 +391,11 @@ public abstract class Position implements Cloneable {
      * cause more willpower loss on each combat tick. If a character is not the dominant character of the position,
      * their effective dominance is NEUTRAL (0).
      */
+<<<<<<< HEAD
     public Dominance getCurrentDominance(Combat c, Character self) {
+=======
+    public double getDominanceOfStance(Combat c, Character self) {
+>>>>>>> pr/2
         if (sub(self)) {
             return Dominance.NEUTRAL;
         }
@@ -406,6 +410,7 @@ public abstract class Position implements Cloneable {
             stanceDominance = Double.valueOf(Math.floor(stanceDominance * 0.6)).intValue();
         }
         Optional<ButtslutQuest> bsq = Global.getButtslutQuest();
+<<<<<<< HEAD
         if (bsq.isPresent() && this.anallyPenetrated(c, c.getOpponent(self)) 
                         && c.getOpponent(self) == Global.getPlayer()) {
             stanceDominance += bsq.get().getBonusDominance(this);
@@ -414,6 +419,10 @@ public abstract class Position implements Cloneable {
         // Rescale in case our calculation has gone beyond valid Dominance values
         stanceDominance = Math.min(Dominance.values().length - 1, stanceDominance);
         return stanceDominance < 0 ? Dominance.NEUTRAL : Dominance.values()[stanceDominance];
+=======
+        if (bsq.isPresent() && this.anallyPenetrated(c, c.getOpponent(self)) && c.getOpponent(self)==Global.getPlayer()) {stanceDominance += bsq.get().getBonusDominance(this);}
+        return Math.max(0, stanceDominance);
+>>>>>>> pr/2
     }
 
     public boolean isBeingFaceSatBy(Combat c, Character self, Character target) {

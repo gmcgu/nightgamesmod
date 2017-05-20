@@ -588,7 +588,11 @@ public class Body implements Cloneable {
     }
     
     public BodyPart getRandomErogenous() {
+<<<<<<< HEAD
         return Global.pickRandom(getCurrentPartsThatMatch(BodyPart::isErogenous)).get();
+=======
+        return Global.pickRandom(getCurrentPartsThatMatch(part -> part.isErogenous())).get();
+>>>>>>> pr/2
     }
 
     public int pleasure(Character opponent, BodyPart with, BodyPart target, double magnitude, Combat c) {
@@ -703,8 +707,13 @@ public class Body implements Cloneable {
         double dominance = 0.0;
         if (character.checkAddiction(AddictionType.DOMINANCE, opponent) && c.getStance().dom(opponent)) {
             float mag = character.getAddiction(AddictionType.DOMINANCE).get().getMagnitude();
+<<<<<<< HEAD
             Position.Dominance stanceDominance = c.getStance().getCurrentDominance(c, opponent);
             dominance = mag * (stanceDominance.ordinal() / 5.0);
+=======
+            double dom = c.getStance().getDominanceOfStance(c, opponent);
+            dominance = mag * (dom / 5.0);
+>>>>>>> pr/2
         }
         perceptionBonus += dominance;
 
@@ -822,10 +831,14 @@ public class Body implements Cloneable {
 
         if (opponent != null && Arrays.asList(fetishParts).contains(with.getType())) {
             double chance = opponent.has(Trait.fetishTrainer)?4 * Math.min(opponent.get(Attribute.Fetish), 25):0;
+<<<<<<< HEAD
             if (with.getType().equals("cock") && target.getType().equals("ass") 
                             && Global.getButtslutQuest().isPresent()) {
                 chance += Global.getButtslutQuest().get().getBonusFetishChance();
             }
+=======
+            if (with.getType().equals("cock") && target.getType().equals("ass") && Global.getButtslutQuest().isPresent()) chance += Global.getButtslutQuest().get().getBonusFetishChance();
+>>>>>>> pr/2
             if (Global.random(100) < chance * with.getFetishChance()) {
                 c.write(character, character.subjectAction("now have", "now has") + " a new fetish, courtesy of "
                                 + opponent.directObject() + ".");
@@ -861,8 +874,12 @@ public class Body implements Cloneable {
         } else {
             double effectiveSeduction = character.get(Attribute.Seduction);
             if (c.getStance().dom(character) && character.has(Trait.brutesCharisma)) {
+<<<<<<< HEAD
                 int stanceDominance = c.getStance().getCurrentDominance(c, character).ordinal();
                 effectiveSeduction += stanceDominance * (character.get(Attribute.Power) / 5.0 + character.get(Attribute.Ki) / 5.0);
+=======
+                effectiveSeduction += c.getStance().getDominanceOfStance(c, character) * (character.get(Attribute.Power) / 5.0 + character.get(Attribute.Ki) / 5.0);
+>>>>>>> pr/2
             }
 
             if (character.has(Trait.PrimalHeat) && character.is(Stsflag.frenzied)) {
@@ -881,7 +898,7 @@ public class Body implements Cloneable {
             double hotness = (getHotness(opponent) - 1) / 2 + 1;
             double perception = (1.0 + (opponent.get(Attribute.Perception) - 5) / 10.0);
             if (Global.isDebugOn(DebugFlags.DEBUG_DAMAGE) && Global.isDebugOn(DebugFlags.DEBUG_SKILLS_RATING)) {
-                System.out.println(String.format("Seduction Bonus: %.1f, hotness: %.1f, perception: %.1f", seductionBonus, hotness, perception));
+                //System.out.println(String.format("Seduction Bonus: %.1f, hotness: %.1f, perception: %.1f", seductionBonus, hotness, perception));
             }
             double perceptionBonus = (hotness + seductionBonus) * perception;
 

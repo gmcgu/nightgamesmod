@@ -27,9 +27,13 @@ public class SaveData {
     public int fontsize;
 
     private enum JSONKey {
+<<<<<<< HEAD
         PLAYERS("characters"), FLAGS("flags"), COUNTERS("counters"), 
         TIME("time"), DATE("date"), FONTSIZE("fontsize"),
         QUESTS("quests");
+=======
+        PLAYERS("characters"), FLAGS("flags"), COUNTERS("counters"), QUESTS("quests"), TIME("time"), DATE("date"), FONTSIZE("fontsize");
+>>>>>>> pr/2
 
         final String key;
 
@@ -69,6 +73,9 @@ public class SaveData {
 
         JsonObject countersJSON = rootJSON.getAsJsonObject(JSONKey.COUNTERS.key);
         counters.putAll(JsonUtils.mapFromJson(countersJSON, String.class, Float.class));
+        
+        JsonArray questsJSON = rootJSON.getAsJsonArray(JSONKey.QUESTS.key);
+        quests.addAll(JsonUtils.loadQuests(questsJSON));
 
         if (rootJSON.has(JSONKey.QUESTS.key)) {
             JsonArray questsJSON = rootJSON.getAsJsonArray(JSONKey.QUESTS.key);
@@ -83,6 +90,7 @@ public class SaveData {
         }
         
         time = Time.fromDesc(rootJSON.get(JSONKey.TIME.key).getAsString());
+        System.out.println("savedata constructed: "+this.toString());
     }
 
     public JsonObject toJson() {
@@ -96,6 +104,10 @@ public class SaveData {
         JsonArray flagJSON = new JsonArray();
         flags.forEach(flagJSON::add);
         rootJSON.add(JSONKey.FLAGS.key, flagJSON);
+        
+        JsonArray questJSON = new JsonArray();
+        quests.stream().map(q->q.saveToJson()).forEach(questJSON::add);
+        rootJSON.add(JSONKey.QUESTS.key, questJSON);
 
         JsonObject counterJSON = new JsonObject();
         counters.forEach(counterJSON::addProperty);
@@ -109,6 +121,8 @@ public class SaveData {
 
         rootJSON.addProperty(JSONKey.DATE.key, date);
         rootJSON.addProperty(JSONKey.FONTSIZE.key, fontsize);
+        
+        System.out.println("savedata toJson: "+this.toString());
 
         return rootJSON;
     }
@@ -139,6 +153,7 @@ public class SaveData {
         int result = players.hashCode();
         result = 31 * result + flags.hashCode();
         result = 31 * result + counters.hashCode();
+        result = 31 * result + quests.hashCode();
         result = 31 * result + time.hashCode();
         result = 31 * result + date;
         result = 31 * result + quests.hashCode();

@@ -20,7 +20,6 @@ import nightgames.combat.Result;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.match.Encounter;
-import nightgames.match.team.TeamPrematch;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -156,12 +155,6 @@ public class PetCharacter extends Character {
     public void detect() {}
 
     @Override
-    public void faceOff(Character opponent, Encounter enc) {}
-
-    @Override
-    public void spy(Character opponent, Encounter enc) {}
-
-    @Override
     public String describe(int per, Combat c) {
         return "";
     }
@@ -239,7 +232,7 @@ public class PetCharacter extends Character {
     @Override
     public void add(Combat c, Status status) {
         super.add(c, status);
-        if (stunned() && !Global.checkFlag(TeamPrematch.DID_FIRST_TEAM_MATCH_FLAG)) {
+        if (stunned()) {
             c.write(this, Global.format("With {self:name-possessive} link to the fight weakened, {self:subject-action:disappears|disappears}..", this, this));
             c.removePet(this);
         }
@@ -320,7 +313,6 @@ public class PetCharacter extends Character {
     @Override
     public void counterattack(Character target, Tactics type, Combat c) {}
 
-
     @Override
     public Growth getGrowth() {
         return super.getGrowth();
@@ -341,4 +333,17 @@ public class PetCharacter extends Character {
     public boolean isPet() {
         return true;
     }
+
+    @Override
+    public void faceOff(Character opponent, Encounter enc) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void spy(Character opponent, Encounter enc) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

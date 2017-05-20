@@ -14,6 +14,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
+import nightgames.combat.Combat;
 import nightgames.modifier.Modifier;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
@@ -70,6 +71,7 @@ public class Match {
             player.getStamina().fill();
             player.getArousal().empty();
             player.getMojo().empty();
+            player.getMojo().restore(player.getMojo().max()/2);
             player.getWillpower().fill();
             if (player.getPure(Attribute.Science) > 0) {
                 player.chargeBattery();
@@ -224,6 +226,7 @@ public class Match {
                 character.add(Trait.masterheels);
             }
         }
+        if(Global.isDebugOn(DebugFlags.DEBUG_SCENE)) /*System.out.println("Win/loss tracker: "+Combat.getResultTracker());*/Combat.printResultsTracker();
         Global.getPlayer().getAddictions().forEach(Addiction::endNight);
         new Postmatch(Global.getPlayer(), combatants);
     }

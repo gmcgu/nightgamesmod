@@ -30,8 +30,12 @@ public class AssFuck extends Fuck {
 
     @Override
     public float priorityMod(Combat c) {
+<<<<<<< HEAD
         return 0.0f + (getSelf().getMood() == Emotion.dominant ? 1.0f : 0)
                         + (Global.getButtslutQuest().isPresent() ? 5 : 0);
+=======
+        return 0.0f + (getSelf().getMood() == Emotion.dominant ? 1.0f : 0) + (Global.getButtslutQuest().isPresent()?5:0);
+>>>>>>> pr/2
     }
 
     @Override
@@ -105,7 +109,11 @@ public class AssFuck extends Fuck {
             if (getSelf().getType().equals("Eve")) {
                 c.setStance(new AnalProne(getSelf(), target), getSelf(), voluntary);
             } else {
+<<<<<<< HEAD
                 if (c.getStance().enumerate() == Stance.behindfootjob) {c.setStance(new BehindFootjob(getSelf(),target, true));}
+=======
+                if (c.getStance().enumerate() == Stance.behindfootjob) {c.setStance(new BehindFootjob(getSelf(),target,true));}
+>>>>>>> pr/2
                 else {c.setStance(new Anal(getSelf(), target), getSelf(), voluntary);}
             }
         } else {
@@ -125,15 +133,22 @@ public class AssFuck extends Fuck {
         } else {
             target.emote(Emotion.horny, 25);
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> pr/2
         int dur=target.has(Trait.Unflappable)?0:1;
         Optional<ButtslutQuest> bsq = Global.getButtslutQuest();
         if (bsq.isPresent() && target==Global.getPlayer()) {
             dur += bsq.get().getEnthrallDurationOnPenetration();
             target.add(c, new Enthralled(getSelf(), target, dur));
+<<<<<<< HEAD
         } else {
             target.add(c, new Flatfooted(target, dur));
         }
+=======
+        } else {target.add(c, new Flatfooted(target, dur));}
+>>>>>>> pr/2
         
         if (getSelf().has(Trait.analFanatic) && getSelf().hasDick()) {
             c.write(getSelf(),

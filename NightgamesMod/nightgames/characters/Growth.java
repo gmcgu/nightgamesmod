@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
@@ -199,7 +201,10 @@ public class Growth implements Cloneable {
         clone.clothing = Collections.unmodifiableMap(clone.clothing);
         return clone;
     }
-
+   
+    @Override public String toString() {
+        return "Growth with stamina "+stamina+" arousal "+arousal+" bonusStamina "+bonusStamina+" bonusArousal "+bonusArousal+" bonusAttributes "+bonusAttributes+" willpower "+willpower+" bonusWillpower "+bonusWillpower+" attributes "+attributes+" traits "+traits;
+    }
     public void removeNullTraits() {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
     }

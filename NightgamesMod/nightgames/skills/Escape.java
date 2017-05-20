@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.CockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -26,11 +27,7 @@ public class Escape extends Skill {
         if (target.hasStatus(Stsflag.cockbound)) {
             return false;
         }
-        return (c.getStance()
-                 .sub(getSelf())
-                        && !c.getStance()
-                             .mobile(getSelf())
-                        || (getSelf().bound() && !getSelf().is(Stsflag.maglocked))) && getSelf().canRespond();
+        return (((c.getStance().sub(getSelf()) && !c.getStance().mobile(getSelf())) || (getSelf().bound() && !getSelf().is(Stsflag.maglocked)))) && getSelf().canRespond();
     }
 
     @Override

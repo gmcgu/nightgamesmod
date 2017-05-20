@@ -21,10 +21,7 @@ public class BreastGrowth extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().canAct() && c.getStance()
-                                      .mobile(getSelf())
-                        && !c.getStance()
-                             .prone(getSelf());
+        return getSelf().canAct() && c.getStance().mobile(getSelf())&& !c.getStance().prone(getSelf()) && !(new BreastGrowthSuper(getSelf()).usable(c, target));
     }
 
     @Override
@@ -51,7 +48,7 @@ public class BreastGrowth extends Skill {
     public boolean resolve(Combat c, Character target) {
         Result res;
         if (target.roll(getSelf(), c, accuracy(c, target))) {
-            if (target.body.getRandomBreasts().equals(BreastsPart.flat)) {
+            if (!target.hasBreasts()) {
                 res = Result.special;
             } else {
                 res = Result.normal;

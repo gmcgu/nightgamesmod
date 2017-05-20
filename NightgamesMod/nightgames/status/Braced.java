@@ -69,7 +69,11 @@ public class Braced extends DurationStatus {
         if (affected.canRespond()) {
             possibleStrings = Arrays.asList(
                         "Being wary now, {self:subject-action:manage} to conserve most of {self:possessive} stamina.",
+<<<<<<< HEAD
                         "Being more careful now, {self:action:manage} to conserve most of {self:possessive} stamina."
+=======
+                        "Being more careful now, {self:subject-action:avoid} {self:action:manage} to conserve most of {self:possessive} stamina."
+>>>>>>> pr/2
                         );
         }
         c.write(affected, Global.format(Global.pickRandom(possibleStrings).get(), affected, affected));

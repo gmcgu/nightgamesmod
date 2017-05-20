@@ -56,6 +56,11 @@ public class Parasite extends Skill {
     public Skill copy(Character user) {
         return new Parasite(user);
     }
+    
+    @Override
+    public float priorityMod(Combat c) {
+        return 15.0f;
+    }
 
     @Override
     public Tactics type(Combat c) {

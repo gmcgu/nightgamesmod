@@ -10,6 +10,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.damage.Staleness;
@@ -107,14 +108,20 @@ public abstract class Skill {
         skills.removeAll(filtered);
     }
 
+<<<<<<< HEAD
     /** Checks whether current conditions prevent this skill from being used, e.g. Charmed
      * prevents the use of non-pleasure skills. */
+=======
+>>>>>>> pr/2
     public static boolean isUsable(Combat c, Skill s) {
         return isUsableOn(c, s, null);
     }
 
+<<<<<<< HEAD
     /** Checks whether current conditions prevent this skill from being used, e.g. Charmed
      * prevents the use of non-pleasure skills. */
+=======
+>>>>>>> pr/2
     public static boolean isUsableOn(Combat c, Skill s, Character target) {
         if (target == null) {
             target = s.getDefaultTarget(c);
@@ -241,7 +248,7 @@ public abstract class Skill {
                 }
             }
         }
-
+        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE) && skill instanceof BreastGrowthSuper) System.out.println("calling resolve SuperBreastGrowth from static superclass");
         boolean success = skill.resolve(c, target);
         skill.user().spendMojo(c, skill.getMojoCost(c));
         if (success) {

@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import nightgames.actions.IMovement;
 import nightgames.actions.Movement;
 import nightgames.characters.Character;
+import nightgames.match.Encounter;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;
-import nightgames.match.Encounter;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
@@ -29,14 +28,14 @@ public class Area implements Serializable {
     public boolean alarm;
     public ArrayList<Deployable> env;
     public transient MapDrawHint drawHint;
-    private IMovement enumerator;
+    private Movement enumerator;
     private boolean pinged;
 
-    public Area(String name, String description, IMovement enumerator) {
+    public Area(String name, String description, Movement enumerator) {
         this(name, description, enumerator, new MapDrawHint());
     }
 
-    public Area(String name, String description, IMovement enumerator, MapDrawHint drawHint) {
+    public Area(String name, String description, Movement enumerator, MapDrawHint drawHint) {
         this.name = name;
         this.description = description;
         this.enumerator = enumerator;
@@ -111,6 +110,7 @@ public class Area implements Serializable {
 
     public void enter(Character p) {
         present.add(p);
+        System.out.printf("%s enters %s: %s\n", p.getTrueName(), name, env);
         List<Deployable> deps = new ArrayList<>(env);
         for (Deployable dep : deps) {
             if (dep != null && dep.resolve(p)) {
@@ -132,8 +132,7 @@ public class Area implements Serializable {
         } else if (present.size() > 1 && canFight(p)) {
             for (Character opponent : Global.getMatch().getCombatants()) {
                 if (present.contains(opponent) && opponent != p
-                               && canFight(opponent)
-                               && Global.getMatch().canEngage(p, opponent)) {
+                                && canFight(opponent)) {
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
                     return fight.spotCheck();
                 }
@@ -183,7 +182,7 @@ public class Area implements Serializable {
         fight = null;
     }
 
-    public IMovement id() {
+    public Movement id() {
         return enumerator;
     }
 

@@ -98,6 +98,9 @@ public class Jewel extends BasePersonality {
         growth.addTrait(11, Trait.powerfulcheeks);
         growth.addBodyPartMod(25, "ass", FieryMod.INSTANCE);
         growth.addTrait(37, Trait.temptingass);
+        growth.addTrait(11, Trait.polecontrol);
+        growth.addTrait(25, Trait.assmaster);
+        growth.addTrait(37, Trait.analFanatic);        
         growth.addTrait(47, Trait.autonomousAss);
         
         growth.addTrait(11, Trait.polecontrol);
@@ -158,26 +161,25 @@ public class Jewel extends BasePersonality {
                                             + " Well, anyway, I'm sure I can use that. Better get yourself ready.\"</i>");
                             useAnal();
                             return true;
-                        }), new CombatSceneChoice("Rather be on top- you can take her [Hard Mode]",
-                                        (c, self, other) -> {
-                                            c.write("<i>\"You think you can take me?!\"<i> Jewel exclaims, narrowing her eyes angrily. Jewel seems to be legitimately irritated, "
-                                                            + "but she relaxes after a few seconds, seeming to accept the boast as not being an insult to her prowess- though there's "
-                                                            + "a dangerous glint in her eyes that wasn't there before, and you start to worry that provoking her might not have been the wisest"
-                                                            + "idea.<br/>\"I think you've just signed up for some good long lessons in learning your place. I'm stronger, more skilled, "
-                                                            + "and more <b>worthy</b> than you are, and it's clear that my going <b>easy></b> on you has given you a swelled sense of your "
-                                                            + "own ability.</i>\"<br/>Jewel sneers at you, and then turns and stalks away. You must have accidentally hit upon something sensitive "
-                                                            + "from Jewel's past- perhaps something she kept hearing growing up among a mostly-male military related to stereotypes about girls being "
-                                                            + "weak and submissive. Once she's calmed down, you'll have to find her and apologize, but you suspect that from now on Jewel is going "
-                                                            + "to be putting a lot more effort into the games. If you want to keep up, you'll probably have to step up your own efforts as well.");
-                                            useAnal();
-                                            useMartial();
-                                            growth.extraAttributes += 1;
-                                            // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
-                                            Global.getPlayer()
-                                                  .getGrowth()
-                                                  .addTraitPoints(new int[] {25, 47}, Global.getPlayer());
-                                            return true;
-                                        }))));
+                        }),
+                        new CombatSceneChoice("Rather be on top- you can take her [Hard Mode]", (c, self, other) -> {
+                            c.write("<i>\"You think you can take me?!\"<i> Jewel exclaims, narrowing her eyes angrily. Jewel seems to be legitimately irritated, "
+                                            + "but she relaxes after a few seconds, seeming to accept the boast as not being an insult to her prowess- though there's "
+                                            + "a dangerous glint in her eyes that wasn't there before, and you start to worry that provoking her might not have been the wisest"
+                                            + "idea.<br/>\"I think you've just signed up for some good long lessons in learning your place. I'm stronger, more skilled, "
+                                            + "and more <b>worthy</b> than you are, and it's clear that my going <b>easy></b> on you has given you a swelled sense of your "
+                                            + "own ability.</i>\"<br/>Jewel sneers at you, and then turns and stalks away. You must have accidentally hit upon something sensitive "
+                                            + "from Jewel's past- perhaps something she kept hearing growing up among a mostly-male military related to stereotypes about girls being "
+                                            + "weak and submissive. Once she's calmed down, you'll have to find her and apologize, but you suspect that from now on Jewel is going "
+                                            + "to be putting a lot more effort into the games. If you want to keep up, you'll probably have to step up your own efforts as well.");
+                            useAnal();
+                            useMartial();
+                            growth.extraAttributes += 1;
+                            // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
+                            Global.getPlayer().getGrowth().addTraitPoints(new int[] {25, 47}, Global.getPlayer());
+                            return true;
+                        })
+        )));
 
         character.addCombatScene(new CombatScene((c, self, other) -> {
             return character.getLevel() >= 20 && !Global.checkFlag(JEWEL_MENTAL_FOCUS)
@@ -202,15 +204,12 @@ public class Jewel extends BasePersonality {
                         }), new CombatSceneChoice("Make fun of her. [Hard Mode]", (c, self, other) -> {
                             c.write("You can't believe your ears. Jewel thinks you're going to just lie down and be her bitch? There's no way that's happening! "
                                             + "You let her know what you think, and that there's no way some little girl is going to make you do anything. Jewel's eyes narrow dangerously, "
-                                            + "<i>\"" + other.getName()
-                                            + ", I think you just dug your own grave. We'll see if this <b>little girl</b> can change your mind the next time we meet.\"</i>");
+                                            + "<i>\"" + other.getName() + ", I think you just dug your own grave. We'll see if this <b>little girl</b> can change your mind the next time we meet.\"</i>");
                             useMental();
                             usePhysical();
                             character.getGrowth().extraAttributes += 1;
                             // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
-                            Global.getPlayer()
-                                  .getGrowth()
-                                  .addTraitPoints(new int[] {1, 57}, Global.getPlayer());
+                            Global.getPlayer().getGrowth().addTraitPoints(new int[] {1, 57}, Global.getPlayer());
                             return true;
                         }))));
 
@@ -239,10 +238,8 @@ public class Jewel extends BasePersonality {
         growth.addTrait(31, Trait.holecontrol);
         growth.addTrait(34, Trait.exhibitionist);
         // 37 - Choice 1, trait 3
-        character.getStamina()
-                 .setMax(100);
-        character.getArousal()
-                 .setMax(70);
+        character.getStamina().setMax(100);
+        character.getArousal().setMax(70);
         // 39 - Choice 2, trait 2
 
         growth.addTrait(43, Trait.analTraining2);
@@ -257,24 +254,15 @@ public class Jewel extends BasePersonality {
     @Override
     public void rest(int time) {
         if (character.rank >= 1) {
-            if (!character.has(Trait.fighter)
-                            && (Global.checkFlag(JEWEL_MARTIAL_FOCUS) || Global.checkFlag(JEWEL_ANAL_FOCUS))) {
+            if (!character.has(Trait.fighter) && (Global.checkFlag(JEWEL_MARTIAL_FOCUS) || Global.checkFlag(JEWEL_ANAL_FOCUS))) {
                 advance();
             }
         }
         if (character.getLevel() >= 40 && Global.checkFlag(JEWEL_ANAL_FOCUS)) {
-            if (!character.body.getRandomAss()
-                               .getMods()
-                               .stream()
-                               .anyMatch(mod -> mod.countsAs(character, new TrainedMod()))) {
-                character.body.addReplace(character.body.getRandomAss()
-                                                        .applyMod(new TrainedMod()),
-                                1);
+            if (!character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(character, new TrainedMod()))) {
+                character.body.addReplace(character.body.getRandomAss().applyMod(new TrainedMod()), 1);
             }
-        } else if (character.body.getRandomAss()
-                                 .getMods()
-                                 .stream()
-                                 .anyMatch(mod -> mod.countsAs(character, new TrainedMod()))) {
+        } else if (character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(character, new TrainedMod()))) {
             character.body.addReplace(AssPart.generateGeneric(), 1);
         }
         super.rest(time);
@@ -350,17 +338,14 @@ public class Jewel extends BasePersonality {
         });
 
         character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
-            if (self.has(Trait.bitingwords) && c.getStance()
-                                                .dom(self)) {
-                ArrayList<String> possible = new ArrayList<>();
+            if (self.has(Trait.bitingwords) && c.getStance().dom(self)) {
+                ArrayList<String> possible = new ArrayList<>(); 
                 possible.add("Jewel looks down at you with a sadistic smirk, <i>\"That's a nice look on you there "
                                 + other.getName()
                                 + ".\"</i>");
                 possible.add("Shifting her weight a bit to glare into your eyes, Jewel says happily, <i>\"Aha, it looks like you're quite comfortable there. Maybe you're a natural bottom?\"</i>");
                 if (other.hasBalls()) {
-                    possible.add("Jewel cups your vulnerable balls and gives them a light squeeze. <i>\"Worthless "
-                                    + other.boyOrGirl()
-                                    + "s like you should just give up. Why even try when you end up as my seat every time?\"</i>");
+                    possible.add("Jewel cups your vulnerable balls and gives them a light squeeze. <i>\"Worthless " + other.boyOrGirl() + "s like you should just give up. Why even try when you end up as my seat every time?\"</i>");
                 }
                 return possible.get(Global.random(possible.size()));
             }
@@ -400,21 +385,21 @@ public class Jewel extends BasePersonality {
                 case 2:
                     return "<i>\"Shit shit, I won't let you win!\"</i>";
                 default:
-                    return Global.pickRandom(Arrays.asList(finalLines))
-                                 .get();
+                    return Global.pickRandom(Arrays.asList(finalLines)).get();
             }
         });
 
         character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
-            final String finalLines[] =
-                            {"<i>\"Wow, still going! You're the best you know? You can't expect everyone to last this long\"</i>",
-                                            "<i>\"Keep it coming partner! I'll take all that you've got.\"</i>",
-                                            "<i>\"I hope you're not dry yet, let's continue!\"</i>",
-                                            "<i>\"Not dry yet? Great, let's continue!\"</i>",};
+            final String finalLines[] = {
+                            "<i>\"Wow, still going! You're the best you know? You can't expect everyone to last this long\"</i>",
+                            "<i>\"Keep it coming partner! I'll take all that you've got.\"</i>",
+                            "<i>\"I hope you're not dry yet, let's continue!\"</i>",
+                            "<i>\"Not dry yet? Great, let's continue!\"</i>",
+                            };
             switch (other.orgasms) {
                 case 0:
                     return "<i>\"Heh, no matter what, you're just a horny little " + other.boyOrGirl()
-                                    + " aren'tcha? Come on, no time for rest, let's see how many times in a row you can cum\"</i>";
+                                + " aren'tcha? Come on, no time for rest, let's see how many times in a row you can cum\"</i>";
                 case 1:
                     return "<i>\"Oooh that's two now. Hope you can keep going!\"</i>";
                 case 2:
@@ -461,6 +446,8 @@ public class Jewel extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         Character other = c.getOpponent(character);
+        if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
+
         Collection<BodyPart> otherOrgans = c.getStance()
                                             .getPartsFor(c, other, other);
         if (BodyPart.hasType(otherOrgans, "ass") && c.getStance()
@@ -629,7 +616,11 @@ public class Jewel extends BasePersonality {
     public String defeat(Combat c, Result flag) {
         Character other = c.getOpponent(character);
         
+<<<<<<< HEAD
         if (character.has(Trait.fighter)) {
+=======
+        if (character.has(Trait.fighter) && Global.randomBool()) {
+>>>>>>> pr/2
             return "Jewel falters as her arousal begins to overwhelm her. You manage to force her to the ground and pin her hands. You press your thigh against her slick pussy, "
                             + "making her moan in pleasure. You rub her with your leg and suck on her neck until she can't resist grinding against you. She climaxes with a scream and you kiss "
                             + "her on the lips to quiet her. You start to get off her, but her voice stops you. <i>\"Don't tell me you're done already. I can keep going for another couple rounds "
@@ -750,8 +741,8 @@ public class Jewel extends BasePersonality {
                             + " She stands up and presses her bare foot against %s dick and balls. "
                             + "%s groans in pleasure and pain as Jewel roughly grinds her foot against "
                             + "the sensitive organs. <i>\"Do you like that? You can't help it, can "
-                            + "you?\"</i> She grins sadistically. <i>\"I've stomped many boys into "
-                            + "the ground, but no matter how much pride they have, they always end "
+                            + "you?\"</i> She grins sadistically. <i>\"I've stomped many " + target.boyOrGirl()
+                            + "s into " + "the ground, but no matter how much pride they have, they always end "
                             + "up moaning in pleasure. It's like penises exist just to be dominated.\""
                             + "</i> You feel a chill run down your back, watching Jewel's display of"
                             + " dominance, but you're also rock hard. %s lets out a loud moan and "
@@ -815,8 +806,12 @@ public class Jewel extends BasePersonality {
         character.outfitPlan.add(Clothing.getByID("gi"));
         character.outfitPlan.add(Clothing.getByID("panties"));
         character.modAttributeDontSaveData(Attribute.Ki, 1);
+<<<<<<< HEAD
         character.getGrowth()
                  .addOrRemoveTraits(character, true);
+=======
+        character.getGrowth().addOrRemoveTraits(character, true);
+>>>>>>> pr/2
     }
 
     @Override
