@@ -28,9 +28,6 @@ public class FieryMod extends PartMod {
     }
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
-        if (target.isType("strapon")) {
-            return 0;
-        }
         if (!opponent.stunned()) {
             if (target.moddedPartCountsAs(opponent, CockMod.primal)) {
                 c.write(self, String.format(

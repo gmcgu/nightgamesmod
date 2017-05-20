@@ -147,7 +147,7 @@ public class Finger extends Skill {
     }
 
     @Override
-    public boolean makesContact(Combat c) {
+    public boolean makesContact() {
         return true;
     }
     

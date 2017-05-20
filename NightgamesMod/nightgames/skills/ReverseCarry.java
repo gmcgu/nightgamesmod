@@ -106,7 +106,7 @@ public class ReverseCarry extends Carry {
     }
 
     @Override
-    public boolean makesContact(Combat c) {
+    public boolean makesContact() {
         return true;
     }
     
