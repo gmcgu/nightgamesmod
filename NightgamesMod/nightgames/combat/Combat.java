@@ -24,7 +24,6 @@ import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.characters.body.mods.DemonicMod;
@@ -978,7 +977,8 @@ private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new
     }
 
     private boolean rollWorship(Character self, Character other) {
-        if ((other.has(Trait.objectOfWorship) || self.is(Stsflag.lovestruck)) && (other.breastsAvailable() || other.crotchAvailable())) {
+        if (!other.isPet() && (other.has(Trait.objectOfWorship) || self.is(Stsflag.lovestruck))
+                        && (other.breastsAvailable() || other.crotchAvailable())) {
             double chance = Math.min(20, Math.max(5, other.get(Attribute.Divinity) + 10 - self.getLevel()));
             if (other.has(Trait.revered)) {
                 chance += 10;
@@ -994,7 +994,7 @@ private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new
 
     private boolean rollAssWorship(Character self, Character opponent) {
         int chance = 0;
-        if (opponent.has(Trait.temptingass)) {
+        if (opponent.has(Trait.temptingass) && !opponent.isPet()) {
             chance += Math.max(0, Math.min(15, opponent.get(Attribute.Seduction) - self.get(Attribute.Seduction)));
             if (self.is(Stsflag.feral))
                 chance += 10;
@@ -1229,7 +1229,7 @@ private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new
                 write(skill.user()
                            .subjectAction("use ", "uses ") + skill.getLabel(this) + ".");
             }
-            if (skill.makesContact() && !getStance().dom(target) && target.canAct()
+            if (skill.makesContact(this) && !getStance().dom(target) && target.canAct()
                             && checkCounter(skill.user(), target, skill)) {
                 write("Countered!");
                 if (!resolveCrossCounter(skill, target, 25)) {
@@ -1237,7 +1237,7 @@ private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new
                 }
                 madeContact = true;
                 success = false;
-            } else if (target.is(Stsflag.counter) && skill.makesContact()) {
+            } else if (target.is(Stsflag.counter) && skill.makesContact(this)) {
                 write("Countered!");
                 if (!resolveCrossCounter(skill, target, 50)) {
                     CounterStatus s = (CounterStatus) target.getStatus(Stsflag.counter);
@@ -1253,7 +1253,7 @@ private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new
                 success = false;
             } else {
                 success = Skill.resolve(skill, this, target);
-                madeContact |= success && skill.makesContact();
+                madeContact |= success && skill.makesContact(this);
             }
             if (success) {
                 if (skill.getTags(this).contains(SkillTag.thrusting) && skill.user().has(Trait.Jackhammer) && Global.random(2) == 0) {
@@ -1805,8 +1805,9 @@ private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new
         return Global.noneCharacter();
     }
 
-    public void writeSystemMessage(String battleString) {
-        if (Global.checkFlag(Flag.systemMessages)) {
+    public void writeSystemMessage(String battleString, boolean basic) {
+        if (Global.checkFlag(Flag.systemMessages) || basic 
+                        && Global.checkFlag(Flag.basicSystemMessages)) {
             write(battleString);
         }
     }
