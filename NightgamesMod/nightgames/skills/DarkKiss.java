@@ -66,7 +66,7 @@ public class DarkKiss extends Skill {
     }
     
     @Override
-    public boolean makesContact(Combat c){
+    public boolean makesContact(){
         return true;
     }
 

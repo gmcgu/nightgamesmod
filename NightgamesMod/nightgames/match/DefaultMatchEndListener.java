@@ -16,7 +16,7 @@ public class DefaultMatchEndListener extends CombatListener {
 
     @Override
     public void postEnd(Optional<Character> winner) {
-        if (winner.isPresent() && winner.get() != Global.noneCharacter()) {
+        if (winner.isPresent()) {
             Global.getMatch().haveMercy(winner.get(), c.getOpponent(winner.get()));
             //match.score(winner.get(), 1, Optional.of(" for defeating " + c.getOpponent(winner.get()).getName()));
         } else {

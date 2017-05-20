@@ -14,18 +14,18 @@ public class FocussedSex extends FocussedBase {
 
     @Override
     public double sensitivity(double x, BodyPart withPart, BodyPart targetPart, Skill skill) {
-        if (withPart.isGenitalOrToy() && targetPart.isGenitalOrToy()) {
-            return -1.25;
+        if (withPart.isGenital() && targetPart.isGenital()) {
+            return -1;
         }
-        return 1.5;
+        return 1.25;
     }
 
     @Override
     public double opponentSensitivity(double x, BodyPart withPart, BodyPart targetPart, Skill skill) {
-        if (withPart.isGenitalOrToy() && targetPart.isGenitalOrToy()) {
-            return 1;
+        if (withPart.isGenital() && targetPart.isGenital()) {
+            return .75;
         }
-        return -1.5;
+        return -1.25;
     }
 
     @Override

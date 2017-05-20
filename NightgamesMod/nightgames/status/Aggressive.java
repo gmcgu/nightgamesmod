@@ -17,8 +17,7 @@ import nightgames.skills.Skill;
 public class Aggressive extends DurationStatus {
 
     private static final Collection<Skill> CONTACT_SKILLS = Collections.unmodifiableSet(
-                    Global.getSkillPool().stream().filter(s -> s.makesContact(null))
-                    .collect(Collectors.toSet()));
+                    Global.getSkillPool().stream().filter(Skill::makesContact).collect(Collectors.toSet()));
 
     private String cause;
 

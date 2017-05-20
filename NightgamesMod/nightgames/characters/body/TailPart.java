@@ -170,7 +170,7 @@ public enum TailPart implements BodyPart,BodyPartMod {
     }
 
     @Override
-    public Collection<BodyPartMod> getMods() {
+    public Collection<? extends BodyPartMod> getMods() {
         return Collections.singleton(this);
     }
 

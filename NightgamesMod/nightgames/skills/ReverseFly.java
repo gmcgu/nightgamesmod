@@ -104,7 +104,7 @@ public class ReverseFly extends Fly {
     }
 
     @Override
-    public boolean makesContact(Combat c) {
+    public boolean makesContact() {
         return true;
     }
     

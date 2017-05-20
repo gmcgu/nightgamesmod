@@ -16,8 +16,7 @@ public class FinishOff extends TeammateAction {
     @Override
     public String describe(Character doer) {
         Character captain = getCaptain();
-        String msg = doer.getName() + " use <b>Finish Off<\b>.\n";
-        return msg + Global.format(
+        return Global.format(
                         "{self:SUBJECT-ACTION:place|places} {self:possessive} hand"
                                         + " on {other:name-possessive} chest. \"Come on, {other:name}, you"
                                         + " can't go on like this. Let me take care of that for you.\""

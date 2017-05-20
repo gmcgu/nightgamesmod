@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.gson.JsonObject;
 
 import nightgames.characters.Character;
+import nightgames.global.Global;
 import nightgames.json.JsonUtils;
 
 public abstract class Quest {

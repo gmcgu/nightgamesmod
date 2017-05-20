@@ -133,7 +133,7 @@ public class ReverseAssFuck extends Fuck {
     }
 
     @Override
-    public boolean makesContact(Combat c) {
+    public boolean makesContact() {
         return true;
     }
     

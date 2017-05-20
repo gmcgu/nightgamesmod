@@ -56,7 +56,9 @@ public class Frottage extends Skill {
                 c.write(getSelf(), deal(c, m, Result.normal, target));
             }
         } else if (getSelf().has(Trait.strapped)) {
-            c.write(getSelf(), receive(c, m, Result.special, target));
+            if (target.human()) {
+                c.write(getSelf(), receive(c, m, Result.special, target));
+            }
             target.loseMojo(c, 10);
             dealer = null;
         } else {
@@ -119,7 +121,7 @@ public class Frottage extends Skill {
     }
 
     @Override
-    public boolean makesContact(Combat c) {
+    public boolean makesContact() {
         return true;
     }
 }

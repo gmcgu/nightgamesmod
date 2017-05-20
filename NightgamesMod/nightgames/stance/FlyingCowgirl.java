@@ -54,7 +54,7 @@ public class FlyingCowgirl extends FemdomSexStance {
 
     @Override
     public boolean sub(Character c) {
-        return bottom == c;
+        return top == c;
     }
 
     @Override
