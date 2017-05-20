@@ -30,14 +30,14 @@ public interface Modifier {
     /**
      * Process non-combat turn
      */
-    void handleTurn(Character c, Match m);
+    void handleTurn(Character c, Match match);
 
     /**
      * Undo all changes to the character's inventory made by handleItems
      */
     void undoItems(Character c);
 
-    boolean allowAction(Action act, Character c, Match m);
+    boolean allowAction(Action act, Character c, Match match);
 
     int bonus();
 

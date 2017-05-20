@@ -468,16 +468,21 @@ public class Mara extends BasePersonality {
         character.outfitPlan.add(Clothing.getByID("pantyhose"));
         character.outfitPlan.add(Clothing.getByID("boots"));
         character.modAttributeDontSaveData(Attribute.Science, 1);
+<<<<<<< HEAD
         character.getGrowth()
                  .addOrRemoveTraits(character, true);
+=======
+        character.getGrowth().addOrRemoveTraits(character, true);
+>>>>>>> pr/2
     }
 
     @Override
     public String victory(Combat c, Result flag) {
         Character target = c.getOpponent(character);
         character.arousal.empty();
-        if (c.getStance()
-             .anallyPenetrated(c, target)) {
+        if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
+
+        if (c.getStance().anallyPenetrated(c, target)) {
             return "The sensations coming from your prostate are too much as your arms give out below you. Mara doesn't let up either, grinding the head of the strap on over your "
                             + "prostate. <i>\"I've read that the prostate is the male equivalent of a g-spot,\"</i> she pants as she continues her assault on your ass. <i>\"I'd like to see if I can "
                             + "make you come without stimulating your penis.\"</i> she continues. You don't really listen as your brain is about to short circuit and your dick is about to give "
@@ -596,8 +601,7 @@ public class Mara extends BasePersonality {
                             + "she's cumming. You lean in and kiss her gently as she catches her breath.<br/><br/>After you've both recovered enough to get back to your feet, Mara punches you weakly "
                             + "in the chest. <i>\"You jerk! Do you have any idea how long this stuff lasts? How am I suppose to win my next fight when I'm this sensitive?\"</i> She pulls your head down "
                             + "to her height and kisses you passionately before storming off.";
-        } else if (c.getStance()
-                    .vaginallyPenetrated(c, character)) {
+        } else if (c.getStance().vaginallyPenetrated(c, character)) {
             return "You bury yourself deep into Mara's tight pussy as she screams in pleasure. Her hot folds shudder and squeeze your cock, confirming she's reached her climax. "
                             + "The sensation is amazing, but you're not in danger of cumming with her. You gently stroke her head while spasms of pleasure continue to run through her small body. "
                             + "It occurs to you -not for the first time- that she's really cute, even when she's not trying to be.<br/><br/>As Mara catches her breath, you see realization slowly dawn "
@@ -780,10 +784,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return character.getStamina()
-                        .percent() >= 75
-                        && character.getArousal()
-                                    .percent() <= 10
+        return character.getStamina().percent() >= 75 && character.getArousal().percent() <= 10
                         && !character.mostlyNude();
     }
 

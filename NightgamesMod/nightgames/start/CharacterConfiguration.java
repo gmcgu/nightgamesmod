@@ -86,8 +86,12 @@ public abstract class CharacterConfiguration {
     }
 
     private static final Field[] GROWTH_FIELDS = Growth.class.getFields();
+<<<<<<< HEAD
     private static final List<String> GROWTH_FIELDS_NAMES=Stream.of(GROWTH_FIELDS)
                     .map(Field::getName).collect(Collectors.toList());
+=======
+    private static final List<String> GROWTH_FIELDS_NAMES=Stream.of(GROWTH_FIELDS).map(Field::getName).collect(Collectors.toList());
+>>>>>>> pr/2
     
     private Map<Integer, Map<Attribute, Integer>> calculateAttributeLevelPlan(Character base, int desiredLevel, Map<Attribute, Integer> desiredFinalAttributes) {
         Map<Attribute, Integer> deltaAtts = desiredFinalAttributes.keySet()
@@ -130,7 +134,10 @@ public abstract class CharacterConfiguration {
             t.forEach(base::addTraitDontSaveData);
             t.forEach(trait -> base.getGrowth().addTrait(0, trait));
         });
+<<<<<<< HEAD
         
+=======
+>>>>>>> pr/2
         Growth bg=base.getGrowth();
         for (String key : growth.keySet()) {
             if (GROWTH_FIELDS_NAMES.contains(key)) {
@@ -149,12 +156,19 @@ public abstract class CharacterConfiguration {
             base.level = l;
             modMeters(base, l * 2); // multiplication to compensate for missed daytime gains
         });
+<<<<<<< HEAD
         xp.ifPresent(x -> base.gainXPPure(x));
+=======
+        xp.ifPresent(x -> base.gainXP(x));
+>>>>>>> pr/2
         Map<Attribute, Integer> start = new HashMap<>(base.att);
         Map<Attribute, Integer> deltaAtts = attributes.keySet()
                         .stream()
                         .collect(Collectors.toMap(Function.identity(), key -> attributes.get(key) - start.getOrDefault(key, 0)));
+<<<<<<< HEAD
         
+=======
+>>>>>>> pr/2
         level.ifPresent(desiredLevel -> {
             Map<Integer, Map<Attribute, Integer>> attributeLevelPlan = calculateAttributeLevelPlan(base, desiredLevel, attributes);
             System.out.println(attributeLevelPlan);
@@ -217,8 +231,12 @@ public abstract class CharacterConfiguration {
         }
     }
     
+<<<<<<< HEAD
     @Override 
     public String toString() {
+=======
+    @Override public String toString() {
+>>>>>>> pr/2
         return "CharacterConfiguration with name "+name+" gender "+gender+" attributes "+attributes+" money "+money+" level "+level+" traits "+traits+" XP "+xp+" body "+body+" clothing "+clothing+" growth "+growth;
     }
     

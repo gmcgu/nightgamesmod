@@ -27,7 +27,11 @@ public class BreastsPart extends GenericBodyPart {
     public static BreastsPart h = (BreastsPart) new BreastsPart().applyMod(new SizeMod(7));
 
     private double bonusSensitivity = 0;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> pr/2
     public static BreastsPart generateGeneric() {
         return new BreastsPart();
     }
@@ -49,7 +53,6 @@ public class BreastsPart extends GenericBodyPart {
     @Override
     public double getHotness(Character self, Character opponent) {
         double hotness = super.getHotness(self, opponent);
-        
         Clothing top = self.getOutfit().getTopOfSlot(ClothingSlot.top);
         hotness += -.1 + Math.sqrt(getSize()) * .15 * self.getOutfit()
                                                 .getExposure(ClothingSlot.top);
@@ -69,12 +72,18 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public double getSensitivity(Character self, BodyPart target) {
+<<<<<<< HEAD
         if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
             System.out.println("checking sensitivity of breasts: "
                             + self.getName()+" bonusSens: "+bonusSensitivity);
         }
         return (.75 + getSize() * .2 + bonusSensitivity)* super.getSensitivity(self, target);   
    }
+=======
+        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) System.out.println("checking sensitivity of breasts: "+self.getName()+" bonusSens: "+bonusSensitivity);
+        return (.75 + getSize() * .2 + bonusSensitivity)* super.getSensitivity(self, target);
+    }
+>>>>>>> pr/2
 
     public static BreastsPart maximumSize() {
         return h;

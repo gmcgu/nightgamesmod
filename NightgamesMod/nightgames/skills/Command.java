@@ -179,7 +179,11 @@ public class Command extends Skill {
             if (target.body.getFetish("pussy").isPresent() && getSelf().hasPussy())
                 available.add(CommandType.WORSHIP_PUSSY);
 
+<<<<<<< HEAD
             if (getSelf().hasDick() && !c.getStance().inserted(getSelf()))
+=======
+            if (getSelf().hasDick()/* && !c TODO: is inserted- .*/)
+>>>>>>> pr/2
                 available.add(CommandType.GIVE_BLOWJOB);
 
             if (getSelf().hasPussy())
@@ -389,12 +393,21 @@ public class Command extends Skill {
                 Clothing removed = getStripTarget(getSelf());
                 if (removed == null)
                     return;
+<<<<<<< HEAD
+=======
+                //getSelf().getOutfit()
+                //         .unequip(removed);
+>>>>>>> pr/2
                 getSelf().undress(c);
                 c.write(getSelf(),
                                 String.format("%s tells %s to remove %s %s for %s."
                                                 + " %s gladly %s, eager to see more of %s perfect physique.",
                                                 getSelf().subject(), target.subject(), 
+<<<<<<< HEAD
                                                 getSelf().possessiveAdjective(), "clothes",
+=======
+                                                getSelf().possessiveAdjective(), /*removed.getName()*/"clothes",
+>>>>>>> pr/2
                                                 getSelf().directObject(), 
                                                 Global.capitalizeFirstLetter(target.pronoun()),
                                                 target.action("comply", "complies"),
@@ -405,14 +418,24 @@ public class Command extends Skill {
                 removed = getStripTarget(target);
                 if (removed == null)
                     return;
+<<<<<<< HEAD
                 getSelf().undress(c);
+=======
+                //target.getOutfit()
+                //      .unequip(removed);
+                target.undress(c);
+>>>>>>> pr/2
                 c.write(getSelf(),
                                 String.format("With a dismissive gesture, %s tells %s"
                                                 + " that %s would feel far better without %s %s on. Of course!"
                                                 + " That would make <i>everything</i> better! %s eagerly %s"
                                                 + " the offending garment.", getSelf().getName(), 
                                                 target.subject(), target.pronoun(), 
+<<<<<<< HEAD
                                                 target.possessiveAdjective(), "clothes",
+=======
+                                                target.possessiveAdjective(), /*removed.getName()*/"clothes",
+>>>>>>> pr/2
                                                 Global.capitalizeFirstLetter(target.pronoun()),
                                                 target.action("remove")));
                 break;

@@ -455,6 +455,7 @@ public class CreationGUI extends JPanel {
                 Global.xpRate = 3;
             }
         });
+
         verticalBox.add(ExpDescription);
         separator_1 = new JSeparator();
         verticalBox.add(separator_1);
@@ -517,8 +518,12 @@ public class CreationGUI extends JPanel {
 
 
     protected void makeGame(Optional<StartConfiguration> startConfig) {
+<<<<<<< HEAD
         if (!namefield.getText().isEmpty() || (startConfig.isPresent() 
                         && startConfig.get().player.nameIsSet())) {
+=======
+        if (!namefield.getText().isEmpty() || (startConfig.isPresent() && startConfig.get().player.nameIsSet())) {
+>>>>>>> pr/2
             String name = namefield.getText();
             CharacterSex sex = (CharacterSex) sexBox.getSelectedItem();
             List<Trait> traits = Collections.emptyList();
@@ -576,7 +581,10 @@ public class CreationGUI extends JPanel {
         Optional<String> fontSizeFlag = Global.getFlagStartingWith(cfg.getFlags(), "DefaultFontSize");
         if (fontSizeFlag.isPresent()) {Global.gui().fontsize=Integer.parseInt(fontSizeFlag.get().substring(15));}
         
+<<<<<<< HEAD
         
+=======
+>>>>>>> pr/2
         refresh();
     }
 

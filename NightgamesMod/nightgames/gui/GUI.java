@@ -8,10 +8,12 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -22,12 +24,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
@@ -48,8 +52,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -69,23 +76,23 @@ import nightgames.characters.Character;
 import nightgames.characters.Meter;
 import nightgames.characters.Player;
 import nightgames.characters.Trait;
+import nightgames.characters.TraitTree;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.daytime.Activity;
 import nightgames.daytime.Store;
 import nightgames.debug.DebugGUIPanel;
-import nightgames.global.DebugFlags;
-import nightgames.global.Encs;
-import nightgames.global.Flag;
-import nightgames.global.Global;
-import nightgames.global.Time;
+import nightgames.global.*;
 import nightgames.items.Item;
 import nightgames.items.Loot;
+import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
+import nightgames.match.Prematch;
 import nightgames.modifier.standard.NoModifier;
 import nightgames.skills.Skill;
 import nightgames.skills.TacticGroup;
+import nightgames.skills.Tactics;
 import nightgames.trap.Trap;
 import nightgames.utilities.DebugHelper;
 
@@ -141,9 +148,14 @@ public class GUI extends JFrame implements Observer {
     private JRadioButton rdporoff;
     private JRadioButton rdimgon;
     private JRadioButton rdimgoff;
+    private JButton rdfntsmall;
     private JButton rdfntnorm;
+<<<<<<< HEAD
     private JButton rdnfntlrg;
     private JButton rdnfntsmall;
+=======
+    private JButton rdfntlrg;
+>>>>>>> pr/2
     private JSlider malePrefSlider;
     private int width;
     private int height;
@@ -348,17 +360,17 @@ public class GUI extends JFrame implements Observer {
             fontsize = Global.clamp(fontsize - 1, 1, 7);
             Global.gui().message("Text Size changed to " + fontsize);
         });
-        rdnfntlrg = new JButton("Larger");
-        rdnfntlrg.addActionListener(a -> {
+        rdfntlrg = new JButton("Larger");
+        rdfntlrg.addActionListener(a -> {
             fontsize = Global.clamp(fontsize + 1, 1, 7);
             Global.gui().message("Text Size changed to " + fontsize);
         });
         size.add(rdfntnorm);
-        size.add(rdnfntlrg);
+        size.add(rdfntlrg);
 
         optionsPanel.add(fontSizeLabel);
         optionsPanel.add(rdfntnorm);
-        optionsPanel.add(rdnfntlrg);
+        optionsPanel.add(rdfntlrg);
         
         JLabel pronounLabel = new JLabel("Human Pronoun Usage");
         ButtonGroup pronoun = new ButtonGroup();
@@ -451,9 +463,13 @@ public class GUI extends JFrame implements Observer {
                 rdimgon.setSelected(true);
             }
             if (Global.checkFlag(Flag.largefonts)) {
+<<<<<<< HEAD
                 rdnfntlrg.setSelected(true);
             } else if (Global.checkFlag(Flag.smallfonts)){
                 rdnfntsmall.setSelected(true);
+=======
+                rdfntlrg.setSelected(true);
+>>>>>>> pr/2
             } else {
                 rdfntnorm.setSelected(true);
             }
@@ -491,7 +507,20 @@ public class GUI extends JFrame implements Observer {
                         imgPanel.remove(imgLabel);
                     }
                     imgPanel.repaint();
-                }
+                }/*
+                if (rdfntlrg.isSelected()) {
+                    Global.unflag(Flag.smallfonts);
+                    Global.flag(Flag.largefonts);
+                    fontsize = 6;
+                } else if (rdfntsmall.isSelected()) {
+                    Global.flag(Flag.smallfonts);
+                    Global.unflag(Flag.largefonts);
+                    fontsize = 4;
+                } else {
+                    Global.unflag(Flag.smallfonts);
+                    Global.unflag(Flag.largefonts);
+                    fontsize = 5;
+                }*/
             }
         });
 
@@ -1280,7 +1309,7 @@ public class GUI extends JFrame implements Observer {
                 } else if (Global.day != null) {
                     Global.getDay().plan();
                 } else {
-                    MatchType.NORMAL.runPrematch();
+                    MatchType.NORMAL.runPrematch();;
                 }
             }
         }
@@ -1403,7 +1432,7 @@ public class GUI extends JFrame implements Observer {
         statusPanel.removeAll();
         statusPanel.repaint();
         //statusPanel.setPreferredSize(new Dimension(400, mainPanel.getHeight()));
-        statusPanel.setPreferredSize(new Dimension(width/4, mainPanel.getHeight()));
+        statusPanel.setPreferredSize(new Dimension(width/8, mainPanel.getHeight()));
 
         
         if (width < 720) {
@@ -1416,7 +1445,7 @@ public class GUI extends JFrame implements Observer {
 
         statusPanel.add(statsPanel);
         //statsPanel.setPreferredSize(new Dimension(400, 200));
-        statsPanel.setPreferredSize(new Dimension(width/4, 200));
+        statsPanel.setPreferredSize(new Dimension(width/8, 200));
 
         JSeparator sep = new JSeparator();
         sep.setMaximumSize(new Dimension(statusPanel.getWidth(), 2));
@@ -1468,7 +1497,11 @@ public class GUI extends JFrame implements Observer {
         try {
             editorKit.insertHTML(doc, doc.getLength(),
                             "<font face='Georgia' color='white' size='" + descFontSize + "'>"
+<<<<<<< HEAD
                                             + player.getOutfit().describe(player) + "<br/>" + player.describeStatus()
+=======
+                                            + player.getOutfit().describe(player) + "<br/>" + player.describeStatus() 
+>>>>>>> pr/2
                                             + (Global.getButtslutQuest().isPresent()?("<br/>" + Global.getButtslutQuest().get().getDescriptionFor(player)):"")
                                             + "</font><br/>",
                             0, 0, null);
@@ -1485,9 +1518,9 @@ public class GUI extends JFrame implements Observer {
 //        statusPanel.setPreferredSize(new Dimension(400, height));
 //        currentStatusPanel.setMaximumSize(new Dimension(400, 2000));
 //        currentStatusPanel.setPreferredSize(new Dimension(400, 2000));
-        statusPanel.setPreferredSize(new Dimension(width/4, height));
-        currentStatusPanel.setMaximumSize(new Dimension(width/4, 2000));
-        currentStatusPanel.setPreferredSize(new Dimension(width/4, 2000));
+        statusPanel.setPreferredSize(new Dimension(width/8, height));
+        currentStatusPanel.setMaximumSize(new Dimension(width/8, 2000));
+        currentStatusPanel.setPreferredSize(new Dimension(width/8, 2000));
         
         currentStatusPanel.setBackground(GUIColors.bgLight);
         statusPanel.add(currentStatusPanel);

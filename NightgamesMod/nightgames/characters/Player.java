@@ -153,6 +153,7 @@ public class Player extends Character {
         }
         if (c.p1.human()) {
             c.p2.defeat(c, flag);
+<<<<<<< HEAD
             if (Global.getButtslutQuest().isPresent()) {
                 Global.getButtslutQuest().get().addPlayerWonPoint(c.p2);
             }
@@ -161,6 +162,12 @@ public class Player extends Character {
             if (Global.getButtslutQuest().isPresent()) {
                 Global.getButtslutQuest().get().addPlayerWonPoint(c.p1);
             }
+=======
+            if (Global.getButtslutQuest().isPresent()) {Global.getButtslutQuest().get().addPlayerWonPoint(c.p2);}
+        } else {
+            c.p1.defeat(c, flag);
+            if (Global.getButtslutQuest().isPresent()) {Global.getButtslutQuest().get().addPlayerWonPoint(c.p1);}
+>>>>>>> pr/2
         }
     }
 
@@ -297,8 +304,7 @@ public class Player extends Character {
 
         if (state == State.combat) {
             if (!location.fight.battle()) {
-                Global.getMatch()
-                      .resume();
+                Global.getMatch().resume();
             }
         } else if (busy > 0) {
             busy--;
@@ -724,6 +730,12 @@ public class Player extends Character {
     @Override
     public String nameDirectObject() {
         return "you";
+    }
+    
+    @Override
+    public boolean add(Trait t) {
+        if (t==Trait.nymphomania) {mod(Attribute.Nymphomania, 1);}
+        return super.add(t);
     }
 
     @Override

@@ -215,9 +215,13 @@ public class CassieTime extends BaseNPCTime {
             if (npc.has(Trait.magicmilk) && Global.getPlayer().getAddictionSeverity(AddictionType.MAGIC_MILK) != Severity.NONE) {
                 Global.gui().choose(this, "Ask for milk");
             }
+<<<<<<< HEAD
             if (player.get(Attribute.Arcane) > 10 && npc.get(Attribute.Arcane) 
                             >= 2*player.get(Attribute.Arcane)
                             && npc.hasDick()) {
+=======
+            if (player.get(Attribute.Arcane) > 10 && npc.get(Attribute.Arcane) >= 2*player.get(Attribute.Arcane)) {
+>>>>>>> pr/2
                 Global.gui().choose(this, "Magic");
             }
         }

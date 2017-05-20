@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BreastsPart;
 import nightgames.combat.Combat;
+import nightgames.global.Flag;
 import nightgames.global.Global;
 
 public class Missionary extends MaledomSexStance {
@@ -25,8 +26,12 @@ public class Missionary extends MaledomSexStance {
 
     @Override
     public String image() {
+<<<<<<< HEAD
         if(top.body.getRandomBreasts().getSize() > BreastsPart.flat.getSize())
             return "futa_missionary.jpg";
+=======
+        if(top.hasBreasts()) return "futa_missionary.jpg";
+>>>>>>> pr/2
         return "missionary.jpg";
     }
 

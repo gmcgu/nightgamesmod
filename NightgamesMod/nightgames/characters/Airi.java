@@ -11,6 +11,7 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.characters.body.mods.SizeMod;
@@ -489,6 +490,10 @@ public class Airi extends BasePersonality {
         }
         character.arousal.empty();
         opponent.arousal.empty();
+<<<<<<< HEAD
+=======
+        if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
+>>>>>>> pr/2
 
         if (character.is(Stsflag.disguised)) {
             StringBuilder sb = new StringBuilder();

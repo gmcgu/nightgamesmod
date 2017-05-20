@@ -3,6 +3,7 @@ package nightgames.stance;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
+import nightgames.global.Flag;
 import nightgames.global.Global;
 
 public class Doggy extends MaledomSexStance {

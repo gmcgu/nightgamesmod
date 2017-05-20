@@ -40,6 +40,7 @@ public class Aphrodisiac extends Skill {
                                     .get() >= 10
                         && !c.getStance()
                              .prone(getSelf());
+
         return canMove && (hasItem || canGetFromOwnBody);
     }
 
@@ -116,6 +117,7 @@ public class Aphrodisiac extends Skill {
                             + " is just surprised, but gradually a growing desire " + "starts to make "
                             + target.directObject() + " weak in the knees.";
         }
+
     }
 
     @Override

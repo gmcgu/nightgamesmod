@@ -46,8 +46,12 @@ public class Reversal extends Skill {
         }
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             writeOutput(c, Result.normal, target);
-
             c.setStance(c.getStance().reverse(c,true));
+
+<<<<<<< HEAD
+            c.setStance(c.getStance().reverse(c,true));
+=======
+>>>>>>> pr/2
             target.emote(Emotion.nervous, 10);
             getSelf().emote(Emotion.dominant, 10);
         } else {

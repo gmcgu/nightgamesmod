@@ -202,6 +202,7 @@ public class NPC extends Character {
         c.write(ai.victory(c, flag));
         gainAttraction(target, 1);
         target.gainAttraction(this, 2);
+        if (target instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, this, target)) {Global.getButtslutQuest().get().addPlayerLossPoint(this);}
     }
 
     @Override
@@ -862,7 +863,6 @@ public class NPC extends Character {
         super.resolveOrgasm(c, opponent, selfPart, opponentPart, times, totalTimes);
         ai.resolveOrgasm(c, this, opponent, selfPart, opponentPart, times, totalTimes);
     }
-
     @Override
     public String getPortrait(Combat c) {
         Disguised disguised = (Disguised) getStatus(Stsflag.disguised);
@@ -874,6 +874,7 @@ public class NPC extends Character {
 
     @Override
     public String getType() {
+        if(ai==null) {System.out.println("is broken: name "+this.getTrueName());return "Nobody";}
         return ai.getType();
     }
 

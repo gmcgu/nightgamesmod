@@ -407,8 +407,18 @@ public class GenericBodyPart implements BodyPart {
     protected List<PartMod> getPartMods() {
         return mods;
     }
+<<<<<<< HEAD
 
     @Override
+=======
+    
+    public double getFetishEffectiveness() {
+        return sensitivity==0?0.25:1.0;
+    }
+    public double getFetishChance() {
+        return sensitivity==0?0.1:0.25;
+    }
+>>>>>>> pr/2
     public void receiveCum(Combat c, Character self, Character donor, BodyPart sourcePart) {
         getMods().stream().forEach(mod -> ((PartMod)mod).receiveCum(c, self, this, donor, sourcePart));
     }

@@ -96,8 +96,12 @@ public class PetThreesome extends Skill {
         }
         if (targetO.isReady(target)) {
             Result result = Global.random(3) == 0 ? Result.critical : Result.normal;
+<<<<<<< HEAD
             if (selfO.isType("pussy") && targetO.isType("cock") && target.hasPussy() 
                              &&  master.hasInsertable() && Global.randomBool()) {
+=======
+            if (selfO.isType("pussy") && targetO.isType("cock") && target.hasPussy() && master.hasInsertable() && Global.random(2)==0) {
+>>>>>>> pr/2
                 c.write(getSelf(), Global.format("While {self:subject} is holding {other:name-do} down, "
                                 + "{master:subject-action:move|moves} behind {other:direct-object} and {master:action:pierce|pierces} "
                                 + "{other:direct-object} with {master:possessive} cock. "
@@ -130,7 +134,11 @@ public class PetThreesome extends Skill {
                                     target, master.subjectAction("are", "is")));
                     c.setStance(new FFMCowgirlThreesome(fucker, master, target), getSelf(), true);
                 }
+<<<<<<< HEAD
             } else if (selfO.isType("cock") && master.hasPussy() && target.hasDick() && Global.randomBool()) {
+=======
+            } else if (selfO.isType("cock") && master.hasPussy() && target.hasDick() && Global.random(2)==0) {
+>>>>>>> pr/2
                 c.write(getSelf(), Global.format("While %s holding {other:name-do} down, "
                                 + "{self:subject} moves behind {other:direct-object} and pierces "
                                 + "{other:direct-object} with {self:possessive} cock. "
@@ -148,7 +156,11 @@ public class PetThreesome extends Skill {
                                 target, master.subjectAction("are", "is")));
                 c.setStance(new MFFMissionaryThreesome(fucker, master, target), getSelf(), true);
             } else if (selfO.isType("cock")) {
+<<<<<<< HEAD
                 if (result == Result.critical && Global.randomBool() && master.hasPussy() && target.hasDick()) {
+=======
+                if (result == Result.critical || (Global.random(2)==0 && master.hasPussy() && target.hasDick())) {
+>>>>>>> pr/2
                     c.write(getSelf(), Global.format("While %s holding {other:name-do} from behind, "
                                     + "{self:subject} mounts {other:direct-object} and pierces "
                                     + "{other:direct-object} with {self:possessive} cock in the missionary position. "

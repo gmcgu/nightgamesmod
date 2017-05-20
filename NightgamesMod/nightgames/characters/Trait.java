@@ -496,6 +496,7 @@ public enum Trait {
         }
     }, null, null, true), // currently wearing a strapon
 
+<<<<<<< HEAD
     event("event", "special character", true),
     mindcontrolresistance("", "temporary resistance to mind games - hidden", true),
     none("", "", true),
@@ -506,6 +507,15 @@ public enum Trait {
     buttsluttraining("not visible", "the duration of the "
                     + "attached status represents the level ()", true);
     
+=======
+    event("event", "special character"),
+    mindcontrolresistance("", "temporary resistance to mind games - hidden"),
+    none("", ""),
+    
+    //From the training miniquests
+    trainedslut("Trained Slut", "Has been trained to be a slut. Reinforcing that training causes increased submissiveness"),
+    buttsluttraining("not visible", "the duration of the attached status represents the level ()");
+>>>>>>> pr/2
     
     private static void override(Map<Trait, Collection<Trait>> o, Trait key, Trait... overrides) {
         o.put(key, Arrays.asList(overrides));
@@ -678,8 +688,13 @@ public enum Trait {
             return nullResistance;
         }
     }
+<<<<<<< HEAD
     
     public boolean isVisible() {
         return !hidden;
+=======
+    public boolean isVisible() {
+        return !(this==strapped || this==mindcontrolresistance || this==event || this==none || this==buttsluttraining);
+>>>>>>> pr/2
     }
 }

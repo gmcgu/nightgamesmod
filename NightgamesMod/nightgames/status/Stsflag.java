@@ -68,7 +68,9 @@ public enum Stsflag {
     collared,
     disabling,
     pheromones,
-    piercingOdor, 
+    piercingOdor,
+    buttsluttraining,
+    buttslutificationReady,
     hypnovisor,
     slimed,
     disguised,
@@ -83,7 +85,11 @@ public enum Stsflag {
     tailfucked,
     permanent,
     mindgames, 
+<<<<<<< HEAD
     focussed, 
     buttsluttraining, 
     buttslutificationReady,
+=======
+    focussed,
+>>>>>>> pr/2
 }

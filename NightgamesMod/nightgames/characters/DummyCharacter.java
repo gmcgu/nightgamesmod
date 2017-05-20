@@ -126,4 +126,5 @@ public class DummyCharacter extends Character {
     @Override public Growth getGrowth() {
         return new Growth();
     }
+
 }

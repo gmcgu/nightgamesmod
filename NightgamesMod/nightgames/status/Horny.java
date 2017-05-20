@@ -9,6 +9,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
+import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.skills.damage.DamageType;
 
@@ -66,6 +67,7 @@ public class Horny extends DurationStatus {
 
     @Override
     public void tick(Combat c) {
+        if(Global.isDebugOn(DebugFlags.DEBUG_SCENE)) System.out.println("Horny magnitude: "+magnitude);
         affected.arouse(Math.round(magnitude), c, " (" + source + ")");
         affected.emote(Emotion.horny, 20);
     }

@@ -19,7 +19,11 @@ public class Cynical extends DurationStatus {
         super("Cynical", affected, amount);
         flag(Stsflag.cynical);
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> pr/2
     @Override
     public String describe(Combat c) {
         if (affected.human()) {
@@ -32,6 +36,14 @@ public class Cynical extends DurationStatus {
     @Override
     public String initialMessage(Combat c, Optional<Status> replacement) {
         return String.format("%s now cynical towards future mind games.\n", affected.subjectAction("are", "is"));
+    }
+    
+    @Override
+    public int regen(Combat c) {
+//        super.tick(10);
+      super.tick(1);
+
+        return 0;
     }
 
     @Override

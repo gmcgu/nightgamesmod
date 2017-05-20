@@ -41,6 +41,10 @@ public class StartConfiguration {
     public String getSummary() {
         return summary;
     }
+    
+    public Collection<DebugFlags> getDebug() {
+        return debugFlags;
+    }
 
     public boolean isEnabled() {
         return enabled;
@@ -52,6 +56,10 @@ public class StartConfiguration {
     
     public Collection<String> getFlags() {
         return flags;
+    }
+    
+    public Collection<DebugFlags> getDebugFlags() {
+        return debugFlags;
     }
 
     public boolean playerCanChooseGender() {
