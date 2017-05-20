@@ -7,7 +7,6 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.damage.DamageType;
-import nightgames.skills.damage.Staleness;
 import nightgames.stance.Stance;
 
 public class SuckNeck extends Skill {
@@ -168,7 +167,7 @@ public class SuckNeck extends Skill {
     }
 
     @Override
-    public boolean makesContact() {
+    public boolean makesContact(Combat c) {
         return true;
     }
     
