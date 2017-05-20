@@ -47,11 +47,9 @@ public class Shove extends Skill {
             target.pain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.physical, target, Global.random(10, 25)));
             if (getSelf().check(Attribute.Power, target.knockdownDC() - getSelf().get(Attribute.Ki))) {
                 c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())), getSelf(), true);
-<<<<<<< HEAD
+
                 target.add(c, new Falling(target));
-=======
-                target.add(c, new Falling(target));           
->>>>>>> pr/2
+
             }
         } else if (c.getStance().getClass() == Mount.class || c.getStance().getClass() == ReverseMount.class) {
             if (getSelf().check(Attribute.Power, target.knockdownDC() + 5)) {

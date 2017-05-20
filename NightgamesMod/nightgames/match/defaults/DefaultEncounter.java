@@ -152,25 +152,22 @@ public class DefaultEncounter implements Encounter {
                 } else {
                     ineligibleNpcCaughtMasturbating(npc);
                 }
-<<<<<<< HEAD
+
             } else if (p1 == human && p1.eligible(p2)) {
-=======
-            } else if (p1 == human && !p1.eligible(p2)) {
->>>>>>> pr/2
+
                 Global.gui().message("You encounter " + p2.getName() + ", but you still haven't recovered from your last fight.");
             } else if (p1 == human) {
                 Global.gui().message(String.format(
                                 "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
                                 p2.getName(), p2.pronoun(), p2.pronoun(), p2.possessiveAdjective()));
-<<<<<<< HEAD
+
             } else if (!p1.eligible(p2)) {
                 Global.gui().message("You encounter " + p1.getName() + ", but you still haven't recovered from your last fight.");
             } else {
                 Global.gui().message(String.format(
                                 "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
                                 p1.getName(), p1.pronoun(), p1.pronoun(), p1.possessiveAdjective()));
-=======
->>>>>>> pr/2
+
             }
         }
         location.endEncounter();
@@ -431,7 +428,7 @@ public class DefaultEncounter implements Encounter {
               .empty();
         attacker.tempt(20);
         Global.getMatch()
-              .score(attacker, target.has(Trait.event) ? 5 : 1);
+              .score(attacker,  1);
         attacker.state = State.ready;
         target.state = State.ready;
         location.endEncounter();
@@ -587,7 +584,7 @@ public class DefaultEncounter implements Encounter {
               .empty();
         attacker.tempt(20);
         Global.getMatch()
-              .score(attacker, target.has(Trait.event) ? 5 : 1);
+              .score(attacker,  1);
         attacker.state = State.ready;
         target.state = State.ready;
         location.endEncounter();

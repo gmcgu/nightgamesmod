@@ -164,17 +164,14 @@ public class Global {
     private static Date jdate;
     private static TraitTree traitRequirements;
     public static Scene current;
-    public static boolean debug[] = new boolean[DebugFlags.values().length];
     public static int debugSimulation = 0;
     public static double moneyRate = 1.0;
     public static double xpRate = 1.0;
     public static ContextFactory factory;
     public static Context cx;
-<<<<<<< HEAD
+
     public static MatchType currentMatchType = MatchType.NORMAL;
-=======
-    private static MatchType currentMatchType = MatchType.NORMAL;
->>>>>>> pr/2
+
     private static Character noneCharacter = new NPC("none", 1, null);
     private static HashMap<String, MatchAction> matchActions;
     private static final int LINEUP_SIZE = 5;
@@ -248,7 +245,7 @@ public class Global {
     }
 
     public static boolean isDebugOn(DebugFlags flag) {
-        return debug[flag.ordinal()] && debugSimulation == 0;
+        return false;
     }
     
     public static void ifDebuggingPrintf(DebugFlags flag, String formatted, Object... args) {
@@ -269,7 +266,6 @@ public class Global {
         Collection<DebugFlags> cfgDebugFlags = config.map
                         (StartConfiguration::getDebugFlags).orElse(new ArrayList<>());
         Collection<String> cfgFlags = config.map(StartConfiguration::getFlags).orElse(new ArrayList<>());
-        Collection<DebugFlags> cfgDebugFlags = config.map(StartConfiguration::getDebugFlags).orElse(new ArrayList<>());
         human = new Player(playerName, pickedGender, playerConfig, pickedTraits, selectedAttributes);
         if(human.has(Trait.largereserves)) {
             human.getWillpower().gain(20);
@@ -290,13 +286,9 @@ public class Global {
         }      
         Map<String, Boolean> configurationFlags = JsonUtils.mapFromJson(JsonUtils.rootJson(new InputStreamReader(ResourceLoader.getFileResourceAsStream("data/globalflags.json"))).getAsJsonObject(), String.class, Boolean.class);
         configurationFlags.forEach((flag, val) -> Global.setFlag(flag, val));
-<<<<<<< HEAD
-=======
-        
->>>>>>> pr/2
+
         if (!cfgDebugFlags.isEmpty()) {
             for (DebugFlags db:cfgDebugFlags.stream().collect(Collectors.toSet())) {
-                debug[db.ordinal()]=true;
             }
         }
         quests=new ArrayList<Quest>();
@@ -626,15 +618,13 @@ public class Global {
         getSkillPool().add(new Focus.OnForeplay(ch));
         getSkillPool().add(new Focus.OnSex(ch));
         getSkillPool().add(new Focus.OnRecovery(ch));
-<<<<<<< HEAD
+
         getSkillPool().add(new ManipulateFetish(ch));
         //getSkillPool().add(new BreastGrowthSuper(ch));
         getSkillPool().add(new Kneel(ch));
         getSkillPool().add(new OfferAss(ch));
         
-=======
 
->>>>>>> pr/2
         if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
             getSkillPool().add(new SelfStun(ch));
         }
@@ -820,7 +810,6 @@ public class Global {
     private static Set<Character> pickCharacters(Collection<Character> avail, Collection<Character> added, int size) {
         List<Character> randomizer = avail.stream()
                         .filter(c -> !c.human())
-                        .filter(c -> !c.has(Trait.event))
                         .filter(c -> !added.contains(c))
                         .collect(Collectors.toList());
         Collections.shuffle(randomizer);
@@ -876,7 +865,7 @@ public class Global {
             if (player.getPure(Attribute.Science) > 0) {
                 player.chargeBattery();
             }
-            if (human.getAffection(player) > maxaffection && !player.has(Trait.event) && !checkCharacterDisabledFlag(player)) {
+            if (human.getAffection(player) > maxaffection && !checkCharacterDisabledFlag(player)) {
                 maxaffection = human.getAffection(player);
                 lover = player;
             }
@@ -1394,8 +1383,6 @@ public class Global {
         hookLogwriter();
         for (String arg : args) {
             try {
-                DebugFlags flag = DebugFlags.valueOf(arg);
-                debug[flag.ordinal()] = true;
             } catch (IllegalArgumentException e) {
                 // pass
             }
@@ -1888,18 +1875,13 @@ public class Global {
 		}
 	}
 
-<<<<<<< HEAD
+
 	public static Optional<String> getFlagStartingWith(Collection<String> collection,
 	                String start) {
         return collection.stream().filter(s -> s.startsWith(start)).findFirst();
     }
 	
-=======
-	public static Optional<String> getFlagStartingWith(Collection<String> collection, String start) {
-	    return collection.stream().filter(s -> s.startsWith(start)).findFirst();
-	}
 
->>>>>>> pr/2
 	/**
 	 * TODO Huge hack to freeze status descriptions.
 	 */
@@ -1915,22 +1897,11 @@ public class Global {
         FROZEN_RNG = new Random();
         rng = FROZEN_RNG;
     }
-    
-<<<<<<< HEAD
-    public static boolean randomBool() {
-        return rng.nextBoolean();
-    }
-    
-    public static Optional<ButtslutQuest> getButtslutQuest() {
-        return quests.stream().filter(q -> q instanceof ButtslutQuest)
-                        .map(q -> (ButtslutQuest)q).findFirst();
-    }
-=======
+
     public static Optional<ButtslutQuest> getButtslutQuest() {
         return quests.stream().filter(q -> q instanceof ButtslutQuest).map(q -> (ButtslutQuest)q).findFirst();
     }
     public static boolean randomBool() {
         return rng.nextBoolean();
     }
->>>>>>> pr/2
 }

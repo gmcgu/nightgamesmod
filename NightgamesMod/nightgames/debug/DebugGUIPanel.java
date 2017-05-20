@@ -193,19 +193,7 @@ public class DebugGUIPanel extends JPanel {
 
     public DebugGUIPanel() {
         add(new JLabel("Debuggers"));
-        DebugFlags flags[] = DebugFlags.values();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        JPanel debugOptions = new JPanel(new GridLayout((flags.length + 2) / 3, 3));
-        add(debugOptions);
-        IntStream.range(0, flags.length).forEach(i -> {
-            DebugFlags flag = flags[i];
-            JCheckBox box = new JCheckBox(flag.name());
-            box.setSelected(Global.debug[i]);
-            box.addActionListener(event -> {
-                Global.debug[i] = box.isSelected();
-            });
-            debugOptions.add(box);
-        });
         out = new JTextArea();
         out.setOpaque(false);
         out.setRows(20);

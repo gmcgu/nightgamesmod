@@ -38,10 +38,7 @@ public class HeldPaizuri extends AbstractFacingStance {
         return c != bottom && c != top;
     }
 
-    @Override
-    public boolean paizuri(Character c, Character target) {
-        return c==top && target==bottom;
-    }
+
     
     @Override
     public boolean getUp(Character c) {

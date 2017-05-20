@@ -69,11 +69,7 @@ public class Strip extends ArmSkill {
         
         return false;
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> pr/2
     public boolean resolveDefault(Combat c, Arm arm, Character owner, Character target) {
         boolean sub = c.getStance().dom(owner);
         double accuracy = 10 + owner.get(Attribute.Science);

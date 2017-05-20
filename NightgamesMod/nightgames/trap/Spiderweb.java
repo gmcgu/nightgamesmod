@@ -83,7 +83,7 @@ public class Spiderweb extends Trap {
         victim.defeated(attacker);
         victim.getArousal().empty();
         attacker.tempt(20);
-        Global.getMatch().score(attacker, victim.has(Trait.event) ? 5 : 1);
+        Global.getMatch().score(attacker,  1);
         attacker.state = State.ready;
         victim.state = State.ready;
         victim.location().endEncounter();

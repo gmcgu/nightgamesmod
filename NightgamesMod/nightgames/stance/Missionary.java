@@ -26,12 +26,10 @@ public class Missionary extends MaledomSexStance {
 
     @Override
     public String image() {
-<<<<<<< HEAD
+
         if(top.body.getRandomBreasts().getSize() > BreastsPart.flat.getSize())
             return "futa_missionary.jpg";
-=======
-        if(top.hasBreasts()) return "futa_missionary.jpg";
->>>>>>> pr/2
+
         return "missionary.jpg";
     }
 

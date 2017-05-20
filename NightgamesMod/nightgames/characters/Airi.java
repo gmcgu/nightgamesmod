@@ -490,10 +490,10 @@ public class Airi extends BasePersonality {
         }
         character.arousal.empty();
         opponent.arousal.empty();
-<<<<<<< HEAD
-=======
+
+
         if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
->>>>>>> pr/2
+
 
         if (character.is(Stsflag.disguised)) {
             StringBuilder sb = new StringBuilder();

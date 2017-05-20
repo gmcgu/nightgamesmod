@@ -19,11 +19,6 @@ public class Cynical extends DurationStatus {
         super("Cynical", affected, amount);
         flag(Stsflag.cynical);
     }
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> pr/2
     @Override
     public String describe(Combat c) {
         if (affected.human()) {
@@ -49,12 +44,6 @@ public class Cynical extends DurationStatus {
     @Override
     public float fitnessModifier() {
         return 1;
-    }
-
-    @Override
-    public int regen(Combat c) {
-        super.tick(1);
-        return 0;
     }
     
     @Override

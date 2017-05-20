@@ -468,12 +468,10 @@ public class Mara extends BasePersonality {
         character.outfitPlan.add(Clothing.getByID("pantyhose"));
         character.outfitPlan.add(Clothing.getByID("boots"));
         character.modAttributeDontSaveData(Attribute.Science, 1);
-<<<<<<< HEAD
+
         character.getGrowth()
                  .addOrRemoveTraits(character, true);
-=======
-        character.getGrowth().addOrRemoveTraits(character, true);
->>>>>>> pr/2
+
     }
 
     @Override

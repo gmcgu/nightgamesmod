@@ -47,7 +47,6 @@ public class EnemyButtslutTrainingStatus extends Status {
         if (trainingLevel > 5) {
             //affected.removelist.add(this);
             affected.add(trainingTrait);
-            affected.add(Trait.trainedslut);
         }
     }
     

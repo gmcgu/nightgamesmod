@@ -108,20 +108,18 @@ public abstract class Skill {
         skills.removeAll(filtered);
     }
 
-<<<<<<< HEAD
+
     /** Checks whether current conditions prevent this skill from being used, e.g. Charmed
      * prevents the use of non-pleasure skills. */
-=======
->>>>>>> pr/2
+
     public static boolean isUsable(Combat c, Skill s) {
         return isUsableOn(c, s, null);
     }
 
-<<<<<<< HEAD
+
     /** Checks whether current conditions prevent this skill from being used, e.g. Charmed
      * prevents the use of non-pleasure skills. */
-=======
->>>>>>> pr/2
+
     public static boolean isUsableOn(Combat c, Skill s, Character target) {
         if (target == null) {
             target = s.getDefaultTarget(c);

@@ -208,9 +208,4 @@ public class Growth implements Cloneable {
     public void removeNullTraits() {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
     }
-    
-    @Override 
-    public String toString() {
-        return "Growth with stamina "+stamina+" arousal "+arousal+" bonusStamina "+bonusStamina+" bonusArousal "+bonusArousal+" bonusAttributes "+bonusAttributes+" willpower "+willpower+" bonusWillpower "+bonusWillpower+" attributes "+attributes+" traits "+traits;
-    }
 }

@@ -33,7 +33,6 @@ public class CombatStats {
         combatants = setup.execute();
         combatants.forEach(c -> records.put(c.getTrueName(), new Record(c)));
         //Global.save(true);
-        Global.debug = new boolean[DebugFlags.values().length];
     }
 
     private void test() {

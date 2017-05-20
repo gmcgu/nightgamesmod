@@ -864,11 +864,9 @@ public class CreatorGui extends Application {
 			parts.add(cock);
 		}
 
-		PussyPart pussy = this.pussy.getValue();
 		if (pussy != null) {
 			JsonObject pussyObj = new JsonObject();
 			pussyObj.addProperty("class", "nightgames.characters.body.PussyPart");
-			pussyObj.addProperty("enum", pussy.name());
 			parts.add(pussyObj);
 		}
 		body.add("parts", parts);

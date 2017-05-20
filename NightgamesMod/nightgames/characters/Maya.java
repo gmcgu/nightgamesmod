@@ -94,7 +94,6 @@ public class Maya extends BasePersonality {
 
         character.getGrowth().addTrait(0, Trait.enchantingVoice);
         character.getGrowth().addTrait(0, Trait.unnaturalgrowth);
-        character.getGrowth().addTrait(0, Trait.event);
         character.getGrowth().addTrait(0, Trait.cursed);
     }
 

@@ -19,12 +19,10 @@ public class SpawnFaerie extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-<<<<<<< HEAD
+
         return user.get(Attribute.Arcane) >= 3 
                         && !(gender == Ptype.fairymale && Global.checkFlag("isFuta"));
-=======
-        return user.get(Attribute.Arcane) >= 3 && !(gender == Ptype.fairymale && Global.checkFlag("isFuta"));
->>>>>>> pr/2
+
     }
 
     @Override

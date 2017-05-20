@@ -150,12 +150,10 @@ public class GUI extends JFrame implements Observer {
     private JRadioButton rdimgoff;
     private JButton rdfntsmall;
     private JButton rdfntnorm;
-<<<<<<< HEAD
+
     private JButton rdnfntlrg;
     private JButton rdnfntsmall;
-=======
-    private JButton rdfntlrg;
->>>>>>> pr/2
+
     private JSlider malePrefSlider;
     private int width;
     private int height;
@@ -360,17 +358,12 @@ public class GUI extends JFrame implements Observer {
             fontsize = Global.clamp(fontsize - 1, 1, 7);
             Global.gui().message("Text Size changed to " + fontsize);
         });
-        rdfntlrg = new JButton("Larger");
-        rdfntlrg.addActionListener(a -> {
-            fontsize = Global.clamp(fontsize + 1, 1, 7);
-            Global.gui().message("Text Size changed to " + fontsize);
-        });
+
         size.add(rdfntnorm);
-        size.add(rdfntlrg);
+
 
         optionsPanel.add(fontSizeLabel);
         optionsPanel.add(rdfntnorm);
-        optionsPanel.add(rdfntlrg);
         
         JLabel pronounLabel = new JLabel("Human Pronoun Usage");
         ButtonGroup pronoun = new ButtonGroup();
@@ -463,13 +456,11 @@ public class GUI extends JFrame implements Observer {
                 rdimgon.setSelected(true);
             }
             if (Global.checkFlag(Flag.largefonts)) {
-<<<<<<< HEAD
+
                 rdnfntlrg.setSelected(true);
             } else if (Global.checkFlag(Flag.smallfonts)){
                 rdnfntsmall.setSelected(true);
-=======
-                rdfntlrg.setSelected(true);
->>>>>>> pr/2
+
             } else {
                 rdfntnorm.setSelected(true);
             }
@@ -1497,11 +1488,9 @@ public class GUI extends JFrame implements Observer {
         try {
             editorKit.insertHTML(doc, doc.getLength(),
                             "<font face='Georgia' color='white' size='" + descFontSize + "'>"
-<<<<<<< HEAD
+
                                             + player.getOutfit().describe(player) + "<br/>" + player.describeStatus()
-=======
-                                            + player.getOutfit().describe(player) + "<br/>" + player.describeStatus() 
->>>>>>> pr/2
+
                                             + (Global.getButtslutQuest().isPresent()?("<br/>" + Global.getButtslutQuest().get().getDescriptionFor(player)):"")
                                             + "</font><br/>",
                             0, 0, null);

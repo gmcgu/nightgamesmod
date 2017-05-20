@@ -30,11 +30,9 @@ public class FondleBreasts extends Skill {
         int m = 6 + Global.random(4);
         Result result = Result.normal;
         if (target.roll(getSelf(), c, accuracy(c, target))) {
-<<<<<<< HEAD
+
             if (getSelf().getType().equals("Cassie") && target.body.getLargestBreasts().getSensitivity(target, getSelf().body.getRandom("hands")) > 4) {
-=======
-            if (getSelf().getName()=="Cassie" && target.body.getLargestBreasts().getSensitivity(target, getSelf().body.getRandom("hands")) > 4) {
->>>>>>> pr/2
+
                 result=Result.critical;
                 //c.write(getSelf(), deal(c, m, Result.critical, target));
             } else if (target.breastsAvailable()) {

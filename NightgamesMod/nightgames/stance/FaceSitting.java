@@ -53,14 +53,12 @@ public class FaceSitting extends AbstractBehindStance {
             return "facesitting_m.jpg";
         }
         if (top.hasPussy() && bottom.hasBreasts()) {
-<<<<<<< HEAD
+
             if (top.hasDick() && Global.checkFlag(Flag.isFuta) 
                             && Math.random()>0.5) {
                 return "futa_facesitting_h.jpg";
             }
-=======
-            if (top.hasDick() && Global.checkFlag(Flag.isFuta) && Math.random()>0.5) {return "futa_facesitting_h.jpg";}
->>>>>>> pr/2
+
             return "facesitting_ff.jpg";
         }
         return "facesitting.jpg";

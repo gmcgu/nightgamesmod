@@ -419,10 +419,8 @@ public class Cassie extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-<<<<<<< HEAD
-        if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart 
-                        || c.getStance().vaginallyPenetrated(c,c.getOpponent(character))) 
-            dominance +=1;
+
+
         /*if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart 
                         && c.getOpponent(character).body.getLargestBreasts()
                             .getSensitivity(c.getOpponent(character), 
@@ -433,16 +431,7 @@ public class Cassie extends BasePersonality {
         } else */if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
             character.arousal.empty();
             dominance+=1;
-=======
-        if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
 
-        if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart || c.getStance().vaginallyPenetrated(c,c.getOpponent(character))) dominance +=1;
-        if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart && c.getOpponent(character).body.getLargestBreasts().getSensitivity(c.getOpponent(character), character.body.getRandom("hands"))>5) {
-            character.arousal.empty();
-            return "incomplete, should be a series of scenes including one where Cassie makes the player lactate magicmilk that only affects themself and prevents breast size reduction"
-                            + "and one where Cassie gives the player a bra that reduces breast sensitivity to reasonable levels while worn, but also makes them moo on orgasm, and vibrates while fighting Cassie";
-        } else if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
->>>>>>> pr/2
             character.arousal.empty();
             dominance+=1;
             return "Cassie bucks her hips against your ass wildly causing the strapon to rub hard against your prostate. Your arms and legs feel like jelly as she thrusts in again and again. "
@@ -616,13 +605,11 @@ public class Cassie extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
-<<<<<<< HEAD
+
         if (c.getStance().vaginallyPenetrated(c, c.getOpponent(character))) {
             dominance=Math.max(dominance-1,minDominance);
         }
-=======
-        if (c.getStance().vaginallyPenetrated(c, c.getOpponent(character))) dominance=Math.min(dominance-1,minDominance);
->>>>>>> pr/2
+
         Character opponent = c.getOpponent(character);
         if (character.has(Trait.witch) && Global.random(3) == 0) {
             opponent.add(c, new Energized(opponent, 10));

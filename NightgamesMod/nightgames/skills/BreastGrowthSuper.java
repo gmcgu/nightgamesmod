@@ -2,21 +2,19 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-<<<<<<< HEAD
+
 import nightgames.characters.body.BreastsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
-=======
+
 import nightgames.characters.Trait;
-import nightgames.characters.body.BreastsPart;
-import nightgames.combat.Combat;
-import nightgames.combat.Result;
+
 import nightgames.global.DebugFlags;
-import nightgames.global.Global;
+
 import nightgames.stance.Stance;
 import nightgames.status.Hypersensitive;
->>>>>>> pr/2
+
 
 public class BreastGrowthSuper extends Skill {
     public BreastGrowthSuper(Character self) {

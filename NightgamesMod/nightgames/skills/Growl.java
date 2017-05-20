@@ -8,10 +8,9 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.stance.Behind;
 import nightgames.stance.StandingOver;
-<<<<<<< HEAD
-=======
+
 import nightgames.status.Charmed;
->>>>>>> pr/2
+
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
 

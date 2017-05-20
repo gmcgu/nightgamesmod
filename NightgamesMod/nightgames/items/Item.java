@@ -56,23 +56,8 @@ public enum Item implements Loot {
     Sedative("Sedative", 25, "Tires out your opponent, but can also make her numb", "a "),
     DisSol("Dissolving Solution", 30, "Destroys clothes, but completely non-toxic", "a "),
     SPotion("Sensitivity Potion", 25, "Who knows whats in this stuff, but it makes any skin it touches tingle", "a "),
-<<<<<<< HEAD
     EmptyBottle("Empty Bottle", 100, "A small flask that can be used to collect liquids.", "an "),
-    semen("Semen", 100, "A small bottle filled with cum. Kinda gross", "a bottle of ", getSemenEffects(),
-=======
-    Strapon("Strap-on Dildo", 600, "Penis envy much?", "a "),
-    Dildo2("Sonic Dildo", 2000, "Apparently vibrates at the ideal frequency to produce pleasure", "a "),
-    Dildo3("Auto-Dildo", 2000, "In addition to vibrating, enlarges when inserted to make it stay in place", "a "),
-    Crop2("Hunting Crop", 1500, "Equipped with the fearsome Treasure Hunter attachment", "a "),
-    Onahole2("Wet Onahole", 3000, "As hot and wet as the real thing", "an "),
-    Tickler2("Enhanced Tickler", 3000, "Coated with a substance that can increase sensitivity", "an "),
-    Strapon2("Flex-O-Peg", 2500, "A more flexible and versatile strapon with a built in vibrator", "the patented "),
-    ShockGlove("Shock Glove", 800, "Delivers a safe, but painful electric shock", "a "),
-    Aersolizer("Aerosolizer", 500, "Turns a liquid into an unavoidable cloud of mist", "an "),
-    Battery("Battery", 0, "Available energy to power electronic equipment", "a "),
-    MedicalSupplies("Medical Supplies", 0,
-                    "Basic medical supplies that contains a syringe, some bandages, and a pair of rubber gloves among others",
-                    ""),
+
     semen("Semen", 100, "A small bottle filled with cum. Kinda gross", "a bottle of ",
                     Arrays.asList((ItemEffect) new ConditionalEffect(
                                     new GroupEffect(Arrays.asList(
@@ -103,7 +88,6 @@ public enum Item implements Loot {
                                                             return !user.has(Trait.succubus);
                                                         }
                                                     })),
->>>>>>> pr/2
                     RequirementShortcuts.none(),
                     15),
     HolyWater("\"Holy Water\"", 100, "A small flask filled with \"Holy Water\"", "a bottle of ", getHolyWaterEffects(),

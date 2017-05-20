@@ -36,15 +36,11 @@ public class NpcConfiguration extends CharacterConfiguration {
             return secondaryConfig;
         } else if (secondaryConfig.isPresent()) {
             return Optional.of(new NpcConfiguration(primaryConfig.get(), secondaryConfig.get()));
-<<<<<<< HEAD
+
             } else {
                 return primaryConfig;
             }
-=======
-        } else {
-            return primaryConfig;
-        }
->>>>>>> pr/2
+
     }
     public final void apply(NPC base) {
         if (gender.isPresent()) {

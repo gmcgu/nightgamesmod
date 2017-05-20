@@ -88,40 +88,13 @@ public enum Trait {
     desensitized("Desensitized", "Sex is old hat now"), // Reyka Sex perk slight
                                                         // pleasure reduction
     desensitized2("Desensitized 2", "Only the strongest stimulation gets you off"),
-    RawSexuality("Raw Sexuality", "Constant lust boost for you and your opponent in battle", (b, c, t) -> {
-        if (c.human()) {
-            b.append("You exude");
-        } else {
-            b.append(c.getName() + " exudes");
-        }
-        b.append(" an aura of pure eros, making both of you flush with excitement.");
-    }), // Eve
-    affectionate("Affectionate", "Increased affection gain from draws"), // Kat
-                                                                         // Sex
-                                                                         // perk
-    aikidoNovice("Aikido Novice", "Improved counterattack rate"), // Kat
-                                                                  // Sparring
-                                                                  // perk
-    tease("Tease", "Build mojo from dodging"),     // Kat
-                                                   // game
-                                                   // perk
+    RawSexuality("Raw Sexuality", "Constant lust boost for you and your opponent in battle"),
+    affectionate("Affectionate", "Increased affection gain from draws"),
+    aikidoNovice("Aikido Novice", "Improved counterattack rate"),
+    tease("Tease", "Build mojo from dodging"),
     analFanatic("Anal Fanatic", "Lives for fucking ass"),
-
-    // Passive Skills
-    exhibitionist("Exhibitionist", "More effective without any clothes"), // Passively
-                                                                          // builds
-                                                                          // mojo
-                                                                          // while
-                                                                          // nude
-    pheromones("Pheromones", "Scent can drive people wild", (b, c, t) -> {
-        b.append("A primal musk surrounds ");
-        if (c.human()) {
-            b.append("your");
-        } else {
-            b.append(c.getName() + "'s");
-        }
-        b.append(" body.");
-    }), // causes horny in opponents if aroused
+    exhibitionist("Exhibitionist", "More effective without any clothes"),
+    pheromones("Pheromones", "Scent can drive people wild"), // causes horny in opponents if aroused
     augmentedPheromones("Augmented Pheromones", "Artificially enhanced pheromones", null, pheromones),
 
     magicEyeArousal("Magic Eyes: Arouse", "Eyes have a chance to arouse"),
@@ -351,16 +324,7 @@ public enum Trait {
     powerfulhips("Powerful Hips", "Can grind from submissive positions"),
     strongwilled("Strong Willed", "Lowers willpower loss from orgasms"),
     nymphomania("Nymphomania", "Restores willpower upon orgasm"),
-    alwaysready("Always Ready", "Always ready for penetration", (b, c, t) -> {
-        if (c.hasPussy() && c.crotchAvailable()) {
-            b.append("Juices constainly drool from ");
-            if (c.human()) {
-                b.append("your slobbering pussy.");
-            } else {
-                b.append(c.nameOrPossessivePronoun() + " slobbering pussy.");
-            }
-        }
-    }),
+    alwaysready("Always Ready", "Always ready for penetration"),
     revered("Revered", "Higher chance of worship"),
     cautious("Cautious", "Better chance of avoiding traps"),
     responsive("Responsive", "Return more pleasure when being fucked"),
@@ -369,9 +333,7 @@ public enum Trait {
     // Kat's traits
     // Speed Focus
     NimbleRecovery("Nimble Recovery", "Recovers from knockdowns faster"),
-    FeralAgility("Feral Agility", "Extra cunning, evade and counter chance", (b, c, t) -> {
-        b.append(Global.format("It's hard to follow {self:name-possessive} erratic movement with the eyes.", c, c));
-    }),
+    FeralAgility("Feral Agility", "Extra cunning, evade and counter chance"),
     CrossCounter("Cross Counter", "Chance to counter your opponent's counters"),
     Catwalk("Catwalk", "Sexy walk, alluring when moving"),
     // Power Focus
@@ -488,34 +450,7 @@ public enum Trait {
     stronghold("Strong Hold", "Harder to escape Arm/Leg Locks"),
 
     // Item
-    strapped("Strapped", "Penis envy", (b, c, t) -> {
-        if (c.human()) {
-            b.append("A large black strap-on dildo adorns your waist.");
-        } else {
-            b.append("A large black strap-on dildo adorns " + c.nameOrPossessivePronoun() + " waists.");
-        }
-    }, null, null, true), // currently wearing a strapon
-
-<<<<<<< HEAD
-    event("event", "special character", true),
-    mindcontrolresistance("", "temporary resistance to mind games - hidden", true),
-    none("", "", true),
-    
-    //From the training miniquests
-    trainedslut("Trained Slut", "Has been trained to be a slut."
-                    + " Reinforcing that training causes increased submissiveness"),
-    buttsluttraining("not visible", "the duration of the "
-                    + "attached status represents the level ()", true);
-    
-=======
-    event("event", "special character"),
-    mindcontrolresistance("", "temporary resistance to mind games - hidden"),
-    none("", ""),
-    
-    //From the training miniquests
-    trainedslut("Trained Slut", "Has been trained to be a slut. Reinforcing that training causes increased submissiveness"),
-    buttsluttraining("not visible", "the duration of the attached status represents the level ()");
->>>>>>> pr/2
+    strapped("Strapped", "Penis envy"),; // currently wearing a strapon
     
     private static void override(Map<Trait, Collection<Trait>> o, Trait key, Trait... overrides) {
         o.put(key, Arrays.asList(overrides));
@@ -652,17 +587,6 @@ public enum Trait {
             }
             return "";
         });
-        resistances.put(Trait.mindcontrolresistance, (combat, c, s) -> {
-           if (s.mindgames() && combat != null && combat.getOpponent(c).has(Trait.mindcontroller)) {
-               float magnitude = c.getAddiction(AddictionType.MIND_CONTROL).map(Addiction::getMagnitude)
-                                               .orElse(0f);
-               float threshold = 40 * magnitude;
-               if (Global.random(100) < threshold) {
-                   return "Mara's Control";
-               }
-           }
-           return "";
-        });
         resistances.put(Trait.mentalfortress, (combat, c, s) -> {
            if (s.mindgames() && (c.getStamina().percent()*3 / 4) > Global.random(100)) {
                return "Mental Fortress";
@@ -688,13 +612,5 @@ public enum Trait {
             return nullResistance;
         }
     }
-<<<<<<< HEAD
-    
-    public boolean isVisible() {
-        return !hidden;
-=======
-    public boolean isVisible() {
-        return !(this==strapped || this==mindcontrolresistance || this==event || this==none || this==buttsluttraining);
->>>>>>> pr/2
     }
-}
+

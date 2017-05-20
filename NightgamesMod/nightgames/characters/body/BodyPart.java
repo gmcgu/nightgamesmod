@@ -164,7 +164,7 @@ public interface BodyPart {
     public default boolean isGenital() {
         return genitalTypes.contains(getType());
     }
-<<<<<<< HEAD
+
     
     public default boolean isGenitalOrToy() {
         return isGenital() || isType("strapon");
@@ -174,11 +174,7 @@ public interface BodyPart {
         return 0.25;
     }
     
-=======
-    public default double getFetishChance() {
-        return 0.25;
-    }
->>>>>>> pr/2
+
     public default double getFetishEffectiveness() {
         return 1.0;
     }

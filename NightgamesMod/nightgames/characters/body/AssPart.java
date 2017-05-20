@@ -1,10 +1,8 @@
 package nightgames.characters.body;
 
-<<<<<<< HEAD
-=======
 import java.util.HashMap;
 import java.util.Map;
->>>>>>> pr/2
+
 import java.util.Optional;
 
 import nightgames.characters.Attribute;
@@ -16,13 +14,12 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-<<<<<<< HEAD
+
 import nightgames.quest.ButtslutQuest;
-=======
 import nightgames.pet.PetCharacter;
 import nightgames.quest.ButtslutQuest;
 import nightgames.status.Abuff;
->>>>>>> pr/2
+
 import nightgames.status.Drained;
 import nightgames.status.Stsflag;
 import nightgames.status.Trance;
@@ -33,8 +30,6 @@ public class AssPart extends GenericBodyPart {
     public static AssPart generateGeneric() {
         return new AssPart();
     }
-
-    private double bonusSensitivity;
     
     public AssPart(String desc, double hotness, double pleasure, double sensitivity) {
         super(desc, "", hotness, pleasure, sensitivity, false, "ass", "a ");
@@ -216,10 +211,6 @@ public class AssPart extends GenericBodyPart {
     public BodyPart downgrade() {
         return this.applyMod(new SizeMod(SizeMod.clampToValidSize(this, getSize() - 1)));
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> pr/2
     @Override
     public double getSensitivity(Character self, BodyPart target) {
         double sensitivityMod = sensitivity;

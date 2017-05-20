@@ -36,11 +36,9 @@ public class NpcConfigurationTest {
         startConfig = StartConfiguration.parse(JsonUtils.rootJson(file).getAsJsonObject());
         angelConfig = startConfig.findNpcConfig("TestAngel")
                         .orElseThrow(() -> new NoSuchElementException("TestAngel not found in test config."));
-<<<<<<< HEAD
-        Global.initForTesting();
-=======
+
         new Global();
->>>>>>> pr/2
+
         Global.newGame("Dummy", Optional.empty(), Collections.emptyList(), CharacterSex.asexual, Collections.emptyMap());
     }
 
@@ -73,11 +71,9 @@ public class NpcConfigurationTest {
                         IsMapContaining.hasEntry(equalTo(Attribute.Arcane), greaterThanOrEqualTo(2)),
                         IsMapContaining.hasEntry(equalTo(Attribute.Perception), greaterThanOrEqualTo(6)),
                         IsMapContaining.hasEntry(equalTo(Attribute.Speed), greaterThanOrEqualTo(5)))));
-<<<<<<< HEAD
-        assertThat(angel.character.xp, equalTo(5));
-=======
+
         assertThat(angel.character.xp, equalTo(50));
->>>>>>> pr/2
+
         assertThat(angel.character.level, equalTo(5));
         assertThat(angel.character.money, equalTo(5000));
     }

@@ -58,8 +58,5 @@ public class DefabRay extends ArmSkill {
         
         return false;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> pr/2
 }

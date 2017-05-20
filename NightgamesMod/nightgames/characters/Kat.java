@@ -392,7 +392,7 @@ public class Kat extends BasePersonality {
     public String victory(Combat c, Result flag) {
         Character opponent = c.getOpponent(character);
         character.arousal.empty();
-<<<<<<< HEAD
+
         if (c.getStance().vaginallyPenetrated(c,opponent) && opponent instanceof Player && ((Player) opponent).checkAddiction(AddictionType.BREEDER)) {
             opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
             opponent.add(c, Pheromones.getWith(character, opponent, 20, 5, " feral musk"));
@@ -406,23 +406,7 @@ public class Kat extends BasePersonality {
             opponent.add(c, Pheromones.getWith(character, opponent, 20, 5, " feral musk"));
             return "Kat's eyes seem  pupils are massively dilated and ";
         }*/ else if (c.getStance().vaginallyPenetrated(c,character)) {
-=======
-        if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
 
-        if (c.getStance().vaginallyPenetrated(c,opponent) && opponent instanceof Player && ((Player) opponent).checkAddiction(AddictionType.BREEDER)) {
-            opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
-            opponent.add(c, Pheromones.getWith(character, opponent, 20, 5, " feral musk"));
-            return "As Kat desperately pounds into you, you mindlessly grind back against her, trying to force her cock as deep into your vagina as it will go. You tried to fight "
-                            + "her, and you lost, and now you're her bitch and she's breeding you, and that's the way it's supposed to be. The pleasure radiating from the cock "
-                            + "pounding your cunt has driven all rational thought out of your mind, and your instincts now are driving you to lay back and offer your pussy and "
-                            + "womb to Kat as she pumps you full of breeding juice.<p>Kat comes again, not even slowing down as more and more cum inflates your stomach. You've lost "
-                            + "count of the number of times she's ";
-        } else if (c.getStance().vaginallyPenetrated(c,opponent)) {
-            opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
-            opponent.add(c, Pheromones.getWith(character, opponent, 20, 5, " feral musk"));
-            return "Kat's eyes seem  pupils are massively dilated and ";
-        } else if (c.getStance().vaginallyPenetrated(c,character)) {
->>>>>>> pr/2
            opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
             return "She pounces at you, pushing you onto your back and holds you down with the weight of her body. A cute mew of a smile crosses her face, and her tongue sticks "
                             + "out slightly from between her lips. She is riding your cock in a regular rhythm now, not worried as she knows you are much closer to your climax than her.<p>"

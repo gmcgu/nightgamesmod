@@ -57,10 +57,6 @@ public class StartConfiguration {
     public Collection<String> getFlags() {
         return flags;
     }
-    
-    public Collection<DebugFlags> getDebugFlags() {
-        return debugFlags;
-    }
 
     public boolean playerCanChooseGender() {
         return !player.gender.isPresent();

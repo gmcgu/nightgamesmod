@@ -11,20 +11,13 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public class BehindFootjob extends AbstractBehindStance {
-<<<<<<< HEAD
-    private boolean analPenetration;
-    
-=======
->>>>>>> pr/2
     public BehindFootjob(Character top, Character bottom, boolean analPenetration) {
         super(top, bottom, Stance.behindfootjob);
         this.analPenetration=analPenetration;
     }
     
-<<<<<<< HEAD
-=======
+
     private boolean analPenetration;
->>>>>>> pr/2
 
     @Override
     public String describe(Combat c) {
@@ -104,11 +97,8 @@ public class BehindFootjob extends AbstractBehindStance {
 
     @Override
     public float priorityMod(Character self) {
-<<<<<<< HEAD
+
         return getSubDomBonus(self, analPenetration ? 6.0f : 4.0f);
-=======
-        return getSubDomBonus(self, analPenetration?6.0f:4.0f );
->>>>>>> pr/2
     }
 
     @Override
@@ -128,7 +118,6 @@ public class BehindFootjob extends AbstractBehindStance {
 
     @Override
     public double pheromoneMod(Character self) {
-<<<<<<< HEAD
         return analPenetration ? 2.0 : 1.5;
     }
     
@@ -142,26 +131,6 @@ public class BehindFootjob extends AbstractBehindStance {
         if(!analPenetration) return Collections.emptyList();
         return Arrays.asList(top.body.getRandomInsertable()).stream()
                         .filter(part -> part != null && part.present())
-=======
-        return analPenetration?2.0:1.5;
-    }
-    
-    @Override
-    public int dominance() {
-        return analPenetration?6:4;
-    }
-    @Override
-    public List<BodyPart> topParts(Combat c) {
-        if(!analPenetration) return Collections.emptyList();
-        return Arrays.asList(top.body.getRandomInsertable()).stream().filter(part -> part != null && part.present())
-                        .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<BodyPart> bottomParts() {
-        if(!analPenetration) return Collections.emptyList();
-        return Arrays.asList(bottom.body.getRandomAss()).stream().filter(part -> part != null && part.present())
->>>>>>> pr/2
                         .collect(Collectors.toList());
     }
 

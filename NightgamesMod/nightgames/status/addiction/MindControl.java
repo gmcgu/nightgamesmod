@@ -36,7 +36,6 @@ public class MindControl extends Addiction {
 
     @Override
     protected Optional<Status> addictionEffects() {
-        affected.add(Trait.mindcontrolresistance);
         return Optional.of(this);
     }
 

@@ -33,15 +33,11 @@ public class Trip extends Skill {
     }
 
     private boolean isArcane() {
-<<<<<<< HEAD
+
         return getSelf().get(Attribute.Arcane) >= 10;
     }
     
-=======
-	return getSelf().get(Attribute.Arcane) >= 10;
-    }
 
->>>>>>> pr/2
     @Override
     public boolean resolve(Combat c, Character target) {
         if (target.roll(getSelf(), c, accuracy(c, target)) && getSelf().check(Attribute.Cunning, target.knockdownDC())) {
@@ -93,17 +89,12 @@ public class Trip extends Skill {
         if (isSlime()) {
             accuracy += 25;
         }
-<<<<<<< HEAD
+
         if (isArcane()) {
             accuracy/=2;
             accuracy+=getSelf().get(Attribute.Arcane)*5;
         }
-=======
-	if (isArcane()) {
-	    accuracy/=2;
-	    accuracy+=getSelf().get(Attribute.Arcane)*5;
-	}
->>>>>>> pr/2
+
         return (int) Math.round(Global.clamp(accuracy, isSlime() ? 50 : 25, 150));
     }
 
@@ -125,11 +116,9 @@ public class Trip extends Skill {
             return String.format(
                             "You reshape your hands into a sheet of slime and slide it towards %s."
                                             + " In the nick of time, %s jumps clear, landing safely back on %s feet.",
-<<<<<<< HEAD
+
                             target.getName(), target.pronoun(), target.possessiveAdjective());
-=======
-                            target.getName(), target.pronoun(), target.possessivePronoun());
->>>>>>> pr/2
+
         } else if (modifier == Result.item) {
             return String.format(
                             "%s %s a glowing bar hovering behind %s knees, and %s it towards %s. The bar pushes against %s knees, but %s %s to keep %s balance.",
