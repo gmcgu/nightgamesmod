@@ -2,46 +2,163 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
+import nightgames.skills.EngulfedFuck.Pairing;
+import nightgames.skills.damage.DamageType;
+import nightgames.stance.BreastSmothering;
+import nightgames.stance.FlyingCarry;
+import nightgames.stance.HeldPaizuri;
 import nightgames.stance.Stance;
+import nightgames.status.Abuff;
+import nightgames.status.BodyFetish;
+import nightgames.status.Charmed;
+import nightgames.status.FiredUp;
+import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.EarPart;
+import nightgames.characters.body.TailPart;
+import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.ArcaneMod;
+import nightgames.characters.body.mods.DemonicMod;
+import nightgames.status.Hypersensitive;
+import nightgames.status.WingWrapped;
 
-public class EngulfedFuck extends Skill {
-
-    public EngulfedFuck(Character self) {
-        super("Multi Fuck", self);
-        addTag(SkillTag.fucking);
-        addTag(SkillTag.pleasureSelf);
+public class BreastSmotherSuperSucc extends Skill {
+    public BreastSmotherSuperSucc(Character self) {
+        super("BreastSmotherSuperSucc", self);
+        addTag(SkillTag.dominant);
+        addTag(SkillTag.usesBreasts);
+        addTag(SkillTag.weaken);
+        addTag(SkillTag.breastfeed);
+        addTag(SkillTag.perfectAccuracy);
+        addTag(SkillTag.positioning);
         addTag(SkillTag.pleasure);
+        addTag(SkillTag.oral);
+        addTag(SkillTag.foreplay);
     }
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
+        return user.human() && user.hasBreasts();
+    }
+
+    @Override
+    public float priorityMod(Combat c) {
+        if (c.getStance().havingSex(c)) {
+            return 1; 
+        } else {
+            return 3;
+        }
+    }
+
+    static int MIN_REQUIRED_BREAST_SIZE = 4;
+    
+    @Override
+    public boolean usable(Combat c, Character target) {
         return true;
     }
 
     @Override
-    public boolean usable(Combat c, Character target) {
-        return getSelf().canAct() && c.getStance().en == Stance.engulfed && c.getStance().dom(getSelf())
-                        && Pairing.findPairing(getSelf(), target) != Pairing.NONE;
-    }
-
-    @Override
-    public int getMojoCost(Combat c) {
-        return 25;
-    }
-
-    @Override
     public String describe(Combat c) {
-        return "Use all available genitals to give your opponent a proper workout.";
+        return "Shove your opponent's face between your tits to crush her resistance.";
     }
 
     @Override
     public boolean resolve(Combat c, Character target) {
+        boolean special = c.getStance().en != Stance.breastsmothering && !c.getStance().havingSex(c);        
+        writeOutput(c, special ? Result.special : Result.normal, target);
+
+        double n = 20 + Global.random(5) + getSelf().body.getLargestBreasts().getSize();
+
+        //if (target.has(Trait.temptingtits)) {
+            n += Global.random(5, 10);
+        //}
+        //if (target.has(Trait.beguilingbreasts)) {
+            n *= 1.5;
+            target.add(c, new Charmed(target));
+        //}
+        //if (target.has(Trait.imagination)) {
+            n *= 1.5;
+        //}
+
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("breasts"), (int) Math.round(n / 2), this);
+        target.weaken(c, (int) getSelf().modifyDamage(DamageType.physical, target, Global.random(5, 15)));
+
+        target.loseWillpower(c, Math.min(5, target.getWillpower().max() * 10 / 100 ));     
+
+        //if (special) {
+            //c.setStance(new BreastSmothering(getSelf(), target), getSelf(), true);      
+            getSelf().emote(Emotion.dominant, 20);
+        //} else {
+            //getSelf().emote(Emotion.dominant, 10);
+        //}
+        //if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
+            target.add(c, new BodyFetish(target, getSelf(), "breasts", 10));
+        //}
+            
+            target.add(c, new Hypersensitive(target));
+            BreastsPart part = target.body.getRandomBreasts();
+            if (part != null) {
+                BreastsPart realPart = target.body.getRandomBreasts();
+                target.body.addReplace((BreastsPart)(realPart.upgrade().upgrade().upgrade()), 1);
+            }
+            
+            getSelf().add(c, new FiredUp(getSelf(), target, "breasts"));
+            
+            target.add(c, new Abuff(target, Attribute.Power, -2, 5));
+            new Suckle(target).resolve(c, getSelf(), true);
+            
+            c.setStance(new HeldPaizuri(getSelf(), target), getSelf(), true);
+            new Paizuri(getSelf()).resolve(c, target);
+            
+            target.add(c, new nightgames.status.OrgasmSeal(target, 50));
+            
+            getSelf().addTemporaryTrait(Trait.witch, 100);
+            getSelf().addTemporaryTrait(Trait.lactating, 100);
+            getSelf().addTemporaryTrait(Trait.responsive, 100);
+            getSelf().addTemporaryTrait(Trait.temptingtits, 100);
+            getSelf().addTemporaryTrait(Trait.beguilingbreasts, 100);
+            getSelf().addTemporaryTrait(Trait.sedativecream, 100);
+            getSelf().body.temporaryAddPartMod("mouth", ArcaneMod.INSTANCE, 100);
+            
+            BreastsPart partB = getSelf().body.getBreastsBelow(BreastsPart.h.getSize());
+            if (partB != null) {
+                getSelf().body.temporaryAddOrReplacePartWithType(partB.upgrade(), 100);
+            }
+            
+            getSelf().addTemporaryTrait(Trait.divinity, 100);
+            getSelf().addTemporaryTrait(Trait.objectOfWorship, 100);
+            getSelf().addTemporaryTrait(Trait.lastStand, 100);
+            getSelf().addTemporaryTrait(Trait.erophage, 100);
+            getSelf().addTemporaryTrait(Trait.sacrosanct, 100);
+            getSelf().addTemporaryTrait(Trait.genuflection, 100);
+            getSelf().addTemporaryTrait(Trait.revered, 100);
+            
+            getSelf().addTemporaryTrait(Trait.ImitatedStrength, 999);
+            getSelf().addTemporaryTrait(Trait.succubus, 999);
+            getSelf().addTemporaryTrait(Trait.energydrain, 999);
+                getSelf().addTemporaryTrait(Trait.spiritphage, 999);
+                getSelf().addTemporaryTrait(Trait.lacedjuices, 999);
+                getSelf().addTemporaryTrait(Trait.RawSexuality, 999);
+                getSelf().addTemporaryTrait(Trait.soulsucker, 999);
+                getSelf().addTemporaryTrait(Trait.gluttony, 999);
+                getSelf().body.temporaryAddPartMod("ass", DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod("hands", DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod("feet", DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod("mouth", DemonicMod.INSTANCE, 999);
+        getSelf().addTemporaryTrait(Trait.succubus, 999);
+        getSelf().addTemporaryTrait(Trait.soulsucker, 999);
+        getSelf().addTemporaryTrait(Trait.energydrain, 999);
+        getSelf().addTemporaryTrait(Trait.spiritphage, 999);
+        getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonic, 999);
+        getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonic, 999);
+        getSelf().body.temporaryAddOrReplacePartWithType(EarPart.pointed, 999);
+        
         Pairing pair = Pairing.findPairing(getSelf(), target);
         double base = 10.0 + Math.min(20, Global.random(getSelf().get(Attribute.Slime) / 3 + getSelf().get(Attribute.Seduction) / 5));
         int selfDmg = (int) ((base * pair.modPleasure(true)) / (getSelf().has(Trait.experienced) ? 2.0 : 3.0));
@@ -162,97 +279,104 @@ public class EngulfedFuck extends Skill {
                 target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), bpart, realTargetDmg, c, this);
                 getSelf().body.pleasure(target, bpart, getSelf().body.getRandomCock(), selfDmg, c, this);
                 break;
-            default:
-                throw new IllegalArgumentException("EngulfedFuck had pairing NONE or default");
         }
+        
+        
+        
+        target.add(c, new WingWrapped(target, getSelf()));
+        
+        getSelf().emote(Emotion.dominant, 50);
+        getSelf().emote(Emotion.horny, 30);
+        target.emote(Emotion.desperate, 50);
+        target.emote(Emotion.nervous, 75);
+        int m = 5 + Global.random(5);
+        int otherm = m;
+        if (getSelf().has(Trait.insertion)) {
+            otherm += Math.min(getSelf().get(Attribute.Seduction) / 4, 40);
+        }
+        c.setStance(new FlyingCarry(getSelf(), target), getSelf(), getSelf().canMakeOwnDecision());
+            
         return true;
     }
 
     @Override
+    public int getMojoBuilt(Combat c) {
+        return 0;
+    }
+
+    @Override
     public Skill copy(Character user) {
-        return new EngulfedFuck(user);
+        return new BreastSmotherSuperSucc(user);
     }
 
     @Override
     public Tactics type(Combat c) {
-        return Tactics.fucking;
+        if (c.getStance().enumerate() != Stance.breastsmothering) {
+            return Tactics.positioning;
+        } else {
+            return Tactics.pleasure;
+        }
+    }
+
+    @Override
+    public String getLabel(Combat c) {
+        return "BreastSmotherSuperSucc";
     }
 
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
-        return null;
-    }
+        StringBuilder b = new StringBuilder();
+        
+        if (modifier == Result.special) {
+            b.append( "You quickly wrap up " + target.getName() + "'s head in your arms and press your "
+                            + getSelf().body.getRandomBreasts().fullDescribe(getSelf()) + " into " + target.nameOrPossessivePronoun() + " face. ");
+        }
+        else {
+            b.append( "You rock " + target.getName() + "'s head between your "
+                            + getSelf().body.getRandomBreasts().fullDescribe(getSelf()) + " trying to force " + target.directObject() + " to gasp. ");                           
+        }
+        
+        if (getSelf().has(Trait.temptingtits)) {
+            b.append(Global.capitalizeFirstLetter(target.pronoun()) + " can't help but groan in pleasure from having " + target.possessiveAdjective() + " face stuck between your perfect tits");                          
+            if (getSelf().has(Trait.beguilingbreasts)) {
+                b.append(", and you smile as " + target.pronoun() + " snuggles deeper into your cleavage");
+            } 
+            b.append(".");
+            
+        } else{
+            b.append(" " + target.getName() + " muffles something in confusion into your breasts before " + target.pronoun() + " begins to panic as " + target.pronoun() + " realizes " + target.pronoun() + " cannot breathe!");            
+        }   
+        return b.toString();
+}
 
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
-        return null;
-    }
-
-    public enum Pairing {
-        FEMALE_MALE(1, 1),
-        FEMALE_HERM(1, 1.5),
-        MALE_MALE(1, 1),
-        MALE_FEMALE(1, 1),
-        MALE_HERM(1, 1.5),
-        MALE_ASEX(1, .75),
-        HERM_MALE(1.25, 1),
-        HERM_FEMALE(1.25, 1),
-        HERM_HERM(1.25, 1.5),
-        HERM_ASEX(1.25, .75),
-        ASEX_MALE(.6, 1),
-        NONE(0, 0);
-
-        private final double selfMod, targetMod;
-
-        private Pairing(double selfMod, double targetMod) {
-            this.selfMod = selfMod;
-            this.targetMod = targetMod;
+        StringBuilder b = new StringBuilder();
+        if (modifier == Result.special) {
+            b.append( getSelf().subject()+ " quickly wraps up your head between " + getSelf().possessiveAdjective() + " "
+                            + getSelf().body.getRandomBreasts().fullDescribe(getSelf()) + ", filling your vision instantly with them. ");
+        } else {
+            b.append( getSelf().subject()+ " rocks your head between " + getSelf().possessiveAdjective() + " "
+                            + getSelf().body.getRandomBreasts().fullDescribe(getSelf()) + " trying to force you to gasp for air. ");
         }
-
-        double modPleasure(boolean slime) {
-            return slime ? selfMod : targetMod;
-        }
-
-        static Pairing findPairing(Character self, Character target) {
-            if (herm(self)) {
-                if (herm(target)) {
-                    return HERM_HERM;
-                } else if (target.hasPussy()) {
-                    return HERM_FEMALE;
-                } else if (target.hasDick()) {
-                    return HERM_MALE;
-                }
-                return HERM_ASEX;
-            } else if (self.hasPussy()) {
-                if (herm(target)) {
-                    return FEMALE_HERM;
-                } else if (target.hasPussy()) {
-                    return NONE;
-                } else if (target.hasDick()) {
-                    return FEMALE_MALE;
-                }
-            } else if (self.hasDick()) {
-                if (herm(target)) {
-                    return MALE_HERM;
-                } else if (target.hasPussy()) {
-                    return MALE_FEMALE;
-                } else if (target.hasDick()) {
-                    return MALE_MALE;
-                }
-                return MALE_ASEX;
-            } else if (target.hasDick()) {
-                return ASEX_MALE;
+        
+        if (getSelf().has(Trait.temptingtits)) {
+            b.append("You can't help but groan in pleasure from having your face stuck between ");
+            b.append(getSelf().possessiveAdjective());
+            b.append(" perfect tits as they take your breath away");             
+            if (getSelf().has(Trait.beguilingbreasts)) {
+                b.append(", and due to their beguiling nature you can't help but want to stay there as long as possible");
             }
-            return NONE;
+            b.append(".");
+        } else {
+            b.append(" You let out a few panicked sounds muffled by the breasts now covering your face as you realize you cannot breathe!");
         }
 
-        private static boolean herm(Character ch) {
-            return ch.hasDick() && ch.hasPussy();
-        }
+        return b.toString();
     }
-    
+
     @Override
-    public Stage getStage() {
-        return Stage.FINISHER;
+    public boolean makesContact(Combat c) {
+        return true;
     }
 }
