@@ -53,9 +53,6 @@ public abstract class Addiction extends Status {
 
     @Override
     public void tick(Combat c) {
-        if (c.getOpponent(affected).equals(cause)) {
-            combatMagnitude += magnitude / 14.0;
-        }
     }
     
     public final void clearDaytime() {
