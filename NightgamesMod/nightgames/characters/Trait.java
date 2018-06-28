@@ -17,6 +17,9 @@ import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
 
+
+//TODO: Consider movine towards characters.CharTrait, which provides better handling and customization for traits. - DSM
+
 public enum Trait {
     sadist("Sadist", "Skilled at providing pleasure alongside pain",
                     (b, c, t) -> b.append(Global.capitalizeFirstLetter(
@@ -250,6 +253,7 @@ public enum Trait {
     madscientist("Mad Scientist", "May have gone overboard with her projects"),
     witch("Witch", "Learned to wield traditional arcane magic"),
     succubus("Succubus", "Embraced the dark powers that feed on mortal lust"),
+    incubus("Incubus", "Embraced the dark powers that feed on mortal lust"),
     demigoddess("Demigoddess", "Blessed by a deity of sexual pleasure, and on the road to ascension herself."),
     fighter("Fighter", "A combination of martial arts and ki"),
     slime("Slime", "An accident in the biology labs made her body a bit more... malleable."),
@@ -442,13 +446,19 @@ public enum Trait {
 
     // Reyka Draining Focus
     Greedy("Greedy", "Attribute draining lasts 50% longer"),
-    RaptorMentis("Raptor Mentis", "Attribute draining effects also drain Willpower"),
+    RaptorMentis("Raptor Mentis", "Attribute draining effects also drain Mojo"),
     BottomlessPit("Bottomless Pit", "Enhances draining by demonic genitalia"),
     SpecificSapping("Specific Sapping", "Draining effects make escape more difficult for 1 turn"),
     WillingSacrifice("Willing Sacrifice", "Draining is stronger while Charmed"),
     
     stronghold("Strong Hold", "Harder to escape Arm/Leg Locks"),
 
+    //Experimental - Reyka
+    archSuccubus("ArchSuccubus", "Attribute draining is permenant"),
+    
+    //Experimenal - Angel
+    divineAssumption("Divine Assumption", "Coital orgasm Permenantly Increases Divinity."),
+    
     // Item
     strapped("Strapped", "Penis envy"),; // currently wearing a strapon
     
@@ -517,6 +527,8 @@ public enum Trait {
         return OVERRIDES.containsKey(this) && OVERRIDES.get(this).stream().anyMatch(t -> ch.has(t));
     }
 
+    
+    //TODO: This data might as well be someplace in Global, as it's static, accessible from out side the class statically, and only changes upon data loading. - DSM
     public static Map<Trait, Resistance> resistances;
     public static Resistance nullResistance;
     public static final Map<Trait, Collection<Trait>> OVERRIDES;

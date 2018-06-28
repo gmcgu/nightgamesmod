@@ -109,6 +109,7 @@ import nightgames.modifier.CustomModifierLoader;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.FTCModifier;
 import nightgames.modifier.standard.LevelDrainModifier;
+import nightgames.modifier.standard.MayaModifier;
 import nightgames.modifier.standard.NoItemsModifier;
 import nightgames.modifier.standard.NoModifier;
 import nightgames.modifier.standard.NoRecoveryModifier;
@@ -141,12 +142,34 @@ import nightgames.trap.StripMine;
 import nightgames.trap.TentacleTrap;
 import nightgames.trap.Trap;
 import nightgames.trap.Tripline;
+import nightgames.debug.MatchModifierPicker;
 
 public class Global {
-    private static Random rng;
-    private static GUI gui;
-    private static Set<Skill> skillPool = new HashSet<>();
+    private static Random rng;                                      //Isn't the convention for static variables at this level is to put them in all caps? -DSM
+    private static GUI gui;    
+    public static Scene current;
+    public static Scene previous;
+    private static final int LINEUP_SIZE = 5;           
+    public static int debugSimulation = 0;
+    public static double moneyRate = 1.0;
+    public static double xpRate = 1.0;
+    public static final Path COMBAT_LOG_DIR = new File("combatlogs").toPath();
+    public static boolean debug[] = new boolean[DebugFlags.values().length];
+    public static ContextFactory factory;
+    public static Context cx;
+    
+    //EXTRACT TO TIMEKEEPING COMPONENT
+    public static Daytime day;                                    
+    protected static int date;
+    private static Time time;
+    private static Date jdate;
+
+   
+   
+    //THE FOLLOWING ITEMS ARE CANDIDATES FOR EXTRACTION TO A GAMEDATA CLASS - DSM 
+    public static MatchType currentMatchType = MatchType.NORMAL;
     private static Map<String, NPC> characterPool;
+    private static Set<Skill> skillPool = new HashSet<>();          //These central peices of data are not going to change. so they should be gathered and separated for better management. - DSM 
     private static Set<Action> actionPool;
     private static Set<Trap> trapPool;
     private static Set<Trait> featPool;
@@ -154,8 +177,9 @@ public class Global {
     private static Set<Character> players;
     private static Set<Character> debugChars;
     private static Set<Character> resting;
-    private static Set<String> flags;
+    private static Set<String> flags;                               //Global flags - 
     private static Map<String, Float> counters;
+<<<<<<< HEAD
     public static Player human;
     private static Match match;
     public static Daytime day;
@@ -175,10 +199,19 @@ public class Global {
     private static Character noneCharacter = new NPC("none", 1, null);
     private static HashMap<String, MatchAction> matchActions;
     private static final int LINEUP_SIZE = 5;
+=======
+    public static Player human;                                     //Useful for many reasons, redundant in a game where all elements are stored equally. There's many ways to get the player. - DSM 
+    private static Match match;                                     //Only a complete program flow restructure would change this, but many matches are going on as the player may be fighting - DSM
+    //public static Map<Trait, Resistance> RESISTANCEMAP;
+    //public static Resistance nullResistance;                      //Why is this required? 
+    //public static final Map<Trait, Collection<Trait>> OVERRIDES;  
+    private static TraitTree traitRequirements;                     //Traits can and probably should carry their own requirements with them. -DSM
+    private static HashMap<String, MatchAction> matchActions;           //Static Naming conventions -DSM
+>>>>>>> pr/5
     private static List<Quest> quests = new ArrayList<Quest>();
-
-    public static final Path COMBAT_LOG_DIR = new File("combatlogs").toPath();
     
+     private static Character noneCharacter = new NPC("none", 1, null);     
+     
     static {
         hookLogwriter();rng = new Random();
         flags = new HashSet<>();
@@ -260,6 +293,18 @@ public class Global {
         }
     }
 
+    /**Begins a new game, given the various conditions for start. Builds all required sets and members of the player and participating characters.
+     * 
+     * @param playerName
+     * The name of the player. More than likely grabbed from the new game screen GUI elements. 
+     * 
+     * @param config
+     * The starting configuration for the game. 
+     * 
+     * @param pickedTraits
+     * A list of traits that the player has picked at chargen.
+     * 
+     * */
     public static void newGame(String playerName, Optional<StartConfiguration> config, List<Trait> pickedTraits,
                     CharacterSex pickedGender, Map<Attribute, Integer> selectedAttributes) {
         Optional<PlayerConfiguration> playerConfig = config.map(c -> c.player);
@@ -347,12 +392,19 @@ public class Global {
     /**
      * WARNING DO NOT USE THIS IN ANY COMBAT RELATED CODE.
      * IT DOES NOT TAKE INTO ACCOUNT THAT THE PLAYER GETS CLONED. WARNING. WARNING.
+     * 
+     * NOTE: This is a "global accessor" to a private static, it's called across the project as a peice of vital data. 
+     * For this reason it's a piece that should be accessed more properly and without the danger originally posted. Very good example of something that can change. -DSM
+     * 
      * @return
      */
     public static Player getPlayer() {
         return human;
     }
 
+    /**Helper method that Builds the pool of skills. Called by newgame() and reserforLoad().
+     * 
+     * */
     public static void buildSkillPool(Character ch) {
         getSkillPool().clear();
         getSkillPool().add(new Slap(ch));
@@ -630,6 +682,8 @@ public class Global {
         }
     }
 
+    /**
+     * */
     public static void buildActionPool() {
         actionPool = new HashSet<>();
         actionPool.add(new Resupply());
@@ -694,6 +748,7 @@ public class Global {
         modifierPool.add(new VibrationModifier());
         modifierPool.add(new VulnerableModifier());
         modifierPool.add(new LevelDrainModifier());
+        modifierPool.add(new MayaModifier());           //Checks its own condition, so it should be fine, here. - DSM
 
         File customModFile = new File("data/customModifiers.json");
         if (customModFile.canRead()) {
@@ -770,7 +825,7 @@ public class Global {
     public static void endNight() {
         double level = 0;
         int maxLevelTracker = 0;
-
+        
         for (Character player : players) {
             player.getStamina().fill();
             player.getArousal().empty();
@@ -781,12 +836,24 @@ public class Global {
                 maxLevelTracker = Math.max(player.getLevel(), maxLevelTracker);
             }
         }
-        final int maxLevel = maxLevelTracker / players.size();
+        final int maxLevel = maxLevelTracker; // Was final int maxLevel = maxLevelTracker / players.size();
         players.stream().filter(c -> c.has(Trait.naturalgrowth)).filter(c -> c.getLevel() < maxLevel + 2).forEach(c -> {
             while (c.getLevel() < maxLevel + 2) {
                 c.ding(null);
             }
         });
+        /*  
+         * TODO: CONSIDER USING THIS INSTEAD - requires a accompanying trait naturalgrowth  to all regular characters or some similar marking
+         * players.stream().filter(c -> c.has(Trait.naturalgrowth)).filter(c -> c.getLevel() < maxLevel - 1).forEach(c -> {
+                while (c.getLevel() < maxLevel - 1) {
+                    c.ding(null);
+                }
+           });
+         * 
+         * 
+         * */
+        
+        
         players.stream().filter(c -> c.has(Trait.unnaturalgrowth)).filter(c -> c.getLevel() < maxLevel + 5)
                         .forEach(c -> {
                             while (c.getLevel() < maxLevel + 5) {
@@ -827,15 +894,19 @@ public class Global {
         startNight();
     }
 
+    
     public static void startNight() {
         if (isDebugOn(DebugFlags.DEBUG_MATCHTYPES)) {
-            current = new MatchTypePicker();
-            current.respond("Start");
+        current = new MatchTypePicker();
+        current.respond("Start");
+        } else if (isDebugOn(DebugFlags.DEBUG_MATCHMODIFIERS)) {
+        current = new MatchModifierPicker();
+        current.respond("Start");
         } else {
-            currentMatchType = decideMatchType();
-            currentMatchType.runPrematch();
+        currentMatchType = decideMatchType();
+        currentMatchType.runPrematch();
         }
-    }
+        }
 
     public static List<Character> getMatchParticipantsInAffectionOrder() {
         if (match == null) {
@@ -851,6 +922,9 @@ public class Global {
         return results;
     }
 
+    /**Sets up a match by assigning the player lineup.
+     * 
+     * FIXME: Also includes code that checks for Maya and adds her. This should be extracted out into some kind of event. - DSM*/
     public static void setUpMatch(Modifier matchmod) {
         assert day == null;
         Set<Character> lineup = new HashSet<>(debugChars);
@@ -882,6 +956,7 @@ public class Global {
             lineup.add(lover);
         }
         lineup.add(human);
+        //TODO: This really should be taken out of this in favor of something that processes extra events of this kind. - DSM
         if (matchmod.name().equals("maya")) {
             if (!checkFlag(Flag.Maya)) {
                 newChallenger(new Maya(human.getLevel()));
@@ -984,6 +1059,10 @@ public class Global {
         return getNPCByType(type);
     }
 
+    /**Builds the main map of the game. This method also draws the map. 
+     * 
+     * TODO: This should be extracted out into a proper class and ADT that handles maps so they can be loaded independantly. This shouldn't be in Global. -DSM 
+     * */
     public static HashMap<String, Area> buildMap() {
         Area quad = new Area("Quad",
                         "You are in the <b>Quad</b> that sits in the center of the Dorm, the Dining Hall, the Engineering Building, and the Liberal Arts Building. There's "
@@ -1223,6 +1302,13 @@ public class Global {
         return startConfig.isPresent() ? startConfig.get().findNpcConfig(type) : Optional.empty();
     }
 
+    /**Rebuilds the character pool using the starting configuration. 
+     * 
+     * TODO: Refactor into function and unify with CustomNPC handling.
+     * 
+     * 
+     * 
+     * */
     public static void rebuildCharacterPool(Optional<StartConfiguration> startConfig) {
         characterPool = new HashMap<>();
         debugChars.clear();
@@ -1409,6 +1495,10 @@ public class Global {
         });
     }
     
+    /**Returns the introductory text. 
+     * 
+     * NOTE: This should probably be moved into something more modular. -DSM
+     * */
     public static String getIntro() {
         return "You don't really know why you're going to the Student Union in the middle of the night."
                         + " You'd have to be insane to accept the invitation you received this afternoon."
@@ -1518,6 +1608,11 @@ public class Global {
         String replace(Character self, String first, String second, String third);
     }
 
+    /**Builds the parser responsible for taking special tags and forming them into the correct english word.
+     * 
+     * 
+     * 
+     * */
     public static void buildParser() {
         matchActions = new HashMap<>();
         matchActions.put("possessive", (self, first, second, third) -> {
@@ -1712,6 +1807,8 @@ public class Global {
         });
     }
 
+    /**Returns a formatted string for use with the tag parsing system. 
+     * */
     public static String format(String format, Character self, Character target, Object... strings) {
         // pattern to find stuff like {word:otherword:finalword} in strings
         Pattern p = Pattern.compile("\\{((?:self)|(?:other)|(?:master))(?::([^:}]+))?(?::([^:}]+))?\\}");

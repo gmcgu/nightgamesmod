@@ -98,6 +98,8 @@ import nightgames.status.addiction.AddictionType;
 public class Combat extends Observable implements Cloneable {
     private static final int NPC_TURN_LIMIT = 75;
     private static final double NPC_DRAW_ERROR_MARGIN = .15;
+    
+    /**Combat phases.*/
     private enum CombatPhase {
         START,
         PRETURN,
@@ -114,6 +116,8 @@ public class Combat extends Observable implements Cloneable {
         FINISHED_SCENE,
         ENDED,
     }
+    
+    //TODO: Convert as much of this data as possible to CombatData - DSm
     public Character p1;
     public Character p2;
     public List<PetCharacter> otherCombatants;
@@ -136,6 +140,8 @@ public class Combat extends Observable implements Cloneable {
     private boolean wroteMessage;
     private boolean cloned;
     private List<CombatListener> listeners;
+    
+    private CombatData m_Data;
     
     String imagePath = "";
     
@@ -326,84 +332,11 @@ public class Combat extends Observable implements Cloneable {
 
     public void doVictory(Character victor, Character loser) {
         registerCombatResult(victor, loser, 1);
-        if (loser.hasDick() && victor.has(Trait.succubus)) {
-            victor.gain(Item.semen, 3);
-            if (loser.human()) {
-                write(victor, "<br/><b>As she leaves, you see all your scattered semen ooze out and gather into a orb in "
-                                + victor.nameOrPossessivePronoun() + " hands. "
-                                + "She casually drops your seed in some empty vials that appeared out of nowhere</b>");
-            } else if (victor.human()) {
-                write(victor, "<br/><b>" + loser.nameOrPossessivePronoun()
-                                + " scattered semen lazily oozes into a few magically conjured flasks. "
-                                + "To speed up the process, you milk " + loser.possessiveAdjective()
-                                + " out of the last drops " + loser.subject()
-                                + " had to offer. Yum, you just got some leftovers.</b>");
-            }
-        } else if (loser.hasDick() && (victor.human() || victor.has(Trait.madscientist))
-                        && victor.has(Item.EmptyBottle, 1)) {
-            // for now only the player and mara collects semen
-            write(victor, Global.format(
-                            "<br/><b>{self:SUBJECT-ACTION:manage|manages} to collect some of {other:name-possessive} scattered semen in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.semen, 1);
-        }
-        if (checkBottleCollection(victor, loser, DivineMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:name-possessive} divine pussy juices in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.HolyWater, 1);
-        }
-        if (checkBottleCollection(victor, loser, DemonicMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:name-possessive} demonic pussy juices in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.ExtremeAphrodisiac, 1);
-        }
-        if (checkBottleCollection(victor, loser, PlantMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} nectar in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.nectar, 3);
-        }
-        if (checkBottleCollection(victor, loser, CyberneticMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} artificial lubricant in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.LubricatingOils, 1);
-        }
-        if (checkBottleCollection(victor, loser, ArcaneMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of the floating mana wisps ejected from {other:possessive} orgasm in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.RawAether, 1);
-        }
-        if (checkBottleCollection(victor, loser, FeralMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} musky juices in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.FeralMusk, 1);
-        }
-        if (checkBottleCollection(victor, loser, GooeyMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} goo in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.BioGel, 1);
-        }
-        if (checkBottleCollection(victor, loser, FieryMod.INSTANCE)) {
-            write(victor, Global.format(
-                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} excitement in an empty bottle</b>",
-                            victor, loser));
-            victor.consume(Item.EmptyBottle, 1, false);
-            victor.gain(Item.MoltenDrippings, 1);
-        }
+              
+        //Collect Bottle-able substances. 
+        this.doBottleCollection(victor, loser); 
+        
+        //If they lost, Do a willpower gain.
         if (loser.human() && loser.getWillpower().max() < loser.getMaxWillpowerPossible()) {
             write("<br/>Ashamed at your loss, you resolve to win next time.");
             write("<br/><b>Gained 1 Willpower</b>.");
@@ -561,8 +494,10 @@ public class Combat extends Observable implements Cloneable {
             opponents.forEach(opponent -> opponent.weaken(this, opponent.getStamina().max() / 10));
         }
         String beguilingbreastCompletedFlag = Trait.beguilingbreasts.name() + "Completed";
-        if (character.has(Trait.beguilingbreasts) && !getCombatantData(character).getBooleanFlag(beguilingbreastCompletedFlag)
-                        && character.outfit.slotOpen(ClothingSlot.top)) {
+        //Fix for Beguiling Breasts being seen when it shouldn't.
+        if (character.has(Trait.beguilingbreasts) && !getCombatantData(character).getBooleanFlag(beguilingbreastCompletedFlag) && 
+                        character.outfit.slotOpen(ClothingSlot.top) && getStance().facing(character, getOpponent(character)) && 
+                        !getOpponent(character).is(Stsflag.blinded)) {
             Character mainOpponent = getOpponent(character);
             write(character, Global.format("The instant {self:subject-action:lay|lays} {self:possessive} eyes on {other:name-possessive} bare breasts, {self:possessive} consciousness flies out of {self:possessive} mind. " +
                             (character.canAct() ? "{other:SUBJECT-ACTION:giggle|giggles} a bit and {other:action:cup} {other:possessive} {other:body-part:breasts}"
@@ -957,6 +892,8 @@ public class Combat extends Observable implements Cloneable {
     private boolean paused;
     private boolean processedEnding;
 
+    
+    //FIXME: Worship skills may not be properly changing stance - resulting in the worshipped character orgasming and triggering orgasm effectgs as if the player was still inserted. - DSM 
     public Optional<Skill> getRandomWorshipSkill(Character self, Character other) {
         List<Skill> avail = new ArrayList<Skill>(WORSHIP_SKILLS);
         if (other.has(Trait.piety)) {
@@ -1131,10 +1068,10 @@ public class Combat extends Observable implements Cloneable {
 
 
         Character other = getStance().getPartner(this, self);
-        Addiction add = other.getAddiction(AddictionType.DOMINANCE).orElse(null);
+        Addiction add = other.getAddiction(AddictionType.DOMINANCE).orElse(null);       //FIXME: Causes trigger even though addiction has 0 magnitude.
         if (add != null && add.atLeast(Severity.MED) && !add.wasCausedBy(self)) {
             write(self, Global.format("{self:name} does {self:possessive} best to be dominant, but with the "
-                        + "way Jewel has been working {self:direct-object} over {self:pronoun-action:are} completely desensitized." , self, other));
+                        + "way "+ add.getCause().getName() + " has been working {self:direct-object} over {self:pronoun-action:are} completely desensitized." , self, other));
             return;
         }
 
@@ -1355,7 +1292,7 @@ public class Combat extends Observable implements Cloneable {
         }
         wroteMessage = true;
     }
-
+    
     public String getMessage() {
         return message;
     }
@@ -1770,6 +1707,9 @@ public class Combat extends Observable implements Cloneable {
         offerImage(stance.image(), "");
     }
 
+    /**Checks if the opponent has breeder - currently presumes Kat is the only character with it and outputs text. 
+     * 
+     * FIXME: this is currently hardcoded and needs to be moved elsewhere. The text and activation for this trait needs to be sent into the traint itself.*/
     private void checkBreeder(Character checked, boolean voluntary) {
         Character opp = getStance().getPartner(this, checked);
         if (checked.checkAddiction(AddictionType.BREEDER, opp) && getStance().inserted(checked)) {
@@ -1927,4 +1867,148 @@ public class Combat extends Observable implements Cloneable {
     public void addListener(CombatListener listener) {
         listeners.add(listener);
     }
+    
+    
+    /**Collects any substances gained in this victory into an empty bottle.
+     * 
+     * TODO: Mark this for combat rebuild - this goes to one of the final phases on combat end. 
+     * */
+    public void doBottleCollection(Character victor, Character loser){
+        
+        if (loser.hasDick() && victor.has(Trait.succubus)) {
+            victor.gain(Item.semen, 3);
+            if (loser.human()) {
+                write(victor, "<br/><b>As she leaves, you see all your scattered semen ooze out and gather into a orb in "
+                                + victor.nameOrPossessivePronoun() + " hands. "
+                                + "She casually drops your seed in some empty vials that appeared out of nowhere</b>");
+            } else if (victor.human()) {
+                write(victor, "<br/><b>" + loser.nameOrPossessivePronoun()
+                                + " scattered semen lazily oozes into a few magically conjured flasks. "
+                                + "To speed up the process, you milk " + loser.possessiveAdjective()
+                                + " out of the last drops " + loser.subject()
+                                + " had to offer. Yum, you just got some leftovers.</b>");
+            }
+        } else if (loser.hasDick() && (victor.human() || victor.has(Trait.madscientist)) && victor.has(Item.EmptyBottle, 1)) {
+            write(victor, Global.format("<br/><b>{self:SUBJECT-ACTION:manage|manages} to collect some of {other:name-possessive} scattered semen in an empty bottle</b>", victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.semen, 1);
+        }
+         
+        if (checkBottleCollection(victor, loser, DivineMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:name-possessive} divine pussy juices in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.HolyWater, 1);
+        }
+        if (checkBottleCollection(victor, loser, DemonicMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:name-possessive} demonic pussy juices in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.ExtremeAphrodisiac, 1);
+        }
+        if (checkBottleCollection(victor, loser, PlantMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} nectar in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.nectar, 3);
+        }
+        if (checkBottleCollection(victor, loser, CyberneticMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} artificial lubricant in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.LubricatingOils, 1);
+        }
+        if (checkBottleCollection(victor, loser, ArcaneMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of the floating mana wisps ejected from {other:possessive} orgasm in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.RawAether, 1);
+        }
+        if (checkBottleCollection(victor, loser, FeralMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} musky juices in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.FeralMusk, 1);
+        }
+        if (checkBottleCollection(victor, loser, GooeyMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} goo in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.BioGel, 1);
+        }
+        if (checkBottleCollection(victor, loser, FieryMod.INSTANCE)) {
+            write(victor, Global.format(
+                            "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} excitement in an empty bottle</b>",
+                            victor, loser));
+            victor.consume(Item.EmptyBottle, 1, false);
+            victor.gain(Item.MoltenDrippings, 1);
+        }
+    }
+    
+    
+    /*COMBAT REWRITE METHODS======================================================================================================================*/
+    
+    /**WIP Proceeds to the combat scene given based on p. This allows an observer to jump into a given Combat's current phase.
+     * TODO: hook this one once combat phases are done.
+     * */
+    public void gotoPhase(CombatPhase p) {
+        if (p == CombatPhase.START) {
+            
+        } else if (p == CombatPhase.PRETURN) {
+            
+        } else if (p == CombatPhase.SKILL_SELECTION) {
+            
+        } else if (p == CombatPhase.PET_ACTIONS) {
+            
+        } else if (p == CombatPhase.DETERMINE_SKILL_ORDER) {
+            
+        } else if (p == CombatPhase.P1_ACT_FIRST) {
+            
+        } else if (p == CombatPhase.P2_ACT_FIRST) {
+            
+        } else if (p == CombatPhase.P1_ACT_SECOND) {
+            
+        } else if (p == CombatPhase.P2_ACT_SECOND) {
+            
+        } else if (p == CombatPhase.UPKEEP) {
+            
+        } else if (p == CombatPhase.LEVEL_DRAIN) {
+            
+        } else if (p == CombatPhase.RESULTS_SCENE) {
+            
+        } else if (p == CombatPhase.FINISHED_SCENE) {
+            
+        } else if (p == CombatPhase.ENDED) {   
+            
+        } else {
+            
+        }
+    }
+    
+    /**WIP - starts this combat.*/
+    public void startCombat(nightgames.characters.Character P1, nightgames.characters.Character P2){
+        
+    }
+    
+    /**WIP - Ticks this combat, triggering all necessary updates internally. */
+    public void tickCombat(){
+        
+    }
+    
+    /**WIP - Progressings this combat's phases at this level.*/
+    public void progressCombat(){
+        
+    }
+    /**WIP - ends this combat, resolving and cleaning it up.*/
+    public void endCombat(){
+        
+    }
+    
 }

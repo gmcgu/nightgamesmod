@@ -31,7 +31,7 @@ public class ReykaTime extends BaseNPCTime {
         giftedString = "\"Awww thanks!\"";
         giftString = "\"A present? You shouldn't have!\"";
         transformationOptionString = "Demonic Rituals";
-        loveIntro = "[Placeholder]<br/>You head down to the chapel basement. Reyka shows you a cute smile when she realizes that you've come to visit.";
+        loveIntro = "[Placeholder]<br/>You head down to the chapel basement. Reyka shows you a cute smile when she realizes that you've come to visit.\n";
         transformationIntro = "<br/>Reyka seems a bit shocked at your request. <i>You want to become a demon?</i> "
                         + "She looks a bit worried when she responds. You quickly reassure her that you don't necessarily want the whole package, corrupted soul and all. "
                         + "You just want some of the fun bits that she had made such good use of. Seeing the conversation directed back to sex, Reyka quickly recovers her saucy grin, "
@@ -50,8 +50,11 @@ public class ReykaTime extends BaseNPCTime {
             growCock.ingredients.put(Item.Talisman, 1);
             growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Has no penis");
             growCock.option = "Reyka: Grow a cock";
-            growCock.scene = "[Placeholder]<br/>Reyka downs the bottle of the priapus draft after channeling her dark magic into the talisman and attaching it to her clitoris. "
-                            + "The two of you wait, and soon enough, a large demonic cock sprouts out under the talisman, ripping it off from her body.";
+            growCock.scene = "You ask Reyka if should could grow a cock. Just for you. You wave a Priapus Draft in front of her as a gift.<br/><br/>" 
+                            + "<i>\"Ohhh, really? Do you know how hard it is to drain people when you have a penis? Ohhh, well, if it's for YOU, lover. Watch closely!\"</i><br/><br/>"
+                            + "Reyka downs the bottle of the priapus draft after channeling her dark magic into the talisman and attaching it to her clitoris.<br/>"
+                            + "The two of you wait, and soon enough, a large demonic cock sprouts out under the talisman. She then rips the talisman off; her dark transformation complete.<br/><br/>" 
+                            + "<i>\"Ohhh...Like what you see? I hope so. I plan on having as much fun as possible with this.\"</i><br/>";
             growCock.effect = (c, self, other) -> {
                 other.body.add(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_BIG)).applyMod(CockMod.incubus));
                 return true;
@@ -63,10 +66,13 @@ public class ReykaTime extends BaseNPCTime {
             removeCock.ingredients.put(Item.FemDraft, 3);
             removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Has a penis");
             removeCock.option = "Reyka: Remove her cock";
-            removeCock.scene = "<br/>Reyka doesn't seem extremely pleased with your request to remove her new found maleness, but complies anyways with your wishes. "
-                            + "Taking the FemDrafts you offer her, she drinks them one after another and waits with her cock still proudly erect. "
-                            + "Soon enough though, the organ starts shrinking back into her body as if being absorbed by her lower lips. "
-                            + "Finally the cock head retreats into her fleshy hood, becoming indistinguishable from her old clitoris.";
+            removeCock.scene = "You ask Reyka if she could remove her cock, offering her 3 femdrafts as a helping hand.<br/>"
+                            + ""
+                            + "Reyka doesn't seem extremely pleased with your request to remove her new-found maleness, but complies anyways with your wishes. "
+                            + "<i>\"Ugh! And I was just starting to enjoy playing with it! Suit yourself. Hand those over.\"</i><br/>"
+                            + "Taking the FemDrafts you offer her, she drinks them one after another and waits with her cock still proudly erect.<br/> "
+                            + "Soon enough though, the organ starts shrinking back into her body as if being absorbed by her lower lips. <br/>"
+                            + "Finally, the cockhead retreats into her clit's fleshy hood, becoming indistinguishable from her old clitoris.<br/>";
             removeCock.effect = (c, self, other) -> {
                 other.body.removeAll("cock");
                 return true;
@@ -115,12 +121,11 @@ public class ReykaTime extends BaseNPCTime {
         demonWings.ingredients.put(Item.semen, 5);
         demonWings.addRequirement(not(bodypart("wings")), "No wings");
         demonWings.option = "Demonic Wings";
-        demonWings.scene =
-                        "Reyka smiles and crushes the ingredients together and draws a magic formation on your back and shoulders. "
-                                        + "After telling you to sit down across from her, she starts masturbating. Dumbfounded at her sudden action, you start getting up from your chair. "
-                                        + "You quick fall off balance though when the markings on your back grow hot. Black demonic wings tears through your back and settles behind you. "
+        demonWings.scene = "Reyka smiles and crushes the ingredients together and draws a magic formation on your back and shoulders.<br/><br/>"
+                                        + "After telling you to sit down across from her, she starts masturbating. Dumbfounded at her sudden action, you start getting up from your chair.<br/><br/>"
+                                        + "You quick fall off balance though when the markings on your back grow hot. Black demonic wings tears through your back and settles behind you. <br/><br/>"
                                         + "Engrossed with exploring your new wings, you don't even notice when Reyka approaches you and pushes you down. You realize that the ritual must have "
-                                        + "taken a lot out of her, and she looks particularly famished now. You resign yourself to be the demoness' partner and dinner as payment for your new wings.";
+                                        + "taken a lot out of her, and she looks particularly famished now. You resign yourself to be the demoness' partner and dinner as payment for your new wings.<br/><br/>";
         demonWings.effect = (c, self, other) -> {
             self.body.addReplace(WingsPart.demonic, 1);
             return true;
@@ -131,8 +136,14 @@ public class ReykaTime extends BaseNPCTime {
         demonTail.ingredients.put(Item.semen, 5);
         demonTail.addRequirement(not(bodypart("tail")), "No tail");
         demonTail.option = "Spade Tail";
-        demonTail.scene =
-                        "[Placeholder]<br/>Reyka marks the top of you ass with a magic symbol and fingers your ass until you grow a demonic tail.";
+        demonTail.scene = "You ask Reyka if she could give you a spaded tail just like hers.<br/><br/>" 
+                        + "<i>\"A tail? Sure! It's not just for show, you know. Come here. This will be fun!\"</i>\"<br/>" 
+                        + "Reyka gets very close to you before you feel some dark power forming in her hands. She presses her finger into your back, just above your ass, marking it with an unholy symbol that you can feel burning into you.<br/>"
+                        + "<i>\"Relax now, this is the fun part...\"</i><br/><br/>" 
+                        + "Reyka then fingers your ass for many minutes - the burning power feels like it's only swelling up on your ass until something bursts out of your skin and begins pushing owtwards, flainging around uncontrollably. "
+                        + "Before long, you can see the this new appeandage coming around to your front. When it's over, you can see your new demonic tail.<br/><br/>"  
+                        + "<i>\"There you go! Do you want me to show you how to use it?\"</i><br/><br/>"
+                        + "you shake your head no and decide to leave, noticing that your new tail needs to stay hidden before your mind starts using it for all sorts of lewd purposes.<br/>";
         demonTail.effect = (c, self, other) -> {
             self.body.addReplace(TailPart.demonic, 1);
             return true;
@@ -166,7 +177,11 @@ public class ReykaTime extends BaseNPCTime {
             succubusPussy.ingredients.put(Item.FemDraft, 20);
             succubusPussy.ingredients.put(Item.semen, 5);
             succubusPussy.option = "Succubus Pussy";
-            succubusPussy.scene = "[Placeholder]<br/>Reyka mixes the potions together with her tail and fucks you thoroughly with it, turning your once-human slit into a cock-hungry succubus pussy.";
+            succubusPussy.scene = "[Placeholder] You ask Reyka if she could give your pussy a bit of demonic power.<br/><br/>"
+                            + "<i>\"Oh myyy...You wanna be my little succusister? I knew youd go for this kind of fun when I met you. With pleasure! Lots.\"</i>\"<br/><br/>"
+                            + "Having agreed with a malicious and mischeivious smile, Reyka grants your request. Using her demonic tail, she mixes the potions together while asking you nicely to lay down on the floor. "
+                            + "She then crawls over you and begins fucking your pussy nice and slow with her tail, leaving no place unattended.<br/><br/>"
+                            + "After the intense pleasure, your once-human slit has been corrupted into cock-hungry succubus pussy.<br/><br/>";
             transformationOptions.add(succubusPussy);
         }
         {
@@ -178,7 +193,11 @@ public class ReykaTime extends BaseNPCTime {
             devilishAss.addRequirement((c, self, other) -> {
                 return self.getLevel() >= 30;
             }, "At least level 30");
-            devilishAss.scene = "[Placeholder]<br/>Reyka mixes the potions together with her tail and fucks you thoroughly with it, turning your once-human ass into a cock-hungry corrupted hole.";
+            devilishAss.scene = "[Placeholder] You ask Reyka if she could give your asshole a bit of demonic power.<br/><br/>"
+                            + "<i>\"Ohhh, just your asshole? I guess there's no accounting for taste. I knew youd go for this kind of stuff when I met you, though. Of course I could do that. Just hand me those and show me your asshole.\"</i>\"<br/>"
+                            + "Having agreed with a malicious and mischeivious smile, Reyka grants your request. Using her demonic tail, she mixes the potions together while you assume the position on the floor. "
+                            + "Reyka walks over to you and starts feeling you up before plunging her tail into your needy ass, fucking your asshole deep and slow with her tail.<br/><br/>"
+                            + "After the intense pleasure is over with, your once-human asshole pulses with a new demonic power. You have a greedy succubus ass, now.<br/><br/>";
             transformationOptions.add(devilishAss);
         }
         {
@@ -190,7 +209,13 @@ public class ReykaTime extends BaseNPCTime {
             demonicMouth.addRequirement((c, self, other) -> {
                 return self.getLevel() >= 30;
             }, "At least level 30");
-            demonicMouth.scene = "[Placeholder]<br/>Reyka drinks the potions and kisses you. Somehow the mixture corrupts the inside of your mouth into that of a demon's.";
+            demonicMouth.scene = "[Placeholder] You ask Reyka if she could give you a demonic mouth, capable of draining people with a lewd kiss.<br/>"
+                            + "<i>\"Ohhh, that's so romantic. I knew you'd go for this kind of stuff when I met you, though. Hand me those. I think we'll both really enjoy this.\"</i>\"<br/>"
+                            + "Reyka drinks all of the potions you've brought her while she struggles to contain their combined power. She then pulls you close and begins deeply kissing you, using as much of her demonic tongue as possible."
+                            + "The sensations are all incredible as you feel the combined powers of all of the stuff she drank go to work, including the hint of some of her own powers flowing through you. "
+                            + "You kiss each other intensely for several minutes before the effefts subside, leaving you both in a lusty daze."
+                            + "After the intense pleasure subsides, you can feel the greedy and dark power of your new demonic tongue and lips. Reyka seems very pleased.<br/>"
+                            + "<i>\"That was really nice, lover. We should do something like that again.\"</i>\"<br/>";
             transformationOptions.add(demonicMouth);
         }
     }
@@ -310,28 +335,35 @@ public class ReykaTime extends BaseNPCTime {
             } else {
                 Global.gui()
                       .message("You tell Reyka about the darkness you've been feeling inside. The thing she put there."
-                                      + " <i>\"Oh, left a little mark, did I? Well, don't worry, you'll be fine. As long as "
-                                      + "you keep it fed, of course.\"</i> You most certainly do not like the sound of that. "
+                                      + "<br/><br/><i>\"Oh, left a little mark, did I? Well, don't worry, you'll be fine. As long as you keep it fed, of course.\"</i>"
+                                      + ""
+                                      + "<br/><br/>You most certainly do not like the sound of that. "
                                       + "<i>\"Don't fret so much dear, it's unseemly. It's really quite simple: it got there"
                                       + " because of what I am, so it wants you to be a little like me as well. You know,"
-                                      + " demonic and all.\"</i> What!? She's turning you into a demon? <i>\"No, no, it's not "
+                                      + " demonic and all.\"</i>"
+                                      + ""
+                                      + "<br/><br/>What!? She's turning you into a demon?<br/><i>\"No, no, it's not "
                                       + "that strong. Not yet at least. No, for now, you just need to act the part a bit."
                                       + " And what could be a better way to do so than some particularly naughty sex?\" "
-                                      + "</i>That's more your language, so you follow Reyka as she leads you to the wonderful"
+                                      + "</i><br/>That's more your language, so you follow Reyka as she leads you to the wonderful"
                                       + " irony that is her home.\n\nWhen a demon promises to do naughty things to you, "
                                       + "that should probably worry you. It doesn't. Something about Reyka puts you at "
                                       + "ease despite her imperious manner. Her wicked smile in the pale light of her "
-                                      + "basement room however, does not. <i>\"So tell me, what do you think would be some "
-                                      + "delightfully bad things for us to stoke that fire of yours with?\"</i> She glances "
+                                      + "basement room however, does not."
+                                      + ""
+                                      + "<br/><br/><i>\"So tell me, what do you think would be some "
+                                      + "delightfully bad things for us to stoke that fire of yours with?\"</i><br/>She glances "
                                       + "meaningfully downward as if to look around you at something... Oh, oh. Butt "
-                                      + "stuff? <i>\"Butt stuff! That always seems to get under some people's nerves. But "
+                                      + "stuff?<br/><i>\"Butt stuff! That always seems to get under some people's nerves. But "
                                       + "still tame enough for a neophyte such as yourself. So what are you waiting for? "
-                                      + "Get naked.\"</i> You do as she tells you, and she does the same. Your efforts are "
+                                      + "Get naked.\"</i>"
+                                      + ""
+                                      + "<br/><br/>You do as she tells you, and she does the same. Your efforts are "
                                       + "hampered a bit as she reveals her curvy physique, but you manage to get it all "
-                                      + "off anyway. <i>\"I see there is little need to get you ready, \"</i> nope, already "
-                                      + "rock-hard, <i>\"so we just have to take care of lubrication.\"</i> You look around for"
+                                      + "off anyway.<br/><i>\"I see there is little need to get you ready, \"</i> (nope, already "
+                                      + "rock-hard) <i>\"so we just have to take care of lubrication.\"</i><br/>You look around for"                                   
                                       + " a bottle, but there doesn't seem to be any. <i>\"No, dear. Not that artificial "
-                                      + "nonsense. Your saliva will work perfectly well.\"</i> She gets on her bed on all "
+                                      + "nonsense. Your saliva will work perfectly well.\"</i><br/><br/>She gets on her bed on all "
                                       + "fours and looks back at you. <i>\"Don't worry, I wash myself. Usually. Well? You "
                                       + "may commence!\"</i> She does look kind of inviting... You hesitantly walk towards "
                                       + "her and kneel before the bed, looking right at her rosy hole. You grab her "
@@ -344,18 +376,22 @@ public class ReykaTime extends BaseNPCTime {
                                       + " to take on a life of their own, rotating and grinding back against your face. "
                                       + "The scents wafting up from her wet slit do not help your concentration at all,"
                                       + " and you find yourself travelling down every once in a while to have a test. It"
-                                      + " seems to taste better every time, and the lubrication helps as well. <i>\"That'll"
-                                      + " do for now, love, I need something more substantial right now.\"</i> What a "
+                                      + " seems to taste better every time, and the lubrication helps as well.<br/><br/><i>\"That'll"
+                                      + " do for now, love, I need something more substantial right now.\"</i><br/>What a "
                                       + "coincidence. You've got just the thing. You push her forward a bit and take your"
                                       + " position behind her on the bed. It's a pretty steep angle to line yourself up "
                                       + "properly, but you are well-motivated. Before giving yourself a chance to have "
-                                      + "second thoughts, you sink all the way down into her. <i>\"Ooooh! It's been too long"
+                                      + "second thoughts, you sink all the way down into her.<br/><i>\"Ooooh! It's been too long"
                                       + " since I had a stud give me a good pounding back there! You'll make up for lost "
-                                      + "time, won't you?\"</i> Oh, fucking yes you will! Not bothering with starting off "
+                                      + "time, won't you?\"</i>"
+                                      + ""
+                                      + "<br/><br/>Oh, fucking yes you will! Not bothering with starting off "
                                       + "slowly, you immediately begin hammering her tight ass as hard as you can, "
                                       + "eliciting all kinds of sounds from the demon beneath you. Her tail wraps itself"
                                       + " around your neck, but luckily doesn't constrict. Just to make sure you don't "
-                                      + "leave, probably. Not that there was any risk of that happening. You don't hold "
+                                      + "leave, probably."
+                                      + ""
+                                      + "<br/><br/>Not that there was any risk of that happening. You don't hold "
                                       + "up long under the ferocious tempo, and you soon feel you're about to cum. When "
                                       + "you do, it feels like something snaps inside of you. The orgasm feels even more"
                                       + " powerful than usual, and there is a distinct sense of something besides cum "
@@ -363,10 +399,10 @@ public class ReykaTime extends BaseNPCTime {
                                       + " covers your mouth. Before you can even process what's going on, it blows "
                                       + "something into you. You break away and start coughing, causing black smoke to "
                                       + "flow out of your mouth. You can still feel it though. Not in your lungs, "
-                                      + "someplace deeper. <i>\"Willing sacrifices are always more potent that those taken"
+                                      + "someplace deeper.<br/><i>\"Willing sacrifices are always more potent that those taken"
                                       + " by force. Keep this up, and you'll make quite the handsome semi-incubus at some"
-                                      + " point. Are you alright, dear? You look a little pale.\"</i> You feel a little "
-                                      + "pale. You tell her that it's perhaps best if you rested for a while before "
+                                      + " point. Are you alright, dear? You look a little pale.\"</i><br/>You feel a little "
+                                      + "pale.<br/><br/>You tell her that it's perhaps best if you rested for a while before "
                                       + "continuing... Whatever it was she just did. She agrees, waving you off. It "
                                       + "seems a dismissive gesture, but her eyes betray something else. Is that actual"
                                       + " concern? Pondering the theological implications of a demon showing affection,"
@@ -750,5 +786,47 @@ public class ReykaTime extends BaseNPCTime {
     @Override
     public Optional<String> getAddictionOption() {
         return Global.getPlayer().checkAddiction(AddictionType.CORRUPTION) ? Optional.of("Strengthen Corruption") : Optional.empty();
+    }
+
+    @Override
+    public void doPlayGamesWith() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doHaveSex() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doSparring() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doAddictionScene() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doGivePresent() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doSpecialFunction1() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doSpecialFunction2() {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -27,21 +27,23 @@ public class AngelTime extends BaseNPCTime {
         giftString = "\"A present mm? Alright let's see it.\"";
         transformationOptionString = "Sacraments";
         advTrait = Trait.demigoddess;
-        transformationIntro =
-                        "[Placeholder]<br/>Angel says she may be able to try a few things with her new divine powers.";
+        //TODO: Finish placeholders for Angel divinity transformations.
+        transformationIntro = "[Placeholder]<br/>Angel says she may be able to try a few things with her new divine powers.";
+        
+        
         loveIntro = "You meet Angel at her room, but for once, she doesn't seem eager to get to sex. You can tell she has something on her mind, so you let her lean "
                         + "against you on the futon while she thinks. It's quiet. You aren't used to your time with Angel being quiet, mostly because you so rarely meet her alone. You "
-                        + "lose track of time sitting there before she breaks the silence. <i>\"" + player.getTrueName()
-                        + ", what do you think about my friends?\"</i> That's not the question you expected. "
-                        + "You've gotten along with her friends quite well so far. Angel shifts her position so you can't see her face. <i>\"I've had several lovers who couldn't get along with "
-                        + "my friends. Some of them pretended they did for awhile, some of them wanted me to spend less time with them.\"</i> Her friends are very socially and sexually aggressive. "
+                        + "lose track of time sitting there before she breaks the silence.<br/><br/><i>\"" + player.getTrueName()
+                        + ", what do you think about my friends?\"</i><br/>That's not the question you expected. "
+                        + "You've gotten along with her friends quite well so far. Angel shifts her position so you can't see her face.<br/><br/><i>\"I've had several lovers who couldn't get along with "
+                        + "my friends. Some of them pretended they did for awhile, some of them wanted me to spend less time with them.\"</i><br/><br/>Her friends are very socially and sexually aggressive. "
                         + "You can see how that might make some " + Global.getPlayer().guyOrGirl() + "s uncomfortable. The fact that Angel and Mei occasionally have sex could probably also be a point of contention. It's probably "
-                        + "fortunate that the night games got you used to casual and group sex before you met them. <i>\"A lot of people are superficially interested in me, but "
+                        + "fortunate that the night games got you used to casual and group sex before you met them.<br/><br/><i>\"A lot of people are superficially interested in me, but "
                         + "most lose interest when they find out what I'm really like. Sarah, Mei and Caroline know me better than anyone, but they don't think any less of me. Mei and Sarah "
                         + "need me as much as I need them. Caroline is good at making friends, but she chooses to stick with us anyway. If I have to choose between them or a " + Global.getPlayer().boyOrGirl() + "friend, "
-                        + "I choose them without a second thought.\"</i> Angel looks you in the eye. You've never seen her this worried and vulnerable. <i>\"Do you really like them?\"</i> You can "
-                        + "reply with confidence that you've grown quite fond of Sarah, Mei and Caroline, personalities, quirks and all. <i>\"Good, because I don't kno-... No one's going to make "
-                        + "me choose between you and them, got it? That's just not going to happen.\"</i> Angel stands up, back to her normal self. <i>\"So should we meet up with them or spend a "
+                        + "I choose them without a second thought.\"</i><br/><br/>Angel looks you in the eye. You've never seen her this worried and vulnerable.<br/><br/><i>\"Do you really like them?\"</i><br>You can "
+                        + "reply with confidence that you've grown quite fond of Sarah, Mei and Caroline, personalities, quirks and all.<br/><i>\"Good, because I don't kno-... No one's going to make "
+                        + "me choose between you and them, got it? That's just not going to happen.\"</i><br/>Angel stands up, back to her normal self.<br/><br/><i>\"So should we meet up with them or spend a "
                         + "little more time with just the two of us?\"</i>";
         transformationFlag = "";
     }
@@ -54,7 +56,11 @@ public class AngelTime extends BaseNPCTime {
             growCock.ingredients.put(Item.PriapusDraft, 3);
             growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Angel has no penis");
             growCock.option = "Angel: Grow a cock";
-            growCock.scene = "[Placeholder]<br/>Angel chugs down the three priapus drafts one after another and grows a splendid new blessed cock.";
+            growCock.scene = "[Placeholder] You hand Angel three Priapus Drafts and convince her to grow a cock.<br/><br/>"
+                            + "<i>\"Okay, well you've convinced me. Having a cock for a while should be interesting. Why not?\"</i><br/><br/>"
+                            + "Angel chugs each draft down, one after the next.<br/><br/>"
+                            + "After the third one goes down, you can see Angel visibly react as something begin to bluge out from behind her thong. Angel moves it out of the way before her new blessed cock grows out to its full size. She gives it a few nice rubs with a sigh.<br/><br/>"
+                            + "<i>\"Wow...when it feels like this, it's no wonder that guys get a feeling of power for having a big dick. Oh yeah...Hey, does this make you horny, too? I think I want to get to using this right away, so leave or assume some kind of position.\"</i><br/>";
             growCock.effect = (c, self, other) -> {
                 other.body.add(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_BIG)).applyMod(CockMod.blessed));
                 return true;
@@ -66,7 +72,13 @@ public class AngelTime extends BaseNPCTime {
             removeCock.ingredients.put(Item.FemDraft, 3);
             removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Angel has a penis");
             removeCock.option = "Angel: Remove her cock";
-            removeCock.scene = "[Placeholder]<br/>Angel drinks the three femdrafts one after another and her blessed cock shrinks back into her normal clitoris.";
+            removeCock.scene = "[Placeholder]<br/>"
+                            + "You hand Angel three femdrafts and convince her to remove her cock.<br/><br/>"
+                            + "<i>\"Okay, sure. Whatever will get you having sex with me before one of us leaves. Here goes.\"</i><br/><br/>"
+                            + "Angel chugs each draft down, one after the next.<br/>"
+                            + "After the third one goes down, you can see Angel's bulge shrink until there's nothing left. Moving her thong out of the way, Angel shows your her blessed pussy before directing your eyes back up to her face.<br/> "
+                            + "<i>\"Okay, stud, nothing in the way, so get to the sex. Right now.\"</i><br/><br/>"
+                            + "The both of you make up for the loss with some sex. Exhausted with Angel's divine sexual endurance, you leave.<br/><br/>";
             removeCock.effect = (c, self, other) -> {
                 other.body.removeAll("cock");
                 return true;
@@ -80,7 +92,11 @@ public class AngelTime extends BaseNPCTime {
                 return self.get(Attribute.Divinity) >= 10;
             }, "At least 10 Divinity");
             blessedCock.option = "Blessed Cock";
-            blessedCock.scene = "[Placeholder]<br/>Angel performs a sacrament on your cock, imbuing it with holy powers.";
+            blessedCock.scene = "[Placeholder] You ask Angel if she could give your dick the same kind of powers that she has.<br/>"
+                            + "<i>\"Uhh...Sure, I guess? I mean, I can try. Sex might work. Special sex? Get on the bed.\"</i><br/>"
+                            + "You get on the bed before Angel stands over you, making somewhat dramatic motions with herself.<br/>"
+                            + "<i>\"With this fuck, my acolyte stud, your Goddess' pussy shall bless you with power!\"</i><br/>"
+                            + "<br/>She then sits down on you and rides you for a while - her eyes locked with yours while she performs a sacrament on your cock. When she's done (which takes a while), you can feel the new holy power of your cock...<br/>";
             transformationOptions.add(blessedCock);
         }
         {
@@ -90,8 +106,12 @@ public class AngelTime extends BaseNPCTime {
                 return self.get(Attribute.Divinity) >= 10;
             }, "At least 10 Divinity");
             divinePussy.option = "Divine Pussy";
-            divinePussy.scene =
-                            "[Placeholder]<br/>Angel performs a sacrament on your pussy, imbuing it with holy powers.";
+            divinePussy.scene = "[Placeholder] You ask Angel if she could bless your pussy with the same of powers that she has.<br/><br/>"
+                            + "<i>\"Uhh...Sure, I guess? I mean, I can try. Sex might work. Special sex? Get on the bed.\"</i><br/><br/>"
+                            + "You get on the bed before Angel crawls up to you and starts making out with you. Before long, you feel her divinity glow from her body and her own sex before she starts grinding it into yours."
+                            + "<br/>"
+                            + "<i>\"Oh yeah! Let your pussy be blessed with some of my power!\"</i><br/><br/>"
+                            + "<br/>Her eyes remain locked with yours during the divine sex session as she performs a sacrament on your pussy. When she's done (which takes a while), you can feel the new holy power of your pussy...<br/><br/>";
             transformationOptions.add(divinePussy);
         }
         {
@@ -101,8 +121,11 @@ public class AngelTime extends BaseNPCTime {
                 return self.get(Attribute.Divinity) >= 20;
             }, "At least 20 Divinity");
             sacredAss.option = "Sacred Ass";
-            sacredAss.scene =
-                            "[Placeholder]<br/>Angel blesses your ass, imbuing it with holy powers.";
+            sacredAss.scene = "[Placeholder] You ask Angel if she could bless your asshole with the same kind of powers as her's.<br/><br/>"
+                            + "<i>\"Uhh...Sure, I guess? I mean, I can try. Sex might work. Special sex? Get on the bed.\"</i><br/><br/>"
+                            + "You get on the bed before Angel crawls up to you and starts making out with you. Before long, you feel her divinity glow from her body and her own sex before she begins rubbing her holy sex, licking her own juices up before forcing her golden glowing tongue into your ass.<br/>"
+                            + "<i>\"MMM come ohnn! I bleth yurr ass! Cummm! Mmmnnnnth!\"</i><br/>"
+                            + "<br/>>Angel continues urging you to come from her perverted anal sacrament before following it up with more sex. When she's done (which takes a while), you can feel the new holy power of your ass...<br/><br/>";
             transformationOptions.add(sacredAss);
         }
         {
@@ -116,7 +139,12 @@ public class AngelTime extends BaseNPCTime {
                 return self.get(Attribute.Divinity) >= 10;
             }, "At least 10 Divinity");
             angelWings.option = "Angelic Wings";
-            angelWings.scene = "[Placeholder]<br/>Angel gives you white feathery wings on your back.";
+            angelWings.scene = "[Placeholder] You ask Angel if she could use her divinity to give you angelic wings.<br/><br/>"
+                            + "<i>\"Ohh, you want to be the first of my choir? I guess we could try to give you wings. Sex might work. Special sex. Get on the bed.\"</i><br/><br/>"
+                            + "You get on the bed before Angel crawls up to you and starts making out with you. Before long, you feel her divinity glow from her body. The golden glow radiates out from her while you have really passionate sex for a while, her hands rubbign and grasping your back for most of it while she concetrates as best as she can through the sex.<br/>"
+                            + "<i>\"Mmmmm! Come on! Wings! Aah!\"</i><br/><br/>"
+                            + "<br/>Angel eventually orgasms and her roaming hands shine brightly from behind your back. Your back feels the beyond-orgasmic sensation that her powers usually cause before your back feels like it's "
+                            + "swelling and bursting. As angel is squeezeing you in holy bliss, you feel some new weight on your body and back. You now have angelic wings! After some time, you depart from the sex session satisfied with the exchange.<br/><br/>";
             angelWings.effect = (c, self, other) -> {
                 self.body.addReplace(WingsPart.angelic, 1);
                 return true;
@@ -127,7 +155,15 @@ public class AngelTime extends BaseNPCTime {
             TransformationOption divinity = new TransformationOption();
             divinity.ingredients.put(Item.HolyWater, 1);
             divinity.option = "Bestow Divinity";
-            divinity.scene = "[Placeholder]<br/>Angel has sex with you, lending you a part of her divinity.";
+            divinity.scene = "[Placeholder] You ask Angel if she could bestow some of her divinity onto you. You wave a bottle of her holy juices as an offering?<br/><br/>"
+                            + "<i>\"Oh, ho! Jealous, are we? Do you want to become like me? Well, I only like sharing if there's sex. So we'll be using this.\"</i><br/><br/>"
+                            + "Angel takes the bottle and drinks it - her golden divine aura intensifying. She reveals her holy form to you, which seems almost overpowering. She takes your hand and pulls you towards the bed, her voice seems to match her Godddess-like countenence."
+                            + "<i>\"Come on. Let's practice some good religion.\"</i><br/><br/>"
+                            + "Her lavicious gaze and beautiful form invite you easily onto the bed, where you both have incredible sex. During this, you can feel the glowing power of her divinity reach into your soul, making you feel warm and wonderful. After a while, the sex session ends and you feel that the power has become part of you."
+                             + "<br/>Afterwards, Angel's hands are all over you, doting on you now that you have consummated her own divinity by allowing her to put a bit of it into you.<br/><br/>"
+                             + "<i>\"Use it well, lover. Just don't forget who YOUR goddess really is.\"</i><br/><br/>"
+                             + "Angel kisses you lovingly on the lips once more before you decide to leave, feeling a bit closer to the recently-minted Goddess.<br/><br/>"; 
+
             divinity.effect = (c, self, other) -> {
                 self.modAttributeDontSaveData(Attribute.Divinity, 1);
                 return true;
@@ -141,8 +177,8 @@ public class AngelTime extends BaseNPCTime {
         if (npc.getAffection(player) > 0) {
             Global.gui()
                   .message("You text Angel, suggesting to meet up. She responds with a location where to meet her. When you arrive however, you find her friends waiting "
-                                  + "for you instead. One of the girls, Caroline, waves you over to where they're sitting. <i>\"Angel stepped away for a minute. Sit down and talk with us until "
-                                  + "she gets back.\"</i> You spend some time chatting with the girls about their hobbies (Caroline plays a lot of video games and Sarah is fond of romance novels) "
+                                  + "for you instead. One of the girls, Caroline, waves you over to where they're sitting.<br/><i>\"Angel stepped away for a minute. Sit down and talk with us until "
+                                  + "she gets back.\"</i><br/><br/>You spend some time chatting with the girls about their hobbies (Caroline plays a lot of video games and Sarah is fond of romance novels) "
                                   + "and about how you met Angel (you make up something plausible). Mei is sitting right next to you and makes a habit of resting her hand on your leg while "
                                   + "you're talking. Her whole body language suggests she'd be interested in getting to know you better. After a few minutes however, she has to excuse herself "
                                   + "to make a quick phone call. On her way out, she slips a small piece of paper into your hand with a flirtatious smile. It turns out to contain her phone number.<br/><br/><i>\"Be "
@@ -238,20 +274,23 @@ public class AngelTime extends BaseNPCTime {
                       .message("You feel very nervous approaching Angel like this. A growing part of you feels a need to "
                                       + "pay respect to this... Angel? Goddess? The other part finds the idea ridiculous. "
                                       + "But perhaps it can't hurt to try? You sheepishly ask Angel if there is anything "
-                                      + "you can do for her. <i>\"Do for me? Well, there's always some chores to be done, "
-                                      + "but... Why do you ask? You know you don't have to bribe me into sex.\"</i> She's not"
+                                      + "you can do for her.<br/><br/><i>\"Do for me? Well, there's always some chores to be done, "
+                                      + "but... Why do you ask? You know you don't have to bribe me into sex.\"</i><br/>She's not"
                                       + " going to make this easy on you, is she? You try to explain your predicament "
-                                      + "as best you can, trying not to appear too needy about the whole thing. "
+                                      + "as best you can, trying not to appear too needy about the whole thing.<br/>"
                                       + "<i>\"Oh... Oh! I mean... Well... Sure, I guess. Whatever is a girl to do when a cute "
                                       + "" + Global.getPlayer().guyOrGirl() + " comes along, asking to worship her?\"</i> You give a start at the word 'worship',"
                                       + " but then, it does ring kind of true... <i>\"Oh, yes I am sure I can think of some nice"
-                                      + " tasks for you. Hmm, I might enjoy this. Follow me, altar " + Global.getPlayer().boyOrGirl() + ".\"</i> Whatever confusion"
-                                      + " she felt clearly did not stand up to her dirty mind. Well, what's a sex goddess for?"
-                                      + "\n\nAs soon as you reach the privacy of Angel's room, she regains the divine aura "
+                                      + " tasks for you. Hmm, I might enjoy this. Follow me, altar " + Global.getPlayer().boyOrGirl() + ".\"</i>"
+                                      + ""
+                                      + "<br/><br/>Whatever confusion she felt clearly did not stand up to her dirty mind. "
+                                      + "Well, what's a sex goddess for?"
+                                      + "<br/><br/>As soon as you reach the privacy of Angel's room, she regains the divine aura "
                                       + "you are used to seeing at night. The sight of the plush white wings sprouting from "
                                       + "her back drives away the hesitation you felt. This is clearly a being worthy of "
                                       + "worship. You stand still as she gets comfortable, patiently awaiting her for first"
-                                      + " command. <i>\"Right then, \"</i> she starts, wearing only her bra and short skirt, "
+                                      + " command."
+                                      + "<br/><br/><i>\"Right then, \"</i> she starts, wearing only her bra and short skirt, "
                                       + "<i>\"first, let's first have you bow to me.\"</i> You immediately bend at the waist. The"
                                       + " act feels shockingly natural. <i>\"Now, kiss my foot.\"</i> That's a bridge too far, isn't"
                                       + " it? But no, as she dangles a shapely foot in front of you, you find that it isn't."
@@ -265,7 +304,7 @@ public class AngelTime extends BaseNPCTime {
                                       + "unable to even think of defying her. You lap away at her, doing the best job you can. "
                                       + "The air trapped underneath the skirt grows hot and moist, and you struggle to breathe "
                                       + "enough as you lick. Your efforts do seem to be effective, though, as Angel's knees "
-                                      + "tremble against your shoulders. <i>\"Keep going! Eat your Goddess!\"</i> The rod in your"
+                                      + "tremble against your shoulders.<br/><br/><i>\"Keep going! Eat your Goddess!\"</i><br/><br/>The rod in your"
                                       + " pants had grown rock-solid, and it's getting really uncomfortable. Still, you keep"
                                       + " up your licking, launching Angel into a series of orgasms. She pulls your head against"
                                       + " her tightly, nearly smothering you. You need to gasp for breath by the time she "
@@ -276,7 +315,7 @@ public class AngelTime extends BaseNPCTime {
                                       + "help but feel a twitch at her praise. <i>\"But we're not here for you, are we? Aw, I "
                                       + "almost feel bad for you, leaving you like this. Okay, I do feel bad, but it's so much"
                                       + " fun to be a little bad sometimes. I'll help you out next time. Was there anything "
-                                      + "else you wanted?\"</i> No. The itch that drove you here is gone, and you feel more at "
+                                      + "else you wanted?\"</i><br/><br/>No. The itch that drove you here is gone, and you feel more at "
                                       + "ease than before despite the raging boner in your pants. You manage to feel a little"
                                       + " annoyance this time at being left blue-balled. Not enough to do something about it,"
                                       + " though, so you leave Angel and hurry home to fix it yourself. ");
@@ -502,5 +541,47 @@ public class AngelTime extends BaseNPCTime {
     @Override
     public Optional<String> getAddictionOption() {
         return Global.getPlayer().checkAddiction(AddictionType.ZEAL) ? Optional.of("Worship") : Optional.empty();
+    }
+
+    @Override
+    public void doPlayGamesWith() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doHaveSex() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doSparring() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doAddictionScene() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doGivePresent() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doSpecialFunction1() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void doSpecialFunction2() {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -549,7 +549,8 @@ public class GUI extends JFrame implements Observer {
                             + "Mara/Angel threesome scene by Onyxdime<br/>"
                             + "Footfetish expansion scenes by Sakruff<br/>"
                             + "Mod by Nergantre<br/>"
-                            + "A ton of testing by Bronzechair</html>"));
+                            + "A ton of testing by Bronzechair"
+                            + "Bugfixes, edits, and some Maya text by DarkSinfulMage</html>"));
             Object[] options = {"OK", "DEBUG"};
             Object[] okOnly = {"OK"};
             int results = JOptionPane.showOptionDialog(GUI.this, panel, "Credits", JOptionPane.DEFAULT_OPTION,
@@ -1091,7 +1092,6 @@ public class GUI extends JFrame implements Observer {
                             "<font face='Georgia' color='white' size='" + fontsize + "'>" + text + "</font><br/>",
                             0, 0, null);
         } catch (BadLocationException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

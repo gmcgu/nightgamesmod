@@ -83,7 +83,7 @@ public class MindControl extends Addiction {
                 return "<b>Your body tries to steer you towards " + cause.getName() + " all the time, and it's taking"
                         + " serious effort to resist.</b>";
             case MED:
-                return "<b>Keeping your body in line and away from " + cause.getName() + " is getting really difficult know,"
+                return "<b>Keeping your body in line and away from " + cause.getName() + " is getting really difficult, now,"
                         + " and it's a severe strain on your stamina.</b>";
             case NONE:
             default:
@@ -486,5 +486,23 @@ public class MindControl extends Addiction {
             return null;
         }
 
+    }
+
+    @Override
+    protected void applyEffects(Character self) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void removeEffects(Character self) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void cleanseAddiction(Character self) {
+        // TODO Auto-generated method stub
+        
     }
 }

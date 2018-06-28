@@ -25,6 +25,8 @@ public class LevelDrainModifier extends BaseModifier {
                 c.addTemporaryTrait(Trait.holecontrol, 999);
                 c.addTemporaryTrait(Trait.polecontrol, 999);
                 c.addTemporaryTrait(Trait.Unsatisfied, 999);
+            } else {
+               
             }
         };
     }
@@ -63,16 +65,21 @@ public class LevelDrainModifier extends BaseModifier {
     public boolean isApplicable() {
         int playerLevel = Global.getPlayer().getLevel();
         double averageLevel = Global.getParticipants().stream().filter(p -> !p.human()).filter(p -> !Global.checkCharacterDisabledFlag(p)).mapToInt(Character::getLevel).average().orElse(0);
+        
+        //NOTE: Debugging addition.
+        if (playerLevel > averageLevel + 5 && (Global.checkFlag(Flag.darkness) || Global.getPlayer().getRank() >= 2) && Global.getParticipants().stream().noneMatch(p -> p.has(Trait.leveldrainer)) == false) {
+             System.out.println("DEBUG: Leveldrain modifier condition failed.");
+        }   
         return playerLevel > averageLevel + 5
                         && (Global.checkFlag(Flag.darkness) || Global.getPlayer().getRank() >= 2)
-                        && Global.getParticipants().stream().noneMatch(p -> p.has(Trait.leveldrainer));
+                        && Global.getParticipants().stream().noneMatch(p -> p.has(Trait.leveldrainer));     //TODO: Add "Or anyone that has leveldrainer or expertleveldrainer also has indiscriminatethief"
     }
 
     List<Item> EXTRA_LOOT = Arrays.asList(Item.BioGel, Item.MoltenDrippings, Item.RawAether, Item.LubricatingOils, Item.FeralMusk, Item.HolyWater, Item.ExtremeAphrodisiac, Item.nectar);
     @Override
     public void extraWinnings(Character player, int score) {
         if (score > 0) {
-            Global.gui().message("Additionally, you get a few bottles from Lilly as extras prizes.");
+            Global.gui().message("Additionally, you get a few bottles from Lilly as extra prizes.");
             for (int i = 0; i < score; i++) {
                 player.gain(Global.pickRandom(EXTRA_LOOT).get());
             }

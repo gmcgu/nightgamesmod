@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.google.gson.JsonObject;
 
 import nightgames.characters.Character;
+import nightgames.characters.Trait;
 import nightgames.combat.Combat;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;
@@ -21,15 +22,21 @@ public abstract class Addiction extends Status {
     public static final float MED_THRESHOLD = .4f;
     public static final float HIGH_THRESHOLD = .7f;
 
-    protected final transient Character cause;
+    protected final transient Character cause;          
     protected float magnitude;
     protected float combatMagnitude;
-
+    
+    
+    //TODO: Suggestion: Since all of the current addictions in the game are given by a character having a trait - Addictions should have a governing Trait and Addictions should manage their own effects. - DSM 
+    protected Trait governingTrait; 
+    
+    
     // should be saved
     private boolean didDaytime;
     private boolean overloading;
-
     protected boolean inWithdrawal;
+    
+    public Trait getGoverningTrait() { return governingTrait;  }  public void setGoverningTrait(Trait governingTrait) { this.governingTrait = governingTrait;  }
 
     protected Addiction(Character affected, String name, Character cause, float magnitude) {
         super(name, affected);
@@ -52,7 +59,18 @@ public abstract class Addiction extends Status {
     }
 
     @Override
+<<<<<<< HEAD
     public void tick(Combat c) {
+=======
+    public void tick(Combat c) {                    //FIXME: Outside of combat, c becomes null. Perhaps separate this method into an in and out of combat version? 
+        if (c == null) {                            //A patient comes into the doctor's office and says it hurts when I do this; the doctor says "Well, don't do that..." - DSM
+            System.out.println("ERROR: Tried to process " + affected.getName() + "'s " + this.name + " from " + this.cause + " (Actually: " + this.cause.getTrueName() +  "), but Combat c is null in Addiction.tick()");        
+        } else  {
+             if (c.getOpponent(affected).equals(cause)) {           
+                 combatMagnitude += magnitude / 14.0;
+             }
+        }
+>>>>>>> pr/5
     }
     
     public final void clearDaytime() {
@@ -117,6 +135,11 @@ public abstract class Addiction extends Status {
     protected abstract Optional<Status> withdrawalEffects();
 
     protected abstract Optional<Status> addictionEffects();
+    
+    //TODO:Added these for future revamp of Addiction system, where addictions manage their own effects.
+    protected abstract void applyEffects(Character self);
+    protected abstract void removeEffects(Character self);
+    protected abstract void cleanseAddiction(Character self);
 
     protected abstract String describeIncrease();
 
