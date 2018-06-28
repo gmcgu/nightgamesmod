@@ -523,7 +523,6 @@ public class Global {
         getSkillPool().add(new Invitation(ch));
         getSkillPool().add(new SubmissiveHold(ch));
         getSkillPool().add(new BreastGrowth(ch));
-        //getSkillPool().add(new BreastGrowthSuper(ch));
         getSkillPool().add(new CockGrowth(ch));
         getSkillPool().add(new BreastRay(ch));
         getSkillPool().add(new FootSmother(ch));
@@ -620,10 +619,12 @@ public class Global {
         getSkillPool().add(new Focus.OnRecovery(ch));
 
         getSkillPool().add(new ManipulateFetish(ch));
-        //getSkillPool().add(new BreastGrowthSuper(ch));
+        getSkillPool().add(new BreastGrowthSuper(ch));
         getSkillPool().add(new Kneel(ch));
         getSkillPool().add(new OfferAss(ch));
         
+        getSkillPool().add(new BreastSmotherSuperSucc(ch));
+        getSkillPool().add(new FutaFight(ch));
 
         if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
             getSkillPool().add(new SelfStun(ch));
