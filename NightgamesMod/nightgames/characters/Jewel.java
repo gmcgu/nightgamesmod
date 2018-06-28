@@ -184,7 +184,6 @@ public class Jewel extends BasePersonality {
                         })
         )));
 
-<<<<<<< HEAD
         character.addCombatScene(new CombatScene((c, self, other) -> {
             return character.getLevel() >= 20 && !Global.checkFlag(JEWEL_MENTAL_FOCUS)
                             && !Global.checkFlag(JEWEL_PHYSICAL_FOCUS)
@@ -216,11 +215,7 @@ public class Jewel extends BasePersonality {
                             Global.getPlayer().getGrowth().addTraitPoints(new int[] {1, 57}, Global.getPlayer());
                             return true;
                         }))));
-=======
         this.addSecondFocusScene();
-        
-       
->>>>>>> pr/5
 
         preferredAttributes.add(c -> c.get(Attribute.Ki) < 15 ? Optional.of(Attribute.Ki) : Optional.empty());
         preferredAttributes.add(c -> c.get(Attribute.Ki) >= 15 && c.get(Attribute.Fetish) < 100

@@ -17,11 +17,6 @@ public enum DebugFlags {
     DEBUG_GUI,
     DEBUG_ADDICTION,
     DEBUG_SPECTATE,
-<<<<<<< HEAD
-
-    DEBUG_MATCHTYPES
-=======
     DEBUG_MATCHTYPES, 
     DEBUG_MATCHMODIFIERS
->>>>>>> pr/5
 }

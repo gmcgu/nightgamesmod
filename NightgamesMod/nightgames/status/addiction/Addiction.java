@@ -59,9 +59,6 @@ public abstract class Addiction extends Status {
     }
 
     @Override
-<<<<<<< HEAD
-    public void tick(Combat c) {
-=======
     public void tick(Combat c) {                    //FIXME: Outside of combat, c becomes null. Perhaps separate this method into an in and out of combat version? 
         if (c == null) {                            //A patient comes into the doctor's office and says it hurts when I do this; the doctor says "Well, don't do that..." - DSM
             System.out.println("ERROR: Tried to process " + affected.getName() + "'s " + this.name + " from " + this.cause + " (Actually: " + this.cause.getTrueName() +  "), but Combat c is null in Addiction.tick()");        
@@ -70,7 +67,6 @@ public abstract class Addiction extends Status {
                  combatMagnitude += magnitude / 14.0;
              }
         }
->>>>>>> pr/5
     }
     
     public final void clearDaytime() {

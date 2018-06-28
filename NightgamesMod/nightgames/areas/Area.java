@@ -130,17 +130,9 @@ public class Area implements Serializable {
         if (fight != null && fight.checkIntrude(p)) {
             p.intervene(fight, fight.getPlayer(1), fight.getPlayer(2));
         } else if (present.size() > 1 && canFight(p)) {
-<<<<<<< HEAD
             for (Character opponent : Global.getMatch().getCombatants()) {
                 if (present.contains(opponent) && opponent != p
                                 && canFight(opponent)) {
-=======
-            for (Character opponent : Global.getMatch().getCombatants()) {          //FIXME: Currently - encounters repeat - Does this check if they are busy? 
-                if (present.contains(opponent) && opponent != p                     
-                               && canFight(opponent)
-                              // && Global.getMatch().canEngage(p, opponent)        
-                               ) {
->>>>>>> pr/5
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
                     return fight.spotCheck();
                 }

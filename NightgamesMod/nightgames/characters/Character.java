@@ -22,15 +22,9 @@ import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-<<<<<<< HEAD
-
 import javax.swing.plaf.basic.BasicTreeUI.TreeIncrementAction;
-
 import org.apache.commons.lang3.ObjectUtils;
-=======
 import javax.xml.stream.events.Characters;
->>>>>>> pr/5
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -91,11 +85,8 @@ import nightgames.status.BodyFetish;
 import nightgames.status.Disguised;
 import nightgames.status.DivineCharge;
 import nightgames.status.DivineRecoil;
-<<<<<<< HEAD
 import nightgames.status.Enthralled;
-=======
 import nightgames.status.Drained;
->>>>>>> pr/5
 import nightgames.status.Falling;
 import nightgames.status.Feral;
 import nightgames.status.Frenzied;
@@ -161,18 +152,6 @@ public abstract class Character extends Observable implements Cloneable {
     public int cloned;
     private Map<Integer, LevelUpData> levelPlan;
     private Growth growth;
-=======
-    public HashSet<Clothing> closet;                //If clothing can be destroyed, it should stand to reason that characters should purchase replace. Consider reworking - DSM            
-    public List<Challenge> challenges;      
-    public Body body;                               //While current implementation allows for many kinds of parts - it means controlling and finding them gets difficult. - DSM 
-    public int availableAttributePoints;            
-    public boolean orgasmed;                        //Merge into tracker object for combat session. -DSM
-    public boolean custom;                          //This is not necessary. Every character should be based off custom implementation and added as a configuration is chosen. -DSM
-    private boolean pleasured;                      //Merge into tracker object for combat session. - DSM
-    public int orgasms;                             //Merge into tracker object for combat session. - DSM
-    public int cloned;                              //Merge into tracker object for combat session. - DSM 
-    private Map<Integer, LevelUpData> levelPlan;    //This has bloated save files quite a bit, making an XML save file mod very desireable for editing and reading. - DSM
-    private Growth growth;                          //FIXME: Growth, as well as a host of many variables in many classes, have many public variables. Move to protected or private and implement mutators. The compliler is your friend. - DSM
     private BodyPart lastOrgasmPart;                //Merge into tracker object for combat session. - DSM 
     
     //TODO: Merge orgasms, cloned, pleasured, location, and lastorgasmpart in this CombatStats object.
@@ -182,7 +161,6 @@ public abstract class Character extends Observable implements Cloneable {
     //TODO: Merge various pieces of data into a MatchStats object. busy, state, location, challenges, mercy, victories, etc.
     //protected MatchStats matchStats;
     
->>>>>>> pr/5
     
     
     
@@ -1474,15 +1452,12 @@ public abstract class Character extends Observable implements Cloneable {
         }
     }
 
-<<<<<<< HEAD
-    public void tick(Combat c) {
-=======
+
     public void tick(Combat c) {            
         body.tick(c);
         status.stream().collect(Collectors.toList()).forEach(s -> s.tick(c));
         countdown(temporaryAddedTraits);
         countdown(temporaryRemovedTraits);
->>>>>>> pr/5
     }
 
     public Collection<Trait> getTraits() {
@@ -4814,8 +4789,6 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     
-<<<<<<< HEAD
-=======
     public void setLastOrgasmPart(BodyPart part) {
         lastOrgasmPart=part;
     }
@@ -4831,5 +4804,4 @@ public abstract class Character extends Observable implements Cloneable {
     public String victoryLiner(Combat c, Character target) {
         return Global.format("{self:SUBJECT-ACTION:try} smiles in satisfaction with their victory.", this, target);
     }
->>>>>>> pr/5
 }
